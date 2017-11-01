@@ -1,0 +1,26 @@
+# jetbrains
+/.idea/
+
+# dependencies
+/node_modules/
+
+# composer
+/vendor/
+
+# vagrant & homestead
+/.vagrant/
+/after.sh
+/aliases
+/Vagrantfile
+/Homestead.yaml
+
+# config
+/.env
+
+# ide-helper
+/.phpstorm.meta.php
+/_ide_helper.php
+
+# public
+/public/admin/
+/public/mix-manifest.json

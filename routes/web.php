@@ -11,17 +11,8 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-//Auth::routes();
-//
-//Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/admin', '');
-//
 Route::group(['prefix' => 'admin'], function () {
     Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
 });
 
-//Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
+Route::post('/api/admin/auth/login', 'Admin\Auth\LoginController@login');

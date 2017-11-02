@@ -8,6 +8,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     <link href="{{ mix('/statics/admin/css/app.css') }}" rel="stylesheet">
+    <script>
+        Window.User = {
+            id: 1,
+            username: 1
+        };
+    </script>
 </head>
 <body>
 <div id="app"></div>

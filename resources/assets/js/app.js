@@ -13,22 +13,18 @@ import App from './App.vue'
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 
-// Router
 const router = new VueRouter({
     root: '/admin',
     routes: routes
 })
 
-// Axios
 const http = Axios.create({
     baseURL: '/',
     timeout: 10000,
     headers: [
         {'X-Requested-With': 'XMLHttpRequest'},
-        // {'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content}
+        {'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content}
     ],
-    xsrfHeaderName: 'X-CSRF-TOKEN',
-    xsrfCookieName: document.head.querySelector('meta[name="csrf-token"]').content,
     validateStatus: function (status) {
         return true
     }

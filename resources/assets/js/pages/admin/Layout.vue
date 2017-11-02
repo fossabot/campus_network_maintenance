@@ -61,12 +61,12 @@
                         </template>
                         <el-menu-item-group>
                             <span slot="title">维修备件</span>
-                            <el-menu-item index="/type/list">维修备件列表</el-menu-item>
-                            <el-menu-item index="/type/create">新增维修备件</el-menu-item>
+                            <el-menu-item index="/part/list">维修备件列表</el-menu-item>
+                            <el-menu-item index="/part/create">新增维修备件</el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group>
                             <span slot="title">维修备件日志</span>
-                            <el-menu-item index="/type/create">维修备件使用情况</el-menu-item>
+                            <el-menu-item index="/part/use">维修备件使用情况</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>

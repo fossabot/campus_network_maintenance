@@ -26,7 +26,9 @@ class LoginController extends Controller
             return response()->json(Lang::get('auth.throttle', ['seconds' => $seconds]), 423);
         }
 
-        if ($this->attemptLogin($request)) {
+        if ($admin = $this->attemptLogin($request)) {
+            session()->put('admin.id', $admin->id);
+
             return response()->json('success', 200);
         }
 
@@ -73,11 +75,19 @@ class LoginController extends Controller
         event(new Lockout($request));
     }
 
+    /**
+     * @param LoginRequest $request
+     */
     protected function incrementLoginAttempts(LoginRequest $request)
     {
         $this->limiter()->hit($this->throttleKey($request), 5);
     }
 
+    /**
+     * @param LoginRequest $request
+     *
+     * @return bool|\Illuminate\Database\Eloquent\Model
+     */
     protected function attemptLogin(LoginRequest $request)
     {
         $admin = Admin::whereUsername($request->input('username'))->first();

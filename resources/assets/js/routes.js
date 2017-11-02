@@ -1,7 +1,7 @@
 import Layout from './pages/admin/Layout.vue'
 
 const mustLogin = (to, from, next) => {
-    if (window.User.hasLogin) {
+    if (window.admin) {
         next()
     } else {
         next('/auth/login')

@@ -8,15 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     <link href="{{ mix('/statics/admin/css/app.css') }}" rel="stylesheet">
-    <script>
-        window.User = {
-            hasLogin: '{{ session()->has('admin.id') }}',
-            id: '{{ session('admin.id') }}',
-            role: '{{ session('admin.id') }}',
-            type: '{{ session('admin.id') }}',
-            name: '{{ session('admin.id') }}'
-        };
-    </script>
+    @if($admin)<script>window.admin = {id: '{{ $admin->id }}', name: '{{ $admin->name }}', role_id: '{{ $admin->role_id }}', role: '{{ $admin->role }}', type_id: '{{ $admin->type_id }}', type: '{{ $admin->type }}'}</script>@endif
+
 </head>
 <body>
 <div id="app"></div>

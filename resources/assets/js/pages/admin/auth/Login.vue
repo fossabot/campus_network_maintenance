@@ -10,10 +10,10 @@
                 <el-col :md="8">
                     <el-form :model="login" :rules="loginRules" ref="login" label-width="120px">
                         <el-form-item label="管理员帐户" prop="username">
-                            <el-input v-model="login.username"></el-input>
+                            <el-input v-model="login.username" @keyup.enter.native="submitForm('login')"></el-input>
                         </el-form-item>
                         <el-form-item label="管理员密码" prop="password">
-                            <el-input v-model="login.password"></el-input>
+                            <el-input v-model="login.password" @keyup.enter.native="submitForm('login')"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" :loading="lockLogin" @click="submitForm('login')">立即登录</el-button>

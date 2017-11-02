@@ -116,6 +116,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'username' => '管理员账户',
+        'password' => '管理员密码',
+    ],
 
 ];

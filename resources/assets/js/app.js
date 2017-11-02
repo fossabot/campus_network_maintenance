@@ -21,28 +21,57 @@ const router = new VueRouter({
 const http = Axios.create({
     baseURL: '/',
     timeout: 10000,
-    headers: [
-        {'X-Requested-With': 'XMLHttpRequest'},
-        {'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content}
-    ],
     validateStatus: function (status) {
         return true
     }
 })
 
+let loading
+
 http.interceptors.request.use((config) => {
+    loading = ElementUI.Loading.service({lock: true})
     return config
 }, (error) => {
     return Promise.reject(error)
 })
 
 http.interceptors.response.use((response) => {
-    return response
+    loading.close()
+    if (response.status === 200) {
+        return response
+    } else if (response.status === 422) {
+        const errors = response.data.errors
+        for (let key in errors) {
+            if (errors.hasOwnProperty(key)) {
+                ElementUI.Notification.error({
+                    title: '提交数据不符合要求',
+                    message: errors[key][0],
+                    duration: 5000
+                })
+            }
+        }
+        return response
+    } else {
+        ElementUI.Notification.error({
+            title: '错误',
+            message: '服务器发生错误',
+            duration: 0
+        })
+        return response
+    }
 }, (error) => {
     return Promise.reject(error)
 })
 
 Vue.prototype.$http = http
+
+if (document.body.clientWidth < 992) {
+    ElementUI.Notification.warning({
+        title: '提示',
+        message: '建议使用 1920x1080 分辨率',
+        duration: 0
+    })
+}
 
 const app = new Vue({
     router: router,

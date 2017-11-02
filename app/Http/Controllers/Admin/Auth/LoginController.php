@@ -9,6 +9,7 @@ class LoginController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        dump($request);
+        //dump($request->all());
+        //return response()->json([], 422);
     }
 }

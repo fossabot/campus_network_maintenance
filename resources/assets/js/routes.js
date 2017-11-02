@@ -5,11 +5,11 @@ const routes = [
         path: '/',
         beforeEnter: (to, from, next) => {
             console.log(window.User)
-            next('/login')
+            next('/auth/login')
         }
     },
     {
-        path: '/login',
+        path: '/auth/login',
         component: require('./pages/admin/auth/Login.vue')
     },
     {

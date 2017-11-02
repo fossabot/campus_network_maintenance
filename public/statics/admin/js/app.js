@@ -27,13 +27,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            lockLogin: false,
+            login: {
+                username: '',
+                password: ''
+            },
+            loginRules: {
+                username: [{ required: true, message: '请输入管理员账户', trigger: 'blur' }, { min: 6, max: 24, message: '管理员账户长度必须是6-24个字符', trigger: 'blur' }],
+                password: [{ required: true, message: '请输入管理员密码', trigger: 'blur' }, { min: 6, max: 24, message: '管理员密码长度必须是6-24个字符', trigger: 'blur' }]
+            }
+        };
     },
 
-    methods: {}
+    methods: {
+        submitForm: function submitForm(data) {
+            var _this = this;
+
+            this.lockLogin = true;
+            this.$refs[data].validate(function (valid) {
+                if (valid) {
+                    _this.$http.post('/api/admin/auth/login', _this.login).then(function (response) {
+                        _this.lockLogin = false;
+                        if (response.code === 200) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+        },
+        resetForm: function resetForm(data) {
+            this.$refs[data].resetFields();
+        }
+    }
 });
 
 /***/ }),
@@ -463,7 +518,144 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "login" })
+  return _c(
+    "el-container",
+    { staticClass: "login", staticStyle: { height: "100%" } },
+    [
+      _c("el-header", [
+        _c(
+          "div",
+          { staticStyle: { "text-align": "center", "padding-top": "50px" } },
+          [
+            _c("img", {
+              staticStyle: { width: "95%", "max-width": "420px" },
+              attrs: { src: "/statics/img/logo.png" }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "el-main",
+        { staticStyle: { height: "100%" } },
+        [
+          _c(
+            "el-row",
+            {
+              staticStyle: { "margin-top": "200px" },
+              attrs: { type: "flex", justify: "center" }
+            },
+            [
+              _c(
+                "el-col",
+                { attrs: { md: 8 } },
+                [
+                  _c(
+                    "el-form",
+                    {
+                      ref: "login",
+                      attrs: {
+                        model: _vm.login,
+                        rules: _vm.loginRules,
+                        "label-width": "120px"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-form-item",
+                        { attrs: { label: "管理员帐户", prop: "username" } },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.login.username,
+                              callback: function($$v) {
+                                _vm.$set(_vm.login, "username", $$v)
+                              },
+                              expression: "login.username"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        { attrs: { label: "管理员密码", prop: "password" } },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.login.password,
+                              callback: function($$v) {
+                                _vm.$set(_vm.login, "password", $$v)
+                              },
+                              expression: "login.password"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        [
+                          _c(
+                            "el-button",
+                            {
+                              attrs: {
+                                type: "primary",
+                                loading: _vm.lockLogin
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.submitForm("login")
+                                }
+                              }
+                            },
+                            [_vm._v("立即登录")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-button",
+                            {
+                              on: {
+                                click: function($event) {
+                                  _vm.resetForm("login")
+                                }
+                              }
+                            },
+                            [_vm._v("重置")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-footer",
+        { staticStyle: { "text-align": "center", height: "200px" } },
+        [
+          _c("p", [_vm._v("版权所有，保留一切权利！")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v("Copyright © " + _vm._s(new Date().getFullYear()) + " "),
+            _c("b", [_vm._v("江苏科技大学 张家港校区/苏州理工学院")])
+          ])
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1386,25 +1578,57 @@ var router = new __WEBPACK_IMPORTED_MODULE_3_vue_router__["default"]({
 var http = __WEBPACK_IMPORTED_MODULE_5_axios___default.a.create({
     baseURL: '/',
     timeout: 10000,
-    headers: [{ 'X-Requested-With': 'XMLHttpRequest' }, { 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content }],
     validateStatus: function validateStatus(status) {
         return true;
     }
 });
 
+var loading = void 0;
+
 http.interceptors.request.use(function (config) {
+    loading = __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Loading.service({ lock: true });
     return config;
 }, function (error) {
     return Promise.reject(error);
 });
 
 http.interceptors.response.use(function (response) {
-    return response;
+    loading.close();
+    if (response.status === 200) {
+        return response;
+    } else if (response.status === 422) {
+        var errors = response.data.errors;
+        for (var key in errors) {
+            if (errors.hasOwnProperty(key)) {
+                __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Notification.error({
+                    title: '提交数据不符合要求',
+                    message: errors[key][0],
+                    duration: 5000
+                });
+            }
+        }
+        return response;
+    } else {
+        __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Notification.error({
+            title: '错误',
+            message: '服务器发生错误',
+            duration: 0
+        });
+        return response;
+    }
 }, function (error) {
     return Promise.reject(error);
 });
 
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.prototype.$http = http;
+
+if (document.body.clientWidth < 992) {
+    __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Notification.warning({
+        title: '提示',
+        message: '建议使用 1920x1080 分辨率',
+        duration: 0
+    });
+}
 
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
     router: router,
@@ -2117,10 +2341,10 @@ var routes = [{
     path: '/',
     beforeEnter: function beforeEnter(to, from, next) {
         console.log(window.User);
-        next('/login');
+        next('/auth/login');
     }
 }, {
-    path: '/login',
+    path: '/auth/login',
     component: __webpack_require__("./resources/assets/js/pages/admin/auth/Login.vue")
 }, {
     path: '/repair',

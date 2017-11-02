@@ -56,8 +56,6 @@ class LoginController extends Controller
     }
 
     /**
-     * 是否登录次数过多
-     *
      * @param LoginRequest $request
      *
      * @return bool

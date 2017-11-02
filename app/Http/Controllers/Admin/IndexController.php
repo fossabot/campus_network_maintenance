@@ -11,8 +11,6 @@ class IndexController extends Controller
     {
         $admin = Admin::find(session('admin.id'));
 
-        return view('admin.index', [
-            'admin' => $admin,
-        ]);
+        return view('admin.index', ['admin' => $admin]);
     }
 }

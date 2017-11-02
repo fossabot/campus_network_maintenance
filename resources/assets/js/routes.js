@@ -1,5 +1,13 @@
 import Layout from './pages/admin/Layout.vue'
 
+const redirect = (to, from, next) => {
+    if (window.admin) {
+        next('/repair/list')
+    } else {
+        next('/auth/login')
+    }
+}
+
 const mustLogin = (to, from, next) => {
     if (window.admin) {
         next()
@@ -11,7 +19,7 @@ const mustLogin = (to, from, next) => {
 const routes = [
     {
         path: '/',
-        beforeEnter: mustLogin
+        beforeEnter: redirect
     },
     {
         path: '/auth/login',
@@ -29,12 +37,14 @@ const routes = [
             {
                 path: 'list',
                 name: '报障单列表',
-                component: require('./pages/admin/repair/List.vue')
+                component: require('./pages/admin/repair/List.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'create',
                 name: '新增报障单',
-                component: require('./pages/admin/repair/Create.vue')
+                component: require('./pages/admin/repair/Create.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: '*',
@@ -54,12 +64,14 @@ const routes = [
             {
                 path: 'list',
                 name: '维修人员列表',
-                component: require('./pages/admin/user/List.vue')
+                component: require('./pages/admin/user/List.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'create',
                 name: '新增维修人员',
-                component: require('./pages/admin/user/Create.vue')
+                component: require('./pages/admin/user/Create.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: '*',
@@ -79,12 +91,14 @@ const routes = [
             {
                 path: 'list',
                 name: '维修分类列表',
-                component: require('./pages/admin/type/List.vue')
+                component: require('./pages/admin/type/List.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'create',
                 name: '新增维修分类',
-                component: require('./pages/admin/type/Create.vue')
+                component: require('./pages/admin/type/Create.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: '*',
@@ -104,17 +118,20 @@ const routes = [
             {
                 path: 'list',
                 name: '维修地区列表',
-                component: require('./pages/admin/location/List.vue')
+                component: require('./pages/admin/location/List.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'create',
                 name: '新增维修地区',
-                component: require('./pages/admin/location/Create.vue')
+                component: require('./pages/admin/location/Create.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'allot',
                 name: '分配维修地区',
-                component: require('./pages/admin/location/Allot.vue')
+                component: require('./pages/admin/location/Allot.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: '*',
@@ -134,17 +151,20 @@ const routes = [
             {
                 path: 'list',
                 name: '维修备件列表',
-                component: require('./pages/admin/part/List.vue')
+                component: require('./pages/admin/part/List.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'create',
                 name: '新增维修备件',
-                component: require('./pages/admin/part/Create.vue')
+                component: require('./pages/admin/part/Create.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: 'use',
                 name: '维修备件使用情况',
-                component: require('./pages/admin/part/Use.vue')
+                component: require('./pages/admin/part/Use.vue'),
+                beforeEnter: mustLogin
             },
             {
                 path: '*',

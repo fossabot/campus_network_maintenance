@@ -2378,6 +2378,14 @@ module.exports = Component.exports
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_admin_Layout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__pages_admin_Layout_vue__);
 
 
+var redirect = function redirect(to, from, next) {
+    if (window.admin) {
+        next('/repair/list');
+    } else {
+        next('/auth/login');
+    }
+};
+
 var mustLogin = function mustLogin(to, from, next) {
     if (window.admin) {
         next();
@@ -2388,7 +2396,7 @@ var mustLogin = function mustLogin(to, from, next) {
 
 var routes = [{
     path: '/',
-    beforeEnter: mustLogin
+    beforeEnter: redirect
 }, {
     path: '/auth/login',
     component: __webpack_require__("./resources/assets/js/pages/admin/auth/Login.vue")
@@ -2402,7 +2410,8 @@ var routes = [{
     children: [{
         path: 'list',
         name: '报障单列表',
-        component: __webpack_require__("./resources/assets/js/pages/admin/repair/List.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/repair/List.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'create',
         name: '新增报障单',

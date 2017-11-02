@@ -16,3 +16,4 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::post('/api/admin/auth/login', 'Admin\Auth\LoginController@login');
+Route::post('/api/admin/type/create', 'Admin\Type\CreateController@create');

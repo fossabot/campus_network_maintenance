@@ -22,7 +22,7 @@
                         <el-switch v-model="data.allow_user_create"></el-switch>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" :loading="lockLogin" @click="submitForm('data')">新增</el-button>
+                        <el-button type="primary" :loading="lock" @click="submitForm('data')">新增</el-button>
                         <el-button @click="resetForm('data')">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -35,7 +35,7 @@
     export default {
         data() {
             return {
-                lockLogin: false,
+                lock: false,
                 data: {
                     name: '',
                     introduction: '',
@@ -62,18 +62,17 @@
         methods: {
             submitForm(data) {
                 this.$refs[data].validate((valid) => {
-                    console.log(this.data)
                     if (valid) {
-                        this.lockLogin = true
+                        this.lock = true
                         this.$http.post(
-                            '/api/admin/auth/login', this.data
+                            '/api/admin/type/create', this.data
                         ).then((response) => {
-                            this.lockLogin = false
-                            if (response.status === 200 && response.data === 'success') {
+                            this.lock = false
+                            if (response.status === 200 && parseInt(response.data)) {
                                 this.$message.success({
-                                    message: '登录成功，正在跳转'
+                                    message: '新增成功'
                                 })
-                                window.location.href = '/admin'
+                                this.$router.push('/type/list')
                             }
                         })
                     }

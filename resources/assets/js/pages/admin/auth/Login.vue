@@ -16,7 +16,7 @@
                             <el-input v-model="data.password" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" :loading="lockLogin" @click="submitForm('data')">立即登录</el-button>
+                            <el-button type="primary" :loading="lock" @click="submitForm('data')">立即登录</el-button>
                             <el-button @click="resetForm('data')">重置</el-button>
                         </el-form-item>
                     </el-form>
@@ -34,7 +34,7 @@
     export default {
         data() {
             return {
-                lockLogin: false,
+                lock: false,
                 data: {
                     username: '',
                     password: ''
@@ -55,11 +55,11 @@
             submitForm(data) {
                 this.$refs[data].validate((valid) => {
                     if (valid) {
-                        this.lockLogin = true
+                        this.lock = true
                         this.$http.post(
                             '/api/admin/auth/login', this.data
                         ).then((response) => {
-                            this.lockLogin = false
+                            this.lock = false
                             if (response.status === 200 && response.data === 'success') {
                                 this.$message.success({
                                     message: '登录成功，正在跳转'

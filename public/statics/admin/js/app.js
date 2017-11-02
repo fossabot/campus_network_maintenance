@@ -57,7 +57,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            lockLogin: false,
+            lock: false,
             data: {
                 username: '',
                 password: ''
@@ -75,9 +75,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.$refs[data].validate(function (valid) {
                 if (valid) {
-                    _this.lockLogin = true;
+                    _this.lock = true;
                     _this.$http.post('/api/admin/auth/login', _this.data).then(function (response) {
-                        _this.lockLogin = false;
+                        _this.lock = false;
                         if (response.status === 200 && response.data === 'success') {
                             _this.$message.success({
                                 message: '登录成功，正在跳转'
@@ -199,7 +199,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            lockLogin: false,
+            lock: false,
             data: {
                 name: '',
                 introduction: '',
@@ -224,16 +224,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.$refs[data].validate(function (valid) {
-                console.log(_this.data);
                 if (valid) {
-                    _this.lockLogin = true;
-                    _this.$http.post('/api/admin/auth/login', _this.data).then(function (response) {
-                        _this.lockLogin = false;
-                        if (response.status === 200 && response.data === 'success') {
+                    _this.lock = true;
+                    _this.$http.post('/api/admin/type/create', _this.data).then(function (response) {
+                        _this.lock = false;
+                        if (response.status === 200 && parseInt(response.data)) {
                             _this.$message.success({
-                                message: '登录成功，正在跳转'
+                                message: '新增成功，正在跳转'
                             });
-                            window.location.href = '/admin';
+                            _this.$router.push('/type/list');
                         }
                     });
                 }
@@ -976,7 +975,7 @@ var render = function() {
                       _c(
                         "el-button",
                         {
-                          attrs: { type: "primary", loading: _vm.lockLogin },
+                          attrs: { type: "primary", loading: _vm.lock },
                           on: {
                             click: function($event) {
                               _vm.submitForm("data")
@@ -1147,10 +1146,7 @@ var render = function() {
                           _c(
                             "el-button",
                             {
-                              attrs: {
-                                type: "primary",
-                                loading: _vm.lockLogin
-                              },
+                              attrs: { type: "primary", loading: _vm.lock },
                               on: {
                                 click: function($event) {
                                   _vm.submitForm("data")

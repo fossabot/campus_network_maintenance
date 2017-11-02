@@ -34,45 +34,23 @@
     export default {
         data() {
             return {
-                total: 4000,
-                per: 20,
-                page: 1,
-                data: [
-                    {
-                        id: 1,
-                        name: '校园网络',
-                        introduction: '校园网络',
-                        auto_complete_hours: 72,
-                        auto_complete_stars: 5,
-                        real_user_auth: '是',
-                        allow_user_create: '是'
-                    },
-                    {
-                        id: 2,
-                        name: '多媒体教室',
-                        introduction: '多媒体教室',
-                        auto_complete_hours: '禁止',
-                        auto_complete_stars: 5,
-                        real_user_auth: '否',
-                        allow_user_create: '否'
-                    },
-                    {
-                        id: 3,
-                        name: '一卡通',
-                        introduction: '一卡通',
-                        auto_complete_hours: '禁止',
-                        auto_complete_stars: 5,
-                        real_user_auth: '否',
-                        allow_user_create: '否'
-                    }
-                ]
+                data: []
             }
         },
         methods: {
             getData() {
-                console.log(this.per)
-                console.log(this.page)
+                this.$http.get('/api/admin/type/list').then((response) => {
+                    if (response.status === 200) {
+                        this.data = response.data
+                        this.$message.success({
+                            message: '获取成功'
+                        })
+                    }
+                })
             }
+        },
+        mounted() {
+            this.getData()
         }
     }
 </script>

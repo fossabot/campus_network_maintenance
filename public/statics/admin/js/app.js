@@ -230,7 +230,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         _this.lock = false;
                         if (response.status === 200 && parseInt(response.data)) {
                             _this.$message.success({
-                                message: '新增成功，正在跳转'
+                                message: '新增成功'
                             });
                             _this.$router.push('/type/list');
                         }
@@ -287,42 +287,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            total: 4000,
-            per: 20,
-            page: 1,
-            data: [{
-                id: 1,
-                name: '校园网络',
-                introduction: '校园网络',
-                auto_complete_hours: 72,
-                auto_complete_stars: 5,
-                real_user_auth: '是',
-                allow_user_create: '是'
-            }, {
-                id: 2,
-                name: '多媒体教室',
-                introduction: '多媒体教室',
-                auto_complete_hours: '禁止',
-                auto_complete_stars: 5,
-                real_user_auth: '否',
-                allow_user_create: '否'
-            }, {
-                id: 3,
-                name: '一卡通',
-                introduction: '一卡通',
-                auto_complete_hours: '禁止',
-                auto_complete_stars: 5,
-                real_user_auth: '否',
-                allow_user_create: '否'
-            }]
+            data: []
         };
     },
 
     methods: {
         getData: function getData() {
-            console.log(this.per);
-            console.log(this.page);
+            var _this = this;
+
+            this.$http.get('/api/admin/type/list').then(function (response) {
+                if (response.status === 200) {
+                    _this.data = response.data;
+                    _this.$message.success({
+                        message: '获取成功'
+                    });
+                }
+                console.log(response);
+            });
         }
+    },
+    mounted: function mounted() {
+        this.getData();
     }
 });
 

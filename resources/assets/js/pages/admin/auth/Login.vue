@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div class="login">
         <el-menu class="menu" @open="handleOpen" @close="handleClose" :collapse="false">
             <el-submenu index="1">
                 <template slot="title">

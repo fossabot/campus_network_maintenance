@@ -49,6 +49,6 @@ http.interceptors.response.use((response) => {
 Vue.prototype.$http = http
 
 const app = new Vue({
-    router,
+    router: router,
     render: h => h(App)
 }).$mount('#app')

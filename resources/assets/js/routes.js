@@ -1,12 +1,17 @@
 import Layout from './pages/admin/Layout.vue'
 
+const mustLogin = (to, from, next) => {
+    if (window.User.hasLogin) {
+        next()
+    } else {
+        next('/auth/login')
+    }
+}
+
 const routes = [
     {
         path: '/',
-        beforeEnter: (to, from, next) => {
-            console.log(window.User)
-            next('/auth/login')
-        }
+        beforeEnter: mustLogin
     },
     {
         path: '/auth/login',

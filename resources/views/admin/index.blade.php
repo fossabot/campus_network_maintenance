@@ -9,9 +9,12 @@
     <title>{{ config('app.name') }}</title>
     <link href="{{ mix('/statics/admin/css/app.css') }}" rel="stylesheet">
     <script>
-        Window.User = {
-            id: 1,
-            username: 1
+        window.User = {
+            hasLogin: '{{ session()->has('admin.id') }}',
+            id: '{{ session('admin.id') }}',
+            role: '{{ session('admin.id') }}',
+            type: '{{ session('admin.id') }}',
+            name: '{{ session('admin.id') }}'
         };
     </script>
 </head>

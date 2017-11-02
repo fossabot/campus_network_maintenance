@@ -73,13 +73,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         submitForm: function submitForm(data) {
             var _this = this;
 
-            this.lockLogin = true;
             this.$refs[data].validate(function (valid) {
                 if (valid) {
+                    _this.lockLogin = true;
                     _this.$http.post('/api/admin/auth/login', _this.login).then(function (response) {
                         _this.lockLogin = false;
-                        if (response.code === 200) {
-                            window.location.reload();
+                        if (response.status === 200) {
+                            window.location.href = '/admin';
                         }
                     });
                 }
@@ -1596,17 +1596,23 @@ http.interceptors.response.use(function (response) {
     loading.close();
     if (response.status === 200) {
         return response;
-    } else if (response.status === 422) {
+    } else if (response.status === 422 || response.status === 423) {
         var errors = response.data.errors;
-        for (var key in errors) {
-            if (errors.hasOwnProperty(key)) {
-                __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Notification.error({
-                    title: '提交数据不符合要求',
-                    message: errors[key][0],
-                    duration: 5000
-                });
+        var message = void 0;
+        if (errors) {
+            for (var key in errors) {
+                if (errors.hasOwnProperty(key)) {
+                    message = errors[key][0];
+                }
             }
+        } else {
+            message = response.data;
         }
+        __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Notification.error({
+            title: '提交数据不符合要求',
+            message: message,
+            duration: 5000
+        });
         return response;
     } else {
         __WEBPACK_IMPORTED_MODULE_2_element_ui___default.a.Notification.error({
@@ -2337,12 +2343,17 @@ module.exports = Component.exports
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_admin_Layout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__pages_admin_Layout_vue__);
 
 
-var routes = [{
-    path: '/',
-    beforeEnter: function beforeEnter(to, from, next) {
-        console.log(window.User);
+var mustLogin = function mustLogin(to, from, next) {
+    if (window.User.hasLogin) {
+        next();
+    } else {
         next('/auth/login');
     }
+};
+
+var routes = [{
+    path: '/',
+    beforeEnter: mustLogin
 }, {
     path: '/auth/login',
     component: __webpack_require__("./resources/assets/js/pages/admin/auth/Login.vue")

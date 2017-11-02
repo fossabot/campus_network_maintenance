@@ -53,15 +53,15 @@
         },
         methods: {
             submitForm(data) {
-                this.lockLogin = true
                 this.$refs[data].validate((valid) => {
                     if (valid) {
+                        this.lockLogin = true
                         this.$http.post(
                             '/api/admin/auth/login', this.login
                         ).then((response) => {
                             this.lockLogin = false
-                            if (response.code === 200) {
-                                window.location.reload()
+                            if (response.status === 200) {
+                                window.location.href = '/admin'
                             }
                         })
                     }

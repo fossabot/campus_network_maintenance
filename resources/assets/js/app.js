@@ -39,17 +39,23 @@ http.interceptors.response.use((response) => {
     loading.close()
     if (response.status === 200) {
         return response
-    } else if (response.status === 422) {
+    } else if (response.status === 422 || response.status === 423) {
         const errors = response.data.errors
-        for (let key in errors) {
-            if (errors.hasOwnProperty(key)) {
-                ElementUI.Notification.error({
-                    title: '提交数据不符合要求',
-                    message: errors[key][0],
-                    duration: 5000
-                })
+        let message
+        if (errors) {
+            for (let key in errors) {
+                if (errors.hasOwnProperty(key)) {
+                    message = errors[key][0]
+                }
             }
+        } else {
+            message = response.data
         }
+        ElementUI.Notification.error({
+            title: '提交数据不符合要求',
+            message: message,
+            duration: 5000
+        })
         return response
     } else {
         ElementUI.Notification.error({

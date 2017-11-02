@@ -16,13 +16,13 @@ class CreateLogRepairUpdateTable extends Migration
         Schema::create('log_repair_update', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('repair_id');
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('admin_id')->nullable();
-            $table->string('location_id')->nullable();
             $table->string('user_id')->nullable();
-            $table->string('user_name')->nullable();
-            $table->string('user_mobile')->nullable();
-            $table->string('user_description')->nullable();
+            $table->unsignedInteger('admin_id')->nullable();
+            $table->string('update_location_id')->nullable();
+            $table->string('update_user_id')->nullable();
+            $table->string('update_user_name')->nullable();
+            $table->string('update_user_mobile')->nullable();
+            $table->string('update_user_description')->nullable();
             $table->timestamps();
 
             $table->index('repair_id');

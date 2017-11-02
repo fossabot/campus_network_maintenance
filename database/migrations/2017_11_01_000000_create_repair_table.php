@@ -32,7 +32,6 @@ class CreateRepairTable extends Migration
             $table->timestamp('updated_at')->nullable();
 
             $table->index('user_id');
-            $table->index('user_name');
             $table->index('user_mobile');
         });
     }

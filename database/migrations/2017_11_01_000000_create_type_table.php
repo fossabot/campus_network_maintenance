@@ -17,10 +17,10 @@ class CreateTypeTable extends Migration
             $table->increments('id');
             $table->string('name', 64);
             $table->string('introduction', 128)->nullable();
-            $table->unsignedInteger('auto_hours')->default(0);
-            $table->unsignedInteger('auto_stars')->default(5);
-            $table->boolean('real_user')->default(true);
-            $table->boolean('allow_user')->default(true);
+            $table->unsignedInteger('auto_complete_hours')->default(0);
+            $table->unsignedInteger('auto_complete_stars')->default(5);
+            $table->boolean('real_user_auth')->default(true);
+            $table->boolean('allow_user_create')->default(true);
             $table->timestamps();
         });
     }

@@ -58,11 +58,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             lockLogin: false,
-            login: {
+            data: {
                 username: '',
                 password: ''
             },
-            loginRules: {
+            rules: {
                 username: [{ required: true, message: '请输入管理员账户', trigger: 'blur' }, { min: 6, max: 24, message: '管理员账户长度必须是6-24个字符', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入管理员密码', trigger: 'blur' }, { min: 6, max: 24, message: '管理员密码长度必须是6-24个字符', trigger: 'blur' }]
             }
@@ -76,7 +76,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$refs[data].validate(function (valid) {
                 if (valid) {
                     _this.lockLogin = true;
-                    _this.$http.post('/api/admin/auth/login', _this.login).then(function (response) {
+                    _this.$http.post('/api/admin/auth/login', _this.data).then(function (response) {
                         _this.lockLogin = false;
                         if (response.status === 200 && response.data === 'success') {
                             _this.$message.success({
@@ -111,14 +111,236 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            tableData: []
+            total: 4000,
+            per: 20,
+            page: 1,
+            data: [{
+                id: 1,
+                name: '校园网络报障',
+                introduction: '校园网络报障'
+            }]
         };
+    },
+
+    methods: {
+        getData: function getData() {
+            console.log(this.per);
+            console.log(this.page);
+        },
+        handleSizeChange: function handleSizeChange(val) {
+            this.per = val;
+            this.getData();
+        },
+        handleCurrentChange: function handleCurrentChange(val) {
+            this.page = val;
+            this.getData();
+        }
     }
 });
+
+/***/ }),
+
+/***/ "./node_modules/_babel-loader@7.1.2@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\"]}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=script&index=0&bustCache!./resources/assets/js/pages/admin/type/Create.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            lockLogin: false,
+            data: {
+                name: '',
+                introduction: '',
+                auto_complete_hours: 0,
+                auto_complete_stars: 5,
+                real_user_auth: true,
+                allow_user_create: true
+            },
+            rules: {
+                name: [{ required: true, message: '请输入分类名称', trigger: 'blur' }, { max: 64, message: '分类名称的长度不得超过64个字符', trigger: 'blur' }],
+                introduction: [{ max: 128, message: '分类描述的长度不得超过64个字符', trigger: 'blur' }],
+                auto_complete_hours: [{ required: true }],
+                auto_complete_stars: [{ required: true }],
+                real_user_auth: [{ required: true }],
+                allow_user_create: [{ required: true }]
+            }
+        };
+    },
+
+    methods: {
+        submitForm: function submitForm(data) {
+            var _this = this;
+
+            this.$refs[data].validate(function (valid) {
+                console.log(_this.data);
+                if (valid) {
+                    _this.lockLogin = true;
+                    _this.$http.post('/api/admin/auth/login', _this.data).then(function (response) {
+                        _this.lockLogin = false;
+                        if (response.status === 200 && response.data === 'success') {
+                            _this.$message.success({
+                                message: '登录成功，正在跳转'
+                            });
+                            window.location.href = '/admin';
+                        }
+                    });
+                }
+            });
+        },
+        resetForm: function resetForm(data) {
+            this.$refs[data].resetFields();
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/_babel-loader@7.1.2@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\"]}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=script&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            total: 4000,
+            per: 20,
+            page: 1,
+            data: [{
+                id: 1,
+                name: '校园网络',
+                introduction: '校园网络',
+                auto_complete_hours: 72,
+                auto_complete_stars: 5,
+                real_user_auth: '是',
+                allow_user_create: '是'
+            }, {
+                id: 2,
+                name: '多媒体教室',
+                introduction: '多媒体教室',
+                auto_complete_hours: '禁止',
+                auto_complete_stars: 5,
+                real_user_auth: '否',
+                allow_user_create: '否'
+            }, {
+                id: 3,
+                name: '一卡通',
+                introduction: '一卡通',
+                auto_complete_hours: '禁止',
+                auto_complete_stars: 5,
+                real_user_auth: '否',
+                allow_user_create: '否'
+            }]
+        };
+    },
+
+    methods: {
+        getData: function getData() {
+            console.log(this.per);
+            console.log(this.page);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/_css-loader@0.28.7@css-loader/index.js!./node_modules/_vue-loader@13.3.0@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e48eaf6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=styles&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/_css-loader@0.28.7@css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.type-list .type-detail {\n    font-size: 0;\n}\n.type-list .type-detail label {\n    width: 100px;\n    color: #99a9bf;\n}\n.type-list .type-detail .el-form-item {\n    margin-right: 0;\n    margin-bottom: 0;\n    width: 50%;\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -130,7 +352,7 @@ exports = module.exports = __webpack_require__("./node_modules/_css-loader@0.28.
 
 
 // module
-exports.push([module.i, "\n.el-header {\n    color: #fefefe;\n    background-color: #409EFF;\n    line-height: 60px;\n}\n.el-header .title {\n    position: absolute;\n    width: 179px;\n    font-size: 20px;\n    font-weight: bold;\n    border-right: 1px solid #E0E0E0;\n}\n.el-aside {\n    background-color: #EDF2FC;\n    height: 100%;\n}\n.el-main {\n    background-color: #FEFEFE;\n    height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.el-header {\n    color: #fefefe;\n    background-color: #409eff;\n    line-height: 60px;\n}\n.el-header .title {\n    position: absolute;\n    width: 179px;\n    font-size: 20px;\n    font-weight: bold;\n    border-right: 1px solid #e0e0e0;\n}\n.el-aside {\n    background-color: #edf2fc;\n    height: 100%;\n}\n.el-main {\n    background-color: #fefefe;\n    height: 100%;\n}\n", ""]);
 
 // exports
 
@@ -396,24 +618,44 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "repair-list" },
+    { staticClass: "type-list" },
     [
       _c(
         "el-table",
-        { attrs: { data: _vm.tableData, border: "" } },
+        { attrs: { data: _vm.data, border: "", stripe: "" } },
         [
           _c("el-table-column", {
-            attrs: { prop: "date", label: "日期", width: "180" }
+            attrs: { prop: "name", label: "分类名称", width: "200" }
           }),
           _vm._v(" "),
           _c("el-table-column", {
-            attrs: { prop: "name", label: "姓名", width: "180" }
+            attrs: { prop: "introduction", label: "分类描述" }
           }),
           _vm._v(" "),
-          _c("el-table-column", { attrs: { prop: "address", label: "地址" } })
+          _c(
+            "el-table-column",
+            { attrs: { label: "操作" } },
+            [_c("el-button", { attrs: { size: "mini" } }, [_vm._v("编辑")])],
+            1
+          )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("el-pagination", {
+        staticStyle: { "margin-top": "20px" },
+        attrs: {
+          layout: "sizes, prev, pager, next, jumper, ->, total",
+          total: _vm.total,
+          "page-sizes": [20, 50, 100, 200],
+          "page-size": _vm.per,
+          "current-page": _vm.page
+        },
+        on: {
+          "size-change": _vm.handleSizeChange,
+          "current-change": _vm.handleCurrentChange
+        }
+      })
     ],
     1
   )
@@ -437,7 +679,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "repair-create" }, [_vm._v("\n    create\n")])
+  return _c(
+    "div",
+    { staticClass: "type-list" },
+    [
+      _c(
+        "el-table",
+        { attrs: { data: _vm.data, border: "" } },
+        [
+          _c("el-table-column", {
+            attrs: { type: "expand" },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _c(
+                      "el-form",
+                      {
+                        staticClass: "type-detail",
+                        attrs: { "label-position": "left", inline: "" }
+                      },
+                      [
+                        _c("el-form-item", { attrs: { label: "自动完成时间" } }, [
+                          _c("span", [
+                            _vm._v(_vm._s(scope.row.auto_complete_hours))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("el-form-item", { attrs: { label: "用户默认评价" } }, [
+                          _c("span", [
+                            _vm._v(_vm._s(scope.row.auto_complete_stars))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("el-form-item", { attrs: { label: "需要用户验证" } }, [
+                          _c("span", [_vm._v(_vm._s(scope.row.real_user_auth))])
+                        ]),
+                        _vm._v(" "),
+                        _c("el-form-item", { attrs: { label: "允许用户创建" } }, [
+                          _c("span", [
+                            _vm._v(_vm._s(scope.row.allow_user_create))
+                          ])
+                        ])
+                      ],
+                      1
+                    )
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "name", label: "分类名称", width: "250" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "introduction", label: "分类描述" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "操作", width: "110" },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _c("el-button", { attrs: { size: "mini" } }, [
+                      _vm._v("查看 / 编辑")
+                    ])
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -500,7 +822,196 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "repair-create" }, [_vm._v("\n    create\n")])
+  return _c(
+    "div",
+    { staticClass: "type-create" },
+    [
+      _c(
+        "el-row",
+        [
+          _c(
+            "el-col",
+            { attrs: { md: 12 } },
+            [
+              _c(
+                "el-form",
+                {
+                  ref: "data",
+                  attrs: {
+                    model: _vm.data,
+                    rules: _vm.rules,
+                    "label-width": "120px"
+                  }
+                },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "分类名称", prop: "name" } },
+                    [
+                      _c("el-input", {
+                        nativeOn: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k($event.keyCode, "enter", 13, $event.key)
+                            ) {
+                              return null
+                            }
+                            _vm.submitForm("data")
+                          }
+                        },
+                        model: {
+                          value: _vm.data.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "name", $$v)
+                          },
+                          expression: "data.name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "分类描述", prop: "introduction" } },
+                    [
+                      _c("el-input", {
+                        nativeOn: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k($event.keyCode, "enter", 13, $event.key)
+                            ) {
+                              return null
+                            }
+                            _vm.submitForm("data")
+                          }
+                        },
+                        model: {
+                          value: _vm.data.introduction,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "introduction", $$v)
+                          },
+                          expression: "data.introduction"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "自动完成时间", prop: "auto_complete_hours" } },
+                    [
+                      _c("el-input-number", {
+                        attrs: { min: 0, max: 720 },
+                        model: {
+                          value: _vm.data.auto_complete_hours,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "auto_complete_hours", $$v)
+                          },
+                          expression: "data.auto_complete_hours"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "用户默认评价", prop: "auto_complete_stars" } },
+                    [
+                      _c("el-input-number", {
+                        attrs: { min: 1, max: 5 },
+                        model: {
+                          value: _vm.data.auto_complete_stars,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "auto_complete_stars", $$v)
+                          },
+                          expression: "data.auto_complete_stars"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "需要用户验证", prop: "real_user_auth" } },
+                    [
+                      _c("el-switch", {
+                        model: {
+                          value: _vm.data.real_user_auth,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "real_user_auth", $$v)
+                          },
+                          expression: "data.real_user_auth"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "允许用户创建", prop: "allow_user_create" } },
+                    [
+                      _c("el-switch", {
+                        model: {
+                          value: _vm.data.allow_user_create,
+                          callback: function($$v) {
+                            _vm.$set(_vm.data, "allow_user_create", $$v)
+                          },
+                          expression: "data.allow_user_create"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { type: "primary", loading: _vm.lockLogin },
+                          on: {
+                            click: function($event) {
+                              _vm.submitForm("data")
+                            }
+                          }
+                        },
+                        [_vm._v("新增")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-button",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.resetForm("data")
+                            }
+                          }
+                        },
+                        [_vm._v("重置")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -556,10 +1067,10 @@ var render = function() {
                   _c(
                     "el-form",
                     {
-                      ref: "login",
+                      ref: "data",
                       attrs: {
-                        model: _vm.login,
-                        rules: _vm.loginRules,
+                        model: _vm.data,
+                        rules: _vm.rules,
                         "label-width": "120px"
                       }
                     },
@@ -582,15 +1093,15 @@ var render = function() {
                                 ) {
                                   return null
                                 }
-                                _vm.submitForm("login")
+                                _vm.submitForm("data")
                               }
                             },
                             model: {
-                              value: _vm.login.username,
+                              value: _vm.data.username,
                               callback: function($$v) {
-                                _vm.$set(_vm.login, "username", $$v)
+                                _vm.$set(_vm.data, "username", $$v)
                               },
-                              expression: "login.username"
+                              expression: "data.username"
                             }
                           })
                         ],
@@ -615,15 +1126,15 @@ var render = function() {
                                 ) {
                                   return null
                                 }
-                                _vm.submitForm("login")
+                                _vm.submitForm("data")
                               }
                             },
                             model: {
-                              value: _vm.login.password,
+                              value: _vm.data.password,
                               callback: function($$v) {
-                                _vm.$set(_vm.login, "password", $$v)
+                                _vm.$set(_vm.data, "password", $$v)
                               },
-                              expression: "login.password"
+                              expression: "data.password"
                             }
                           })
                         ],
@@ -642,7 +1153,7 @@ var render = function() {
                               },
                               on: {
                                 click: function($event) {
-                                  _vm.submitForm("login")
+                                  _vm.submitForm("data")
                                 }
                               }
                             },
@@ -654,7 +1165,7 @@ var render = function() {
                             {
                               on: {
                                 click: function($event) {
-                                  _vm.resetForm("login")
+                                  _vm.resetForm("data")
                                 }
                               }
                             },
@@ -1206,6 +1717,33 @@ if (false) {
   if (module.hot.data) {
     require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-a64f8ae2", module.exports)
   }
+}
+
+/***/ }),
+
+/***/ "./node_modules/_vue-style-loader@3.0.3@vue-style-loader/index.js!./node_modules/_css-loader@0.28.7@css-loader/index.js!./node_modules/_vue-loader@13.3.0@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e48eaf6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=styles&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/_css-loader@0.28.7@css-loader/index.js!./node_modules/_vue-loader@13.3.0@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e48eaf6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=styles&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/_vue-style-loader@3.0.3@vue-style-loader/lib/addStylesClient.js")("919a3e02", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../../../node_modules/_vue-loader@13.3.0@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e48eaf6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=styles&index=0&bustCache!./List.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../../../node_modules/_vue-loader@13.3.0@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e48eaf6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=styles&index=0&bustCache!./List.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
 }
 
 /***/ }),
@@ -2180,7 +2718,7 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__("./node_modules/_vue-loader@13.3.0@vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__("./node_modules/_babel-loader@7.1.2@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\"]}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=script&index=0&bustCache!./resources/assets/js/pages/admin/type/Create.vue")
 /* template */
 var __vue_template__ = __webpack_require__("./node_modules/_vue-loader@13.3.0@vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4a89cc54\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=template&index=0&bustCache!./resources/assets/js/pages/admin/type/Create.vue")
 /* template functional */
@@ -2227,15 +2765,19 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/_vue-style-loader@3.0.3@vue-style-loader/index.js!./node_modules/_css-loader@0.28.7@css-loader/index.js!./node_modules/_vue-loader@13.3.0@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e48eaf6\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=styles&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue")
+}
 var normalizeComponent = __webpack_require__("./node_modules/_vue-loader@13.3.0@vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__("./node_modules/_babel-loader@7.1.2@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\"]}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=script&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue")
 /* template */
 var __vue_template__ = __webpack_require__("./node_modules/_vue-loader@13.3.0@vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3e48eaf6\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/_vue-loader@13.3.0@vue-loader/lib/selector.js?type=template&index=0&bustCache!./resources/assets/js/pages/admin/type/List.vue")
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */

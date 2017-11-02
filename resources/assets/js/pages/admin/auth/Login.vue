@@ -8,16 +8,16 @@
         <el-main style="height: 100%;">
             <el-row type="flex" justify="center" style="margin-top: 200px;">
                 <el-col :md="8">
-                    <el-form :model="login" :rules="loginRules" ref="login" label-width="120px">
+                    <el-form :model="data" :rules="rules" ref="data" label-width="120px">
                         <el-form-item label="管理员帐户" prop="username">
-                            <el-input v-model="login.username" @keyup.enter.native="submitForm('login')"></el-input>
+                            <el-input v-model="data.username" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>
                         <el-form-item label="管理员密码" prop="password">
-                            <el-input v-model="login.password" @keyup.enter.native="submitForm('login')"></el-input>
+                            <el-input v-model="data.password" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" :loading="lockLogin" @click="submitForm('login')">立即登录</el-button>
-                            <el-button @click="resetForm('login')">重置</el-button>
+                            <el-button type="primary" :loading="lockLogin" @click="submitForm('data')">立即登录</el-button>
+                            <el-button @click="resetForm('data')">重置</el-button>
                         </el-form-item>
                     </el-form>
                 </el-col>
@@ -35,11 +35,11 @@
         data() {
             return {
                 lockLogin: false,
-                login: {
+                data: {
                     username: '',
                     password: ''
                 },
-                loginRules: {
+                rules: {
                     username: [
                         {required: true, message: '请输入管理员账户', trigger: 'blur'},
                         {min: 6, max: 24, message: '管理员账户长度必须是6-24个字符', trigger: 'blur'}
@@ -57,7 +57,7 @@
                     if (valid) {
                         this.lockLogin = true
                         this.$http.post(
-                            '/api/admin/auth/login', this.login
+                            '/api/admin/auth/login', this.data
                         ).then((response) => {
                             this.lockLogin = false
                             if (response.status === 200 && response.data === 'success') {

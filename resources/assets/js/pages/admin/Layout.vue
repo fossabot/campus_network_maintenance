@@ -97,7 +97,7 @@
 <style>
     .el-header {
         color: #fefefe;
-        background-color: #409EFF;
+        background-color: #409eff;
         line-height: 60px;
     }
 
@@ -106,16 +106,16 @@
         width: 179px;
         font-size: 20px;
         font-weight: bold;
-        border-right: 1px solid #E0E0E0;
+        border-right: 1px solid #e0e0e0;
     }
 
     .el-aside {
-        background-color: #EDF2FC;
+        background-color: #edf2fc;
         height: 100%;
     }
 
     .el-main {
-        background-color: #FEFEFE;
+        background-color: #fefefe;
         height: 100%;
     }
 </style>

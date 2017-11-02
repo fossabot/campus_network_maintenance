@@ -78,7 +78,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.lockLogin = true;
                     _this.$http.post('/api/admin/auth/login', _this.login).then(function (response) {
                         _this.lockLogin = false;
-                        if (response.status === 200) {
+                        if (response.status === 200 && response.data === 'success') {
+                            _this.$message.success({
+                                message: '登录成功，正在跳转'
+                            });
                             window.location.href = '/admin';
                         }
                     });

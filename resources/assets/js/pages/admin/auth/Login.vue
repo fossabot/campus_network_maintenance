@@ -60,7 +60,10 @@
                             '/api/admin/auth/login', this.login
                         ).then((response) => {
                             this.lockLogin = false
-                            if (response.status === 200) {
+                            if (response.status === 200 && response.data === 'success') {
+                                this.$message.success({
+                                    message: '登录成功，正在跳转'
+                                })
                                 window.location.href = '/admin'
                             }
                         })

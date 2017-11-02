@@ -8,6 +8,14 @@ const redirect = (to, from, next) => {
     }
 }
 
+const mustGuest = (to, from, next) => {
+    if (window.admin) {
+        next('/repair/list')
+    } else {
+        next()
+    }
+}
+
 const mustLogin = (to, from, next) => {
     if (window.admin) {
         next()
@@ -23,7 +31,8 @@ const routes = [
     },
     {
         path: '/auth/login',
-        component: require('./pages/admin/auth/Login.vue')
+        component: require('./pages/admin/auth/Login.vue'),
+        beforeEnter: mustGuest
     },
     {
         path: '/repair',

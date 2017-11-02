@@ -2386,6 +2386,14 @@ var redirect = function redirect(to, from, next) {
     }
 };
 
+var mustGuest = function mustGuest(to, from, next) {
+    if (window.admin) {
+        next('/repair/list');
+    } else {
+        next();
+    }
+};
+
 var mustLogin = function mustLogin(to, from, next) {
     if (window.admin) {
         next();
@@ -2399,7 +2407,8 @@ var routes = [{
     beforeEnter: redirect
 }, {
     path: '/auth/login',
-    component: __webpack_require__("./resources/assets/js/pages/admin/auth/Login.vue")
+    component: __webpack_require__("./resources/assets/js/pages/admin/auth/Login.vue"),
+    beforeEnter: mustGuest
 }, {
     path: '/repair',
     redirect: '/repair/list'
@@ -2415,7 +2424,8 @@ var routes = [{
     }, {
         path: 'create',
         name: '新增报障单',
-        component: __webpack_require__("./resources/assets/js/pages/admin/repair/Create.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/repair/Create.vue"),
+        beforeEnter: mustLogin
     }, {
         path: '*',
         redirect: '/repair/list'
@@ -2430,11 +2440,13 @@ var routes = [{
     children: [{
         path: 'list',
         name: '维修人员列表',
-        component: __webpack_require__("./resources/assets/js/pages/admin/user/List.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/user/List.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'create',
         name: '新增维修人员',
-        component: __webpack_require__("./resources/assets/js/pages/admin/user/Create.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/user/Create.vue"),
+        beforeEnter: mustLogin
     }, {
         path: '*',
         redirect: '/user/list'
@@ -2449,11 +2461,13 @@ var routes = [{
     children: [{
         path: 'list',
         name: '维修分类列表',
-        component: __webpack_require__("./resources/assets/js/pages/admin/type/List.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/type/List.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'create',
         name: '新增维修分类',
-        component: __webpack_require__("./resources/assets/js/pages/admin/type/Create.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/type/Create.vue"),
+        beforeEnter: mustLogin
     }, {
         path: '*',
         redirect: '/type/list'
@@ -2468,15 +2482,18 @@ var routes = [{
     children: [{
         path: 'list',
         name: '维修地区列表',
-        component: __webpack_require__("./resources/assets/js/pages/admin/location/List.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/location/List.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'create',
         name: '新增维修地区',
-        component: __webpack_require__("./resources/assets/js/pages/admin/location/Create.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/location/Create.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'allot',
         name: '分配维修地区',
-        component: __webpack_require__("./resources/assets/js/pages/admin/location/Allot.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/location/Allot.vue"),
+        beforeEnter: mustLogin
     }, {
         path: '*',
         redirect: '/location/list'
@@ -2491,15 +2508,18 @@ var routes = [{
     children: [{
         path: 'list',
         name: '维修备件列表',
-        component: __webpack_require__("./resources/assets/js/pages/admin/part/List.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/part/List.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'create',
         name: '新增维修备件',
-        component: __webpack_require__("./resources/assets/js/pages/admin/part/Create.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/part/Create.vue"),
+        beforeEnter: mustLogin
     }, {
         path: 'use',
         name: '维修备件使用情况',
-        component: __webpack_require__("./resources/assets/js/pages/admin/part/Use.vue")
+        component: __webpack_require__("./resources/assets/js/pages/admin/part/Use.vue"),
+        beforeEnter: mustLogin
     }, {
         path: '*',
         redirect: '/part/list'

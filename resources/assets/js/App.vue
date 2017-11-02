@@ -1,29 +1,26 @@
 <template>
     <div id="app">
-        <div>
-            <el-button @click="startHacking">Start</el-button>
-        </div>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
 <script>
-    export default {
-        methods: {
-            startHacking() {
-                this.$notify({
-                    title: 'It works!',
-                    type: 'success',
-                    message: 'We\'ve laid the ground work for you. It\'s time for you to build something epic!',
-                    duration: 5000
-                })
-            }
-        }
-    }
+    export default {}
 </script>
 
 <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+        font-size: 14px;
+    }
+
     #app {
-        font-family: Helvetica, sans-serif;
-        text-align: center;
+        top: 0;
+        bottom: 0;
+        width: 100%;
     }
 </style>

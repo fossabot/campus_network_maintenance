@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
-    <link href="{{ mix('admin/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/statics/admin/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app"></div>
-<script src="{{ mix('admin/js/manifest.js') }}"></script>
-<script src="{{ mix('admin/js/vendor.js') }}"></script>
-<script src="{{ mix('admin/js/app.js') }}"></script>
+<script src="{{ mix('/statics/admin/js/manifest.js') }}"></script>
+<script src="{{ mix('/statics/admin/js/vendor.js') }}"></script>
+<script src="{{ mix('/statics/admin/js/app.js') }}"></script>
 </body>
 </html>

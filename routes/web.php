@@ -20,8 +20,8 @@
 //Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/admin', '');
 //
-//Route::group(['prefix' => 'admin'], function () {
-//    Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
-//});
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
+});
 
-Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
+//Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');

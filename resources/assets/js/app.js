@@ -52,7 +52,7 @@ http.interceptors.response.use((response) => {
             message = response.data
         }
         ElementUI.Notification.error({
-            title: '提交数据不符合要求',
+            title: '错误',
             message: message,
             duration: 5000
         })

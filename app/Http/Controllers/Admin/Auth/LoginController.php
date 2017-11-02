@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Models\Admin;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 
 class LoginController extends Controller
 {
-    protected $admin;
-
-    public function __construct(Admin $admin)
-    {
-        $this->admin = $admin;
-    }
-
+    /**
+     * @param LoginRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request)
     {
         if ($this->hasTooManyLoginAttempts($request)) {
@@ -28,7 +27,7 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            return response()->json([], 200);
+            return response()->json('success', 200);
         }
 
         $this->incrementLoginAttempts($request);
@@ -81,6 +80,12 @@ class LoginController extends Controller
 
     protected function attemptLogin(LoginRequest $request)
     {
-        $this->admin;
+        $admin = Admin::whereUsername($request->input('username'))->first();
+
+        if ($admin && Hash::check($request->input('password'), $admin->password)) {
+            return $admin;
+        }
+
+        return false;
     }
 }

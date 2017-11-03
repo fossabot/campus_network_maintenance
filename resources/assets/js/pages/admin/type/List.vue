@@ -21,9 +21,10 @@
             </el-table-column>
             <el-table-column prop="name" label="分类名称" width="250"></el-table-column>
             <el-table-column prop="introduction" label="分类描述"></el-table-column>
-            <el-table-column label="操作" width="80">
+            <el-table-column label="操作" width="175">
                 <template slot-scope="scope">
                     <el-button size="mini" @click="$router.push('/type/detail/' + scope.row.id)">修改</el-button>
+                    <el-button size="mini" type="primary" @click="$router.push('/location/allot/' + scope.row.id)">分配地区</el-button>
                 </template>
             </el-table-column>
         </el-table>

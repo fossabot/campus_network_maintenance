@@ -19,6 +19,18 @@
                     return 1
                 }
             }
+        },
+        methods: {
+            getData() {
+                this.$http.get('/api/admin/location/second').then((response) => {
+                    if (response.status === 200) {
+                        this.data = response.data
+                        this.$message.success({
+                            message: '获取成功'
+                        })
+                    }
+                })
+            }
         }
     }
 </script>

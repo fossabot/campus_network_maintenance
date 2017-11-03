@@ -1,5 +1,5 @@
 <template>
-    <div class="location-create">
+    <div class="location-detail">
         <el-row>
             <el-col :md="12">
                 <el-tabs type="card" value="first">

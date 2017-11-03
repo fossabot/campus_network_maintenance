@@ -52,9 +52,9 @@
                             <span slot="title">维修地区</span>
                             <el-menu-item index="/location/list">维修地区列表</el-menu-item>
                             <el-menu-item index="/location/create">新增维修地区</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group>
-                            <span slot="title">分配维修地区</span>
+                            <el-menu-item v-if="$route.path.substr(0, 17) === '/location/detail/'" :index="$route.path">
+                                修改维修地区
+                            </el-menu-item>
                             <el-menu-item index="/location/allot">分配维修地区</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>

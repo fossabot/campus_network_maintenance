@@ -143,7 +143,13 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
-                path: 'allot',
+                path: 'detail/:id',
+                name: '修改维修地区',
+                component: require('./pages/admin/location/Detail.vue'),
+                beforeEnter: mustLogin
+            },
+            {
+                path: 'allot/:id',
                 name: '分配维修地区',
                 component: require('./pages/admin/location/Allot.vue'),
                 beforeEnter: mustLogin

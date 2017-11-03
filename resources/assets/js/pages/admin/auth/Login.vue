@@ -61,8 +61,9 @@
                         ).then((response) => {
                             this.lock = false
                             if (response.status === 200 && response.data === 'success') {
-                                this.$message.success({
-                                    message: '登录成功，正在跳转'
+                                this.$notify.success({
+                                    message: '登录成功',
+                                    duration: 2000
                                 })
                                 window.location.href = '/admin'
                             }

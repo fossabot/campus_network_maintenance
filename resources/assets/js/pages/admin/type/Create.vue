@@ -10,13 +10,16 @@
                         <el-input v-model="data.introduction"></el-input>
                     </el-form-item>
                     <el-form-item label="自动完成时间" prop="auto_complete_hours">
-                        <el-input-number v-model="data.auto_complete_hours" :min="0" :max="720"></el-input-number> 小时
+                        <el-input-number v-model="data.auto_complete_hours" :min="0" :max="720"></el-input-number>
+                        <span>小时</span> <span class="tip">（0为禁止报障单自动完成）</span>
                     </el-form-item>
                     <el-form-item label="用户默认评价" prop="auto_complete_stars">
-                        <el-input-number v-model="data.auto_complete_stars" :min="1" :max="5"></el-input-number> 星
+                        <el-input-number v-model="data.auto_complete_stars" :min="1" :max="5"></el-input-number>
+                        <span>星</span> <span class="tip">（1星最低 5星最高）</span>
                     </el-form-item>
                     <el-form-item label="需要用户验证" prop="real_user_auth">
                         <el-switch v-model="data.real_user_auth"></el-switch>
+                        <span class="tip">（是否验证学号姓名）</span>
                     </el-form-item>
                     <el-form-item label="允许用户创建" prop="allow_user_create">
                         <el-switch v-model="data.allow_user_create"></el-switch>
@@ -69,8 +72,9 @@
                         ).then((response) => {
                             this.lock = false
                             if (response.status === 200 && parseInt(response.data)) {
-                                this.$message.success({
-                                    message: '新增成功'
+                                this.$notify.success({
+                                    message: '新增成功',
+                                    duration: 2000
                                 })
                                 this.$router.replace('/type/list')
                             }
@@ -84,3 +88,9 @@
         }
     }
 </script>
+
+<style>
+    .type-create .tip {
+        color: #878D99;
+    }
+</style>

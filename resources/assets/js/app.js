@@ -39,6 +39,13 @@ http.interceptors.response.use((response) => {
     loading.close()
     if (response.status === 200) {
         return response
+    } else if (response.status === 404) {
+        ElementUI.Notification.error({
+            title: '错误',
+            message: '未找到当前页面',
+            duration: 5000
+        })
+        return response
     } else if (response.status === 422 || response.status === 423) {
         const errors = response.data.errors
         let message

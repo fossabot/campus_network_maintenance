@@ -112,7 +112,7 @@ const routes = [
             {
                 path: 'detail/:id',
                 name: '修改维修分类',
-                component: require('./pages/admin/type/Create.vue'),
+                component: require('./pages/admin/type/Detail.vue'),
                 beforeEnter: mustLogin
             },
             {

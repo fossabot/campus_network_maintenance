@@ -19,28 +19,8 @@ class Type extends Model
 
     protected $hidden = [];
 
-    public function getIntroductionAttribute($value)
-    {
-        return $value ? $value : '暂无描述';
-    }
-
-    public function getAutoCompleteHoursAttribute($value)
-    {
-        return $value ? $value . '小时' : '禁用';
-    }
-
-    public function getAutoCompleteStarsAttribute($value)
-    {
-        return $value . '星';
-    }
-
-    public function getRealUserAuthAttribute($value)
-    {
-        return $value ? '是' : '否';
-    }
-
-    public function getAllowUserCreateAttribute($value)
-    {
-        return $value ? '是' : '否';
-    }
+    protected $casts = [
+        'real_user_auth'    => 'bool',
+        'allow_user_create' => 'bool',
+    ];
 }

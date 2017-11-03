@@ -19,3 +19,5 @@ Route::post('/api/admin/auth/login', 'Admin\Auth\LoginController@login');
 
 Route::get('/api/admin/type/list', 'Admin\Type\ListController@data');
 Route::post('/api/admin/type/create', 'Admin\Type\CreateController@create');
+Route::post('/api/admin/type/detail', 'Admin\Type\DetailController@data');
+Route::post('/api/admin/type/update', 'Admin\Type\CreateController@create');

@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UpdateController extends Controller
 {
+    /**
+     * @param TypeRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(TypeRequest $request)
     {
         $type = Type::findOrFail($request->input('id'));
@@ -35,6 +40,12 @@ class UpdateController extends Controller
         return (bool)Type::whereName($name)->whereKeyNot($id)->first();
     }
 
+    /**
+     * @param Model       $type
+     * @param TypeRequest $request
+     *
+     * @return bool
+     */
     protected function attemptUpdate(Model $type, TypeRequest $request)
     {
         return $type->update($request->only([

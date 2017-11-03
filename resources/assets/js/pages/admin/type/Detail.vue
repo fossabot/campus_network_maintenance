@@ -22,7 +22,7 @@
                         <el-switch v-model="data.allow_user_create"></el-switch>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" :loading="lock" @click="submitForm('data')">新增</el-button>
+                        <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
                         <el-button @click="resetForm('data')">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -79,14 +79,14 @@
                     if (valid) {
                         this.lock = true
                         this.$http.post(
-                            '/api/admin/type/create', this.data
+                            '/api/admin/type/update', this.data
                         ).then((response) => {
                             this.lock = false
-                            if (response.status === 200 && parseInt(response.data)) {
+                            if (response.status === 200) {
                                 this.$message.success({
-                                    message: '新增成功'
+                                    message: '修改成功'
                                 })
-                                this.$router.push('/type/list')
+                                this.$router.replace('/type/list')
                             }
                         })
                     }

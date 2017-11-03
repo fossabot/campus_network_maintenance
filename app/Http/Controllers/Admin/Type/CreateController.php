@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Type;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Type\TypeRequest;
+use App\Http\Requests\Admin\TypeRequest;
 use App\Models\Type;
 
 class CreateController extends Controller

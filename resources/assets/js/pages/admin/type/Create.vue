@@ -72,7 +72,7 @@
                                 this.$message.success({
                                     message: '新增成功'
                                 })
-                                this.$router.push('/type/list')
+                                this.$router.replace('/type/list')
                             }
                         })
                     }

@@ -10,12 +10,6 @@ class DetailController extends Controller
 {
     public function data(Request $request)
     {
-        $type = Type::findOrFail($request->input('id'));
-
-        if ($type) {
-            return response()->json($type, 200);
-        }
-
-        return response()->json('', 404);
+        return response()->json(Type::findOrFail($request->input('id')), 200);
     }
 }

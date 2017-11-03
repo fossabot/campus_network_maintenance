@@ -42,7 +42,7 @@
                             <el-menu-item v-if="$route.path.substr(0, 13) === '/type/detail/'" :index="$route.path">
                                 修改维修分类
                             </el-menu-item>
-                            <el-menu-item v-if="$route.path.substr(0, 16) === '/location/allot/'" :index="$route.path">
+                            <el-menu-item v-if="$route.path.substr(0, 15) === '/type/location/'" :index="$route.path">
                                 分配维修地区
                             </el-menu-item>
                         </el-menu-item-group>

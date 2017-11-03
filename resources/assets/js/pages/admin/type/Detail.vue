@@ -64,9 +64,9 @@
         },
         methods: {
             getData() {
-                this.$http.post('/api/admin/type/detail', {
-                    id: this.$route.params.id
-                }).then((response) => {
+                this.$http.get(
+                    '/api/admin/type/detail/' + this.$route.params.id
+                ).then((response) => {
                     if (response.status === 200) {
                         this.data = response.data
                         this.$message.success({

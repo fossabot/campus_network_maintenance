@@ -4,16 +4,16 @@
             <el-col :md="12">
                 <el-form :model="data" :rules="rules" ref="data" label-width="120px">
                     <el-form-item label="分类名称" prop="name">
-                        <el-input v-model="data.name" @keyup.enter.native="submitForm('data')"></el-input>
+                        <el-input v-model="data.name"></el-input>
                     </el-form-item>
                     <el-form-item label="分类描述" prop="introduction">
-                        <el-input v-model="data.introduction" @keyup.enter.native="submitForm('data')"></el-input>
+                        <el-input v-model="data.introduction"></el-input>
                     </el-form-item>
                     <el-form-item label="自动完成时间" prop="auto_complete_hours">
-                        <el-input-number v-model="data.auto_complete_hours" :min="0" :max="720"></el-input-number>
+                        <el-input-number v-model="data.auto_complete_hours" :min="0" :max="720"></el-input-number> 小时
                     </el-form-item>
                     <el-form-item label="用户默认评价" prop="auto_complete_stars">
-                        <el-input-number v-model="data.auto_complete_stars" :min="1" :max="5"></el-input-number>
+                        <el-input-number v-model="data.auto_complete_stars" :min="1" :max="5"></el-input-number> 星
                     </el-form-item>
                     <el-form-item label="需要用户验证" prop="real_user_auth">
                         <el-switch v-model="data.real_user_auth"></el-switch>

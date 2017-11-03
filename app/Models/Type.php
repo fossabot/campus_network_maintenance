@@ -19,6 +19,11 @@ class Type extends Model
 
     protected $hidden = [];
 
+    public function getIntroductionAttribute($value)
+    {
+        return $value ? $value : '暂无描述';
+    }
+
     public function getAutoCompleteHoursAttribute($value)
     {
         return $value ? $value . '小时' : '禁用';

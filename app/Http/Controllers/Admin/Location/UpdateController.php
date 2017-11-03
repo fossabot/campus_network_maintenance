@@ -6,4 +6,8 @@ use App\Http\Controllers\Controller;
 
 class UpdateController extends Controller
 {
+    public function update()
+    {
+
+    }
 }

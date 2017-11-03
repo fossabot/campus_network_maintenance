@@ -21,7 +21,12 @@ Route::get('/api/admin/type/list', 'Admin\Type\ListController@data');
 Route::post('/api/admin/type/create', 'Admin\Type\CreateController@create');
 Route::post('/api/admin/type/detail', 'Admin\Type\DetailController@data');
 Route::post('/api/admin/type/update', 'Admin\Type\UpdateController@update');
+Route::post('/api/admin/type/location', '');
 
 Route::get('/api/admin/location/first', 'Admin\Location\ListController@first');
 Route::get('/api/admin/location/second', 'Admin\Location\ListController@second');
 Route::post('/api/admin/location/create', 'Admin\Location\CreateController@create');
+Route::post('/api/admin/location/detail', 'Admin\Location\DetailController@data');
+Route::post('/api/admin/location/update', 'Admin\Location\UpdateController@update');
+Route::post('/api/admin/location/allot', 'Admin\Location\AllotController@data');
+Route::post('/api/admin/location/allot', 'Admin\Location\AllotController@allot');

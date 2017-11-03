@@ -1,5 +1,5 @@
 <template>
-    <div class="location-allot">
+    <div class="type-location">
         <div class="title" v-if="type.name">当前分类：【{{ type.name }}】</div>
         <el-transfer v-model="value" :data="data" :titles="titles" filterable
                      :filter-method="filterMethod"></el-transfer>
@@ -23,9 +23,9 @@
         },
         methods: {
             getData() {
-                this.$http.get(
-                    '/api/admin/type/detail/' + this.$route.params.id
-                ).then((response) => {
+                this.$http.post('/api/admin/type/detail', {
+                    id: this.$route.params.id
+                }).then((response) => {
                     this.type = response.data
                 })
                 this.$http.get('/api/admin/location/second').then((response) => {
@@ -48,7 +48,7 @@
             },
             submitForm() {
                 this.lock = true
-                this.$http.post('/api/admin/location/allot', {
+                this.$http.post('/api/admin/type/location', {
                     id: this.$route.params.id,
                     locations: this.value
                 }).then((response) => {
@@ -77,21 +77,21 @@
 </script>
 
 <style>
-    .location-allot .title {
+    .type-location .title {
         padding: 10px 0 20px;
         font-size: 24px;
     }
 
-    .location-allot .el-transfer-panel {
+    .type-location .el-transfer-panel {
         min-height: 400px;
         min-width: 300px;
     }
 
-    .location-allot .el-transfer-panel__filter .el-input__inner {
+    .type-location .el-transfer-panel__filter .el-input__inner {
         padding-left: 40px;
     }
 
-    .location-allot .button {
+    .type-location .button {
         margin-top: 20px;
     }
 </style>

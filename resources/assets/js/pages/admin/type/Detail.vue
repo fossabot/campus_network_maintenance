@@ -1,5 +1,5 @@
 <template>
-    <div class="type-create">
+    <div class="type-detail">
         <el-row>
             <el-col :md="12">
                 <el-form :model="data" :rules="rules" ref="data" label-width="120px">

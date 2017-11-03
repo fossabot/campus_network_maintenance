@@ -97,14 +97,6 @@
     </el-container>
 </template>
 
-<script>
-    export default {
-        mounted() {
-            console.log()
-        }
-    }
-</script>
-
 <style>
     .el-header {
         color: #fefefe;

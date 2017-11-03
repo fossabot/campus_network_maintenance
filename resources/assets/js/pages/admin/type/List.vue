@@ -23,7 +23,7 @@
             <el-table-column prop="introduction" label="分类描述"></el-table-column>
             <el-table-column label="操作" width="110">
                 <template slot-scope="scope">
-                    <el-button size="mini">查看 / 编辑</el-button>
+                    <el-button size="mini" @click="$router.push('/type/detail/' + scope.row.id)">查看 / 编辑</el-button>
                 </template>
             </el-table-column>
         </el-table>

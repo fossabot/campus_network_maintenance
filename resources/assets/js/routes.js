@@ -110,6 +110,12 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
+                path: 'detail/:id',
+                name: '修改维修分类',
+                component: require('./pages/admin/type/Create.vue'),
+                beforeEnter: mustLogin
+            },
+            {
                 path: '*',
                 redirect: '/type/list'
             }

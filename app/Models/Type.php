@@ -18,4 +18,24 @@ class Type extends Model
     ];
 
     protected $hidden = [];
+
+    public function getAutoCompleteHoursAttribute($value)
+    {
+        return $value ? $value . '小时' : '禁用';
+    }
+
+    public function getAutoCompleteStarsAttribute($value)
+    {
+        return $value . '星';
+    }
+
+    public function getRealUserAuthAttribute($value)
+    {
+        return $value ? '是' : '否';
+    }
+
+    public function getAllowUserCreateAttribute($value)
+    {
+        return $value ? '是' : '否';
+    }
 }

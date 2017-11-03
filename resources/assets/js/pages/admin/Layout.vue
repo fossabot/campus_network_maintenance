@@ -39,6 +39,9 @@
                             <span slot="title">维修分类</span>
                             <el-menu-item index="/type/list">维修分类列表</el-menu-item>
                             <el-menu-item index="/type/create">新增维修分类</el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 13) === '/type/detail/'" :index="$route.path">
+                                修改维修分类
+                            </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="location">
@@ -93,6 +96,14 @@
         </el-container>
     </el-container>
 </template>
+
+<script>
+    export default {
+        mounted() {
+            console.log()
+        }
+    }
+</script>
 
 <style>
     .el-header {

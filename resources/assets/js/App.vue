@@ -5,7 +5,11 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+        mounted() {
+            console.info('Author ：https://www.52xckl.cn')
+        }
+    }
 </script>
 
 <style>

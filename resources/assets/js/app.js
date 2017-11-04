@@ -1,5 +1,7 @@
+// 兼容性
 import BabelPolyFill from 'babel-polyfill'
 
+// 引入
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 
@@ -13,11 +15,13 @@ import App from './App.vue'
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 
+// 路由
 const router = new VueRouter({
     root: '/admin',
     routes: routes
 })
 
+// 发送请求
 const http = Axios.create({
     baseURL: '/',
     timeout: 10000,
@@ -76,8 +80,10 @@ http.interceptors.response.use((response) => {
     return Promise.reject(error)
 })
 
+// 注册到 Vue
 Vue.prototype.$http = http
 
+// 建议宽度大于 992px
 if (document.body.clientWidth < 992) {
     ElementUI.Notification.warning({
         title: '提示',

@@ -17,6 +17,4 @@ class LogRepairUpdate extends Model
         'update_location_id', 'update_user_id', 'update_user_name', 'update_user_mobile',
         'update_user_description',
     ];
-
-    protected $hidden = [];
 }

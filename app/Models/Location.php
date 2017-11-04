@@ -15,6 +15,4 @@ class Location extends Model
     protected $fillable = [
         'first', 'second',
     ];
-
-    protected $hidden = [];
 }

@@ -15,6 +15,4 @@ class LogPartUse extends Model
     protected $fillable = [
         'repair_id', 'part_id', 'admin_id', 'number',
     ];
-
-    protected $hidden = [];
 }

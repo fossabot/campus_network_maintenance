@@ -119,6 +119,8 @@ return [
     'attributes' => [
         'username'            => '管理员账户',
         'password'            => '管理员密码',
+        'mobile'              => '手机号码',
+        'company'             => '公司名称',
         'name'                => '名称',
         'introduction'        => '描述',
         'auto_complete_hours' => '自动完成时间',

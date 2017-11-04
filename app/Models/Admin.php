@@ -13,11 +13,7 @@ class Admin extends Model
     protected $dates = [];
 
     protected $fillable = [
-        'role_id', 'type_id', 'username', 'name', 'mobile', 'company',
-    ];
-
-    protected $hidden = [
-        'password',
+        'role_id', 'type_id', 'username', 'password', 'name', 'mobile', 'company',
     ];
 
     protected $appends = [

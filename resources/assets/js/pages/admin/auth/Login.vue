@@ -13,7 +13,7 @@
                             <el-input v-model="data.username" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>
                         <el-form-item label="管理员密码" prop="password">
-                            <el-input v-model="data.password" @keyup.enter.native="submitForm('data')"></el-input>
+                            <el-input type="password" v-model="data.password" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" :loading="lock" @click="submitForm('data')">立即登录</el-button>

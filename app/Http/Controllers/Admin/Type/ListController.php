@@ -7,11 +7,21 @@ use App\Models\Type;
 
 class ListController extends Controller
 {
+    /**
+     * 获取维修分类列表
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function data()
     {
         return response()->json(Type::all()->map([$this, 'transformer'])->toArray(), 200);
     }
 
+    /**
+     * @param Type $type
+     *
+     * @return array
+     */
     public function transformer(Type $type)
     {
         return [

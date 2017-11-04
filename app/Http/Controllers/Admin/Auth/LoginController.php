@@ -13,25 +13,31 @@ use Illuminate\Support\Facades\Lang;
 class LoginController extends Controller
 {
     /**
+     * 登录
+     *
      * @param LoginRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(LoginRequest $request)
     {
+        // 是否登录失败次数过多
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             $seconds = $this->limiter()->availableIn($this->throttleKey($request));
+
             return response()->json(Lang::get('auth.throttle', ['seconds' => $seconds]), 423);
         }
 
+        // 尝试登录
         if ($admin = $this->attemptLogin($request)) {
             session()->put('admin.id', $admin->id);
 
             return response()->json('success', 200);
         }
 
+        // 登录失败次数加一
         $this->incrementLoginAttempts($request);
 
         return response()->json(trans('auth.failed'), 422);

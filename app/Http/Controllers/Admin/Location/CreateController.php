@@ -8,8 +8,16 @@ use App\Models\Location;
 
 class CreateController extends Controller
 {
+    /**
+     * 创建维修地区
+     *
+     * @param LocationRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(LocationRequest $request)
     {
+        // 分辨创建主要地区还是次要地区
         $flag = (bool)$request->input('second');
 
         if (!$flag) {

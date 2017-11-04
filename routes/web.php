@@ -29,4 +29,3 @@ Route::get('/api/admin/location/second', 'Admin\Location\ListController@second')
 Route::post('/api/admin/location/create', 'Admin\Location\CreateController@create');
 Route::post('/api/admin/location/delete', 'Admin\Location\DeleteController@delete');
 Route::get('/api/admin/location/detail/{id}', 'Admin\Location\DetailController@data');
-Route::post('/api/admin/location/update', 'Admin\Location\UpdateController@update');

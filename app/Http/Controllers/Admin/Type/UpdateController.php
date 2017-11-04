@@ -10,18 +10,23 @@ use Illuminate\Database\Eloquent\Model;
 class UpdateController extends Controller
 {
     /**
+     * 修改维修分类
+     *
      * @param TypeRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(TypeRequest $request)
     {
+        // 分类是否存在
         $type = Type::findOrFail($request->input('id'));
 
+        // 检测是否重复
         if ($this->checkNameUnique($type->id, $request->input('name'))) {
             return response()->json('分类名称 已经存在。', 422);
         }
 
+        // 尝试修改
         if ($this->attemptUpdate($type, $request)) {
             return response()->json('', 200);
         }

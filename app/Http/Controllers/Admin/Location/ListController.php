@@ -8,17 +8,17 @@ use App\Models\Location;
 class ListController extends Controller
 {
     /**
-     * 获取并返回主要地区
+     * 获取主要地区列表
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function first()
     {
-        return response()->json(Location::whereNull('second')->get(), 200);
+        return response()->json(Location::whereNull('second')->orderBy('first')->get(), 200);
     }
 
     /**
-     * 获取并返回次要地区
+     * 获取次要地区列表
      *
      * @return \Illuminate\Http\JsonResponse
      */

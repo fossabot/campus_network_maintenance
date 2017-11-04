@@ -82,6 +82,7 @@ if (document.body.clientWidth < 992) {
     ElementUI.Notification.warning({
         title: '提示',
         message: '建议使用 1920x1080 分辨率',
+        position: 'top-left',
         duration: 0
     })
 }

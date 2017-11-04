@@ -5,7 +5,8 @@
                 <el-form :model="data" :rules="rules" ref="data" label-width="120px">
                     <el-form-item label="维修分类" prop="type_id">
                         <el-select v-model="data.type_id" filterable>
-                            <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.name"></el-option>
+                            <el-option v-for="item in type" :key="item.id" :label="item.name"
+                                       :value="item.id"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="管理员帐号" prop="username">
@@ -24,7 +25,7 @@
                         <el-input v-model="data.company"></el-input>
                     </el-form-item>
                     <el-form-item label="设为管理员" prop="role_id" required>
-                        <el-switch v-model="data.role_id"></el-switch>
+                        <el-switch v-model="data.role_id" inactive-value="1" active-value="5"></el-switch>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
@@ -43,17 +44,17 @@
                 lock: false,
                 type: [],
                 data: {
+                    role_id: '',
                     type_id: '',
                     username: '',
                     password: '',
                     name: '',
                     mobile: '',
-                    company: '',
-                    role_id: ''
+                    company: ''
                 },
                 rules: {
                     type_id: [
-                        {required: true, message: '请选择维修分类', trigger: 'blur'}
+                        {type: 'number', required: true, message: '请选择维修分类', trigger: 'blur'}
                     ],
                     username: [
                         {required: true, message: '请输入管理员帐号', trigger: 'blur'},
@@ -80,6 +81,7 @@
                 })
             },
             submitForm(data) {
+                console.log(this.data)
                 this.$refs[data].validate((valid) => {
                     if (valid) {
                         this.lock = true
@@ -89,14 +91,10 @@
                             this.lock = false
                             if (response.status === 200) {
                                 this.$notify.success({
-                                    message: '修改成功',
+                                    message: '新增成功',
                                     duration: 2000
                                 })
-                                if (this.password) {
-                                    window.location.href = '/admin'
-                                } else {
-                                    this.getData()
-                                }
+                                this.$router.replace('/user/list')
                             }
                         })
                     }
@@ -104,7 +102,6 @@
             },
             resetForm(data) {
                 this.$refs[data].resetFields()
-                this.getData()
             }
         },
         mounted() {

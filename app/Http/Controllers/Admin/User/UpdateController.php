@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class UpdateController extends Controller
 {
     /**
-     * @param UserRequest $request
+     * @param UpdateRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UserRequest $request)
+    public function update(UpdateRequest $request)
     {
         $admin = Admin::findOrFail($request->input('id'));
 
@@ -27,12 +27,12 @@ class UpdateController extends Controller
     }
 
     /**
-     * @param Model       $admin
-     * @param UserRequest $request
+     * @param Model         $admin
+     * @param UpdateRequest $request
      *
      * @return bool
      */
-    protected function attemptUpdate(Model $admin, UserRequest $request)
+    protected function attemptUpdate(Model $admin, UpdateRequest $request)
     {
         $data = $request->only(['name', 'mobile', 'company']);
 

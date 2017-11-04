@@ -195,7 +195,7 @@ const routes = [
     },
     {
         path: '/profile',
-        redirect: '/profile/edit'
+        redirect: '/profile/detail'
     },
     {
         path: '/profile',
@@ -203,7 +203,7 @@ const routes = [
         component: Layout,
         children: [
             {
-                path: 'edit',
+                path: 'detail',
                 name: '修改资料',
                 component: require('./pages/admin/profile/Detail.vue'),
                 beforeEnter: mustLogin

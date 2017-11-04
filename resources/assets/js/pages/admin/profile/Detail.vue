@@ -1,5 +1,5 @@
 <template>
-    <div class="repair-create">
+    <div class="profile-detail">
         create
     </div>
 </template>

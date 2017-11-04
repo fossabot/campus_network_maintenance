@@ -25,7 +25,9 @@
         },
         methods: {
             getData() {
-                this.$http.get('/api/admin/location/first').then((response) => {
+                this.$http.get(
+                    '/api/admin/location/first'
+                ).then((response) => {
                     if (response.status === 200) {
                         this.filters = []
                         const data = response.data
@@ -39,7 +41,9 @@
                         }
                     }
                 })
-                this.$http.get('/api/admin/location/second').then((response) => {
+                this.$http.get(
+                    '/api/admin/location/second'
+                ).then((response) => {
                     if (response.status === 200) {
                         this.data = response.data
                         this.$message.success({

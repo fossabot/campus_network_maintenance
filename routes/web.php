@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::post('auth/logout', 'Admin\Auth\LogoutController@logout');
 
+        // 维修人员
         Route::group(['prefix' => 'user'], function () {
             Route::get('list', 'Admin\User\ListController@data');
             Route::post('create', 'Admin\User\CreateController@create');
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('update', 'Admin\User\UpdateController@update');
         });
 
+        // 维修分类
         Route::group(['prefix' => 'type'], function () {
             Route::get('list', 'Admin\Type\ListController@data');
             Route::post('create', 'Admin\Type\CreateController@create');
@@ -43,6 +45,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('location', 'Admin\Type\LocationController@allot');
         });
 
+        // 维修地区
         Route::group(['prefix' => 'location'], function () {
             Route::get('first', 'Admin\Location\ListController@first');
             Route::get('second', 'Admin\Location\ListController@second');
@@ -50,6 +53,8 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('delete', 'Admin\Location\DeleteController@delete');
             Route::get('detail/{id}', 'Admin\Location\DetailController@data');
         });
+
+        // 维修备件
 
     });
 

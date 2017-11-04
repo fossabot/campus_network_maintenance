@@ -24,7 +24,7 @@
                         <el-input v-model="data.company"></el-input>
                     </el-form-item>
                     <el-form-item label="设为管理员" prop="role_id" required>
-                        <el-switch v-model="data.role_id" inactive-value="1" active-value="5"></el-switch>
+                        <el-switch v-model="data.role_id" :inactive-value="1" :active-value="5"></el-switch>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
@@ -80,7 +80,6 @@
                 })
             },
             submitForm(data) {
-                console.log(this.data)
                 this.$refs[data].validate((valid) => {
                     if (valid) {
                         this.lock = true

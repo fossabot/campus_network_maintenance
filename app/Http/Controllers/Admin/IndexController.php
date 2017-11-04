@@ -14,6 +14,14 @@ class IndexController extends Controller
     {
         $admin = Admin::find(session('admin.id'));
 
+        if ($admin) {
+            session()->put([
+                'admin.id'   => $admin->id,
+                'admin.role' => $admin->role_id,
+                'admin.type' => $admin->type_id,
+            ]);
+        }
+
         return view('admin.index', ['admin' => $admin]);
     }
 }

@@ -9,4 +9,20 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
+
+    /**
+     * @return int
+     */
+    public function role()
+    {
+        return (int)session('admin.role');
+    }
+
+    /**
+     * @return int
+     */
+    public function type()
+    {
+        return (int)session('admin.type');
+    }
 }

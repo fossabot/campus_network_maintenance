@@ -9,10 +9,10 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item label="管理员帐号" prop="username">
-                        <el-input v-model="data.username"></el-input>
+                        <el-input v-model="data.username" disabled></el-input>
                     </el-form-item>
                     <el-form-item label="管理员密码" prop="password">
-                        <el-input v-model="data.password"></el-input>
+                        <el-input v-model="data.password" placeholder="不修改密码请留空"></el-input>
                     </el-form-item>
                     <el-form-item label="管理员姓名" prop="name">
                         <el-input v-model="data.name"></el-input>
@@ -24,7 +24,7 @@
                         <el-input v-model="data.company"></el-input>
                     </el-form-item>
                     <el-form-item label="设为管理员" prop="role_id" required>
-                        <el-switch v-model="data.role_id" inactive-value="1" active-value="5"></el-switch>
+                        <el-switch v-model="data.role_id" :inactive-value="1" :active-value="5"></el-switch>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
@@ -55,12 +55,7 @@
                     type_id: [
                         {type: 'number', required: true, message: '请选择维修分类', trigger: 'blur'}
                     ],
-                    username: [
-                        {required: true, message: '请输入管理员帐号', trigger: 'blur'},
-                        {min: 6, max: 24, message: '管理员帐号长度必须是6-24个字符', trigger: 'blur'}
-                    ],
                     password: [
-                        {required: true, message: '请输入管理员密码', trigger: 'blur'},
                         {min: 6, max: 24, message: '管理员密码长度必须是6-24个字符', trigger: 'blur'}
                     ],
                     name: [
@@ -78,22 +73,28 @@
                         this.type = response.data
                     }
                 })
+                this.$http.get(
+                    '/api/admin/user/detail/' + this.$route.params.id
+                ).then((response) => {
+                    if (response.status === 200) {
+                        this.data = response.data
+                    }
+                })
             },
             submitForm(data) {
-                console.log(this.data)
                 this.$refs[data].validate((valid) => {
                     if (valid) {
                         this.lock = true
                         this.$http.post(
-                            '/api/admin/user/create', this.data
+                            '/api/admin/user/update', this.data
                         ).then((response) => {
                             this.lock = false
                             if (response.status === 200) {
                                 this.$notify.success({
-                                    message: '新增成功',
+                                    message: '修改成功',
                                     duration: 2000
                                 })
-                                this.$router.replace('/user/list')
+                                this.getData()
                             }
                         })
                     }
@@ -101,6 +102,7 @@
             },
             resetForm(data) {
                 this.$refs[data].resetFields()
+                this.getData()
             }
         },
         mounted() {

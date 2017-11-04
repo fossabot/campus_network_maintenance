@@ -44,6 +44,14 @@ class UpdateController extends Controller
             }
         }
 
+        if ($request->input('role_id') && $this->role() == 9) {
+            $data = array_merge($data, ['role_id' => $request->input('role_id')]);
+        }
+
+        if ($request->input('type_id')) {
+            $data = array_merge($data, ['type_id' => $request->input('type_id')]);
+        }
+
         return $admin->update($data);
     }
 }

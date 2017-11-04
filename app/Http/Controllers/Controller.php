@@ -13,6 +13,14 @@ class Controller extends BaseController
     /**
      * @return int
      */
+    public function id()
+    {
+        return (int)session('admin.id');
+    }
+
+    /**
+     * @return int
+     */
     public function role()
     {
         return (int)session('admin.role');

@@ -15,23 +15,36 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
 });
 
-Route::post('/api/admin/auth/login', 'Admin\Auth\LoginController@login');
-Route::post('/api/admin/auth/logout', 'Admin\Auth\LogoutController@logout');
+Route::group(['prefix' => 'api'], function () {
 
-Route::get('/api/admin/user/list', 'Admin\User\ListController@data');
-Route::post('/api/admin/user/create', 'Admin\User\CreateController@create');
-Route::get('/api/admin/user/detail/{id}', 'Admin\User\DetailController@data');
-Route::post('/api/admin/user/update', 'Admin\User\UpdateController@update');
+    Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
 
-Route::get('/api/admin/type/list', 'Admin\Type\ListController@data');
-Route::post('/api/admin/type/create', 'Admin\Type\CreateController@create');
-Route::get('/api/admin/type/detail/{id}', 'Admin\Type\DetailController@data');
-Route::post('/api/admin/type/update', 'Admin\Type\UpdateController@update');
-Route::get('/api/admin/type/location/{id}', 'Admin\Type\LocationController@data');
-Route::post('/api/admin/type/location', 'Admin\Type\LocationController@allot');
+    });
 
-Route::get('/api/admin/location/first', 'Admin\Location\ListController@first');
-Route::get('/api/admin/location/second', 'Admin\Location\ListController@second');
-Route::post('/api/admin/location/create', 'Admin\Location\CreateController@create');
-Route::post('/api/admin/location/delete', 'Admin\Location\DeleteController@delete');
-Route::get('/api/admin/location/detail/{id}', 'Admin\Location\DetailController@data');
+    Route::post('admin/auth/login', 'Admin\Auth\LoginController@login')->middleware('guest');
+
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+
+        Route::post('auth/logout', 'Admin\Auth\LogoutController@logout');
+
+        Route::get('user/list', 'Admin\User\ListController@data');
+        Route::post('user/create', 'Admin\User\CreateController@create');
+        Route::get('user/detail/{id}', 'Admin\User\DetailController@data');
+        Route::post('user/update', 'Admin\User\UpdateController@update');
+
+        Route::get('type/list', 'Admin\Type\ListController@data');
+        Route::post('type/create', 'Admin\Type\CreateController@create');
+        Route::get('type/detail/{id}', 'Admin\Type\DetailController@data');
+        Route::post('type/update', 'Admin\Type\UpdateController@update');
+        Route::get('type/location/{id}', 'Admin\Type\LocationController@data');
+        Route::post('type/location', 'Admin\Type\LocationController@allot');
+
+        Route::get('location/first', 'Admin\Location\ListController@first');
+        Route::get('location/second', 'Admin\Location\ListController@second');
+        Route::post('location/create', 'Admin\Location\CreateController@create');
+        Route::post('location/delete', 'Admin\Location\DeleteController@delete');
+        Route::get('location/detail/{id}', 'Admin\Location\DetailController@data');
+
+    });
+
+});

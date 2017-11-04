@@ -8,7 +8,7 @@
         <el-main style="height: 100%;">
             <el-row type="flex" justify="center" style="margin-top: 200px;">
                 <el-col :md="8">
-                    <el-form :model="data" :rules="rules" ref="data" label-width="120px">
+                    <el-form :model="data" :rules="rules" ref="data" label-width="100px">
                         <el-form-item label="管理员帐户" prop="username">
                             <el-input v-model="data.username" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>

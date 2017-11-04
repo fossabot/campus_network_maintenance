@@ -16,7 +16,13 @@ class DeleteController extends Controller
      */
     public function delete(Request $request)
     {
-        if (Location::findOrFail($request->input('id'))->delete()) {
+        $location = Location::findOrFail($request->input('id'));
+
+        if (!$location->second && Location::whereFirst($location->first)->count() > 1) {
+            return response()->json('请先删除' . $location->first . '下的所有次要地区。', 422);
+        }
+
+        if ($location->delete()) {
             TypeLocationRelation::whereLocationId($request->input('id'))->delete();
 
             return response()->json('', 200);

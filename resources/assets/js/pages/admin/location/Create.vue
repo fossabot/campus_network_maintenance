@@ -82,7 +82,11 @@
                                     message: '新增成功',
                                     duration: 2000
                                 })
-                                this.$router.replace('/location/list')
+                                if (data === 'data1') {
+                                    this.$router.replace('/location/list/first')
+                                } else {
+                                    this.$router.replace('/location/list/second')
+                                }
                             }
                         })
                     }

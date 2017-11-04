@@ -137,9 +137,15 @@ const routes = [
         component: Layout,
         children: [
             {
-                path: 'list',
+                path: 'list/first',
+                name: '主要地区列表',
+                component: require('./pages/admin/location/List/First.vue'),
+                beforeEnter: mustLogin
+            },
+            {
+                path: 'list/second',
                 name: '维修地区列表',
-                component: require('./pages/admin/location/List.vue'),
+                component: require('./pages/admin/location/List/Second.vue'),
                 beforeEnter: mustLogin
             },
             {
@@ -149,14 +155,8 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
-                path: 'detail/:id',
-                name: '修改维修地区',
-                component: require('./pages/admin/location/Detail.vue'),
-                beforeEnter: mustLogin
-            },
-            {
                 path: '*',
-                redirect: '/location/list'
+                redirect: '/location/list/first'
             }
         ]
     },

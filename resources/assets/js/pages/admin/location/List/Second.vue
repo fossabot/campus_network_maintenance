@@ -5,9 +5,8 @@
                 <template slot-scope="scope">{{scope.row.first}}</template>
             </el-table-column>
             <el-table-column prop="second" label="次要地区"></el-table-column>
-            <el-table-column label="操作" width="150">
+            <el-table-column label="操作" width="80">
                 <template slot-scope="scope">
-                    <el-button size="mini" @click="$router.push('/location/detail/' + scope.row.id)">修改</el-button>
                     <el-button size="mini" type="danger" @click="deleteLocation(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
@@ -56,7 +55,7 @@
                 return row.first === value
             },
             deleteLocation(id) {
-                this.$confirm('此操作不可恢复，确认删除吗？', '提示', {
+                this.$confirm('此操作将删除次要地区且不可恢复，确认删除吗？', '提示', {
                     type: 'warning',
                     center: true
                 }).then(() => {
@@ -64,8 +63,9 @@
                         id: id
                     }).then((response) => {
                         if (response.status === 200) {
-                            this.$message.success({
-                                message: '删除成功'
+                            this.$notify.success({
+                                message: '删除成功',
+                                duration: 2000
                             })
                         }
                         this.getData()

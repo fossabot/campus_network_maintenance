@@ -49,10 +49,24 @@
                 })
             },
             filterFirst(value, row) {
-                return row.first === value;
+                return row.first === value
             },
             deleteLocation(id) {
-                console.log(id)
+                this.$confirm('此操作不可恢复，确认删除吗？', '提示', {
+                    type: 'warning',
+                    center: true
+                }).then(() => {
+                    this.$http.post('/api/admin/location/delete', {
+                        id: id
+                    }).then((response) => {
+                        if (response.status === 200) {
+                            this.$message.success({
+                                message: '删除成功'
+                            })
+                        }
+                        this.getData()
+                    })
+                })
             }
         },
         mounted() {

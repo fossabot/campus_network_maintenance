@@ -9,19 +9,19 @@
                     <el-form-item label="分类描述" prop="introduction">
                         <el-input v-model="data.introduction"></el-input>
                     </el-form-item>
-                    <el-form-item label="自动完成时间" prop="auto_complete_hours">
+                    <el-form-item label="自动完成时间" prop="auto_complete_hours" required>
                         <el-input-number v-model="data.auto_complete_hours" :min="0" :max="720"></el-input-number>
                         <span>小时</span> <span class="tip">（0为禁止报障单自动完成）</span>
                     </el-form-item>
-                    <el-form-item label="用户默认评价" prop="auto_complete_stars">
+                    <el-form-item label="用户默认评价" prop="auto_complete_stars" required>
                         <el-input-number v-model="data.auto_complete_stars" :min="1" :max="5"></el-input-number>
                         <span>星</span> <span class="tip">（1星最低 5星最高）</span>
                     </el-form-item>
-                    <el-form-item label="需要用户验证" prop="real_user_auth">
+                    <el-form-item label="需要用户验证" prop="real_user_auth" required>
                         <el-switch v-model="data.real_user_auth"></el-switch>
                         <span class="tip">（是否验证学号姓名）</span>
                     </el-form-item>
-                    <el-form-item label="允许用户创建" prop="allow_user_create">
+                    <el-form-item label="允许用户创建" prop="allow_user_create" required>
                         <el-switch v-model="data.allow_user_create"></el-switch>
                     </el-form-item>
                     <el-form-item>
@@ -54,11 +54,7 @@
                     ],
                     introduction: [
                         {max: 128, message: '分类描述的长度不得超过64个字符', trigger: 'blur'}
-                    ],
-                    auto_complete_hours: [{required: true}],
-                    auto_complete_stars: [{required: true}],
-                    real_user_auth: [{required: true}],
-                    allow_user_create: [{required: true}]
+                    ]
                 }
             }
         },

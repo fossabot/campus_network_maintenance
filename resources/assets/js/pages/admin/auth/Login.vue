@@ -9,7 +9,7 @@
             <el-row type="flex" justify="center" style="margin-top: 200px;">
                 <el-col :md="8">
                     <el-form :model="data" :rules="rules" ref="data" label-width="100px">
-                        <el-form-item label="管理员帐户" prop="username">
+                        <el-form-item label="管理员帐号" prop="username">
                             <el-input v-model="data.username" @keyup.enter.native="submitForm('data')"></el-input>
                         </el-form-item>
                         <el-form-item label="管理员密码" prop="password">
@@ -41,8 +41,8 @@
                 },
                 rules: {
                     username: [
-                        {required: true, message: '请输入管理员账户', trigger: 'blur'},
-                        {min: 6, max: 24, message: '管理员账户长度必须是6-24个字符', trigger: 'blur'}
+                        {required: true, message: '请输入管理员帐号', trigger: 'blur'},
+                        {min: 6, max: 24, message: '管理员帐号长度必须是6-24个字符', trigger: 'blur'}
                     ],
                     password: [
                         {required: true, message: '请输入管理员密码', trigger: 'blur'},

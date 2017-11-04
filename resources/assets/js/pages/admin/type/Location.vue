@@ -1,11 +1,10 @@
 <template>
     <div class="type-location">
         <div class="title" v-if="type.name">当前分类：【{{ type.name }}】</div>
-        <el-transfer v-model="value" :data="data" :titles="titles" filterable
-                     :filter-method="filterMethod"></el-transfer>
+        <el-transfer v-model="value" :data="data" :titles="titles" filterable :filter-method="filterMethod"></el-transfer>
         <div class="button">
             <el-button type="primary" :loading="lock" @click="submitForm">确认分配</el-button>
-            <el-button @click="resetForm">重置</el-button>
+            <el-button @click="resetForm">重置刷新</el-button>
         </div>
     </div>
 </template>
@@ -27,6 +26,11 @@
                     '/api/admin/type/detail/' + this.$route.params.id
                 ).then((response) => {
                     this.type = response.data
+                })
+                this.$http.get(
+                    '/api/admin/type/location/' + this.$route.params.id
+                ).then((response) => {
+                    this.value = response.data
                 })
                 this.$http.get('/api/admin/location/second').then((response) => {
                     if (response.status === 200) {
@@ -58,7 +62,7 @@
                             message: '分配成功',
                             duration: 2000
                         })
-                        this.$router.replace('/type/list')
+                        this.resetForm()
                     }
                 })
             },

@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function data()
     {
-        return response()->json(Admin::all()->map([$this, 'transformer'])->toArray(), 200);
+        $users = Admin::orderByDesc('role_id')->orderBy('type_id')->get();
+
+        return response()->json($users->map([$this, 'transformer'])->toArray(), 200);
     }
 
     /**

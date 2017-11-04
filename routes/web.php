@@ -27,23 +27,29 @@ Route::group(['prefix' => 'api'], function () {
 
         Route::post('auth/logout', 'Admin\Auth\LogoutController@logout');
 
-        Route::get('user/list', 'Admin\User\ListController@data');
-        Route::post('user/create', 'Admin\User\CreateController@create');
-        Route::get('user/detail/{id}', 'Admin\User\DetailController@data');
-        Route::post('user/update', 'Admin\User\UpdateController@update');
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('list', 'Admin\User\ListController@data');
+            Route::post('create', 'Admin\User\CreateController@create');
+            Route::get('detail/{id}', 'Admin\User\DetailController@data');
+            Route::post('update', 'Admin\User\UpdateController@update');
+        });
 
-        Route::get('type/list', 'Admin\Type\ListController@data');
-        Route::post('type/create', 'Admin\Type\CreateController@create');
-        Route::get('type/detail/{id}', 'Admin\Type\DetailController@data');
-        Route::post('type/update', 'Admin\Type\UpdateController@update');
-        Route::get('type/location/{id}', 'Admin\Type\LocationController@data');
-        Route::post('type/location', 'Admin\Type\LocationController@allot');
+        Route::group(['prefix' => 'type'], function () {
+            Route::get('list', 'Admin\Type\ListController@data');
+            Route::post('create', 'Admin\Type\CreateController@create');
+            Route::get('detail/{id}', 'Admin\Type\DetailController@data');
+            Route::post('update', 'Admin\Type\UpdateController@update');
+            Route::get('location/{id}', 'Admin\Type\LocationController@data');
+            Route::post('location', 'Admin\Type\LocationController@allot');
+        });
 
-        Route::get('location/first', 'Admin\Location\ListController@first');
-        Route::get('location/second', 'Admin\Location\ListController@second');
-        Route::post('location/create', 'Admin\Location\CreateController@create');
-        Route::post('location/delete', 'Admin\Location\DeleteController@delete');
-        Route::get('location/detail/{id}', 'Admin\Location\DetailController@data');
+        Route::group(['prefix' => 'location'], function () {
+            Route::get('first', 'Admin\Location\ListController@first');
+            Route::get('second', 'Admin\Location\ListController@second');
+            Route::post('create', 'Admin\Location\CreateController@create');
+            Route::post('delete', 'Admin\Location\DeleteController@delete');
+            Route::get('detail/{id}', 'Admin\Location\DetailController@data');
+        });
 
     });
 

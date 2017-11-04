@@ -32,7 +32,7 @@
                             <el-menu-item index="/repair/create">新增报障单</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="user">
+                    <el-submenu index="user" v-if="admin.role_id >= 5">
                         <template slot="title">
                             <span slot="title">维修人员</span>
                         </template>
@@ -45,7 +45,7 @@
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="type">
+                    <el-submenu index="type" v-if="admin.role_id == 9">
                         <template slot="title">
                             <span slot="title">维修分类</span>
                         </template>
@@ -61,7 +61,7 @@
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="location">
+                    <el-submenu index="location" v-if="admin.role_id == 9">
                         <template slot="title">
                             <span slot="title">维修地区</span>
                         </template>
@@ -72,7 +72,7 @@
                             <el-menu-item index="/location/create">新增维修地区</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="part">
+                    <el-submenu index="part" v-if="admin.role_id == 9">
                         <template slot="title">
                             <span slot="title">维修备件</span>
                         </template>

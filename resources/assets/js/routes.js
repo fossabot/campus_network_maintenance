@@ -210,7 +210,7 @@ const routes = [
             },
             {
                 path: '*',
-                redirect: '/profile/edit'
+                redirect: '/profile/detail'
             }
         ]
     },

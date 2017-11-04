@@ -23,7 +23,7 @@
                     <el-form-item label="公司名称" prop="company">
                         <el-input v-model="data.company"></el-input>
                     </el-form-item>
-                    <el-form-item label="设为管理员" prop="role_id" required>
+                    <el-form-item label="设为管理员" prop="role_id" v-if="admin.role_id == 9" required>
                         <el-switch v-model="data.role_id" :inactive-value="1" :active-value="5"></el-switch>
                     </el-form-item>
                     <el-form-item>
@@ -41,6 +41,7 @@
         data() {
             return {
                 lock: false,
+                admin: window.admin,
                 type: [],
                 data: {
                     role_id: '',

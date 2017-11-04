@@ -46,7 +46,14 @@ http.interceptors.response.use((response) => {
     } else if (response.status === 404) {
         ElementUI.Notification.error({
             title: '错误',
-            message: '未找到当前页面',
+            message: '未找到当前页面。',
+            duration: 5000
+        })
+        return response
+    } else if (response.status === 403) {
+        ElementUI.Notification.error({
+            title: '错误',
+            message: '没有此操作的权限。',
             duration: 5000
         })
         return response

@@ -11,6 +11,10 @@ class CreateController extends Controller
 {
     public function create(CreateRequest $request)
     {
+        if ($this->role() <= $request->input('role_id')) {
+            return response()->json('没有此操作的权限。', 403);
+        }
+
         if ($this->checkUsernameUnique($request->input('username'))) {
             return response()->json('管理员帐号 已经存在。', 422);
         }

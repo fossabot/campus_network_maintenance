@@ -22,10 +22,9 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::post('admin/auth/login', 'Admin\Auth\LoginController@login')->middleware('guest');
+    Route::post('admin/auth/logout', 'Admin\Auth\LogoutController@logout');
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
-
-        Route::post('auth/logout', 'Admin\Auth\LogoutController@logout');
 
         // 维修人员
         Route::group(['prefix' => 'user'], function () {

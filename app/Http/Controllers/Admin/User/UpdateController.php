@@ -19,6 +19,10 @@ class UpdateController extends Controller
     {
         $admin = Admin::findOrFail($request->input('id'));
 
+        if ($this->role() <= $request->input('role_id')) {
+            return response()->json('没有此操作的权限。', 403);
+        }
+
         if ($this->attemptUpdate($admin, $request)) {
             return response()->json('', 200);
         }

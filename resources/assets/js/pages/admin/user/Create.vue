@@ -23,11 +23,11 @@
                     <el-form-item label="公司名称" prop="company">
                         <el-input v-model="data.company"></el-input>
                     </el-form-item>
-                    <el-form-item label="设为管理员" prop="role_id" required>
+                    <el-form-item label="设为管理员" prop="role_id" v-if="admin.role_id == 9" required>
                         <el-switch v-model="data.role_id" :inactive-value="1" :active-value="5"></el-switch>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
+                        <el-button type="primary" :loading="lock" @click="submitForm('data')">新增</el-button>
                         <el-button @click="resetForm('data')">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -40,6 +40,7 @@
     export default {
         data() {
             return {
+                admin: window.admin,
                 lock: false,
                 type: [],
                 data: {

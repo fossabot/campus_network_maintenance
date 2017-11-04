@@ -17,8 +17,6 @@ class Type extends Model
         'real_user_auth', 'allow_user_create',
     ];
 
-    protected $hidden = [];
-
     protected $casts = [
         'real_user_auth'    => 'bool',
         'allow_user_create' => 'bool',

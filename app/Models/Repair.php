@@ -18,6 +18,4 @@ class Repair extends Model
         'status_id', 'type_id', 'location_id', 'admin_id',
         'user_id', 'user_name', 'user_mobile', 'user_description', 'user_star', 'user_evaluation',
     ];
-
-    protected $hidden = [];
 }

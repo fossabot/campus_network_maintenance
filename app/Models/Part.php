@@ -15,6 +15,4 @@ class Part extends Model
     protected $fillable = [
         'name',
     ];
-
-    protected $hidden = [];
 }

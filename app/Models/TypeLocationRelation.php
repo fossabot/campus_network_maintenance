@@ -15,6 +15,4 @@ class TypeLocationRelation extends Model
     protected $fillable = [
         'type_id', 'location_id',
     ];
-
-    protected $hidden = [];
 }

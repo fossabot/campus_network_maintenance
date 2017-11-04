@@ -15,6 +15,4 @@ class RepairDescription extends Model
     protected $fillable = [
         'repair_id', 'admin_id', 'description',
     ];
-
-    protected $hidden = [];
 }

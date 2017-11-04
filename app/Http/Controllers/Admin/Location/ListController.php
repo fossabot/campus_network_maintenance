@@ -24,6 +24,6 @@ class ListController extends Controller
      */
     public function second()
     {
-        return response()->json(Location::whereNotNull('second')->get(), 200);
+        return response()->json(Location::whereNotNull('second')->orderBy('first')->get(), 200);
     }
 }

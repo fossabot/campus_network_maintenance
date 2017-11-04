@@ -5,9 +5,10 @@
                 <template slot-scope="scope">{{scope.row.first}}</template>
             </el-table-column>
             <el-table-column prop="second" label="次要地区"></el-table-column>
-            <el-table-column label="操作" width="80">
+            <el-table-column label="操作" width="150">
                 <template slot-scope="scope">
                     <el-button size="mini" @click="$router.push('/location/detail/' + scope.row.id)">修改</el-button>
+                    <el-button size="mini" type="danger" @click="deleteLocation(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -49,6 +50,9 @@
             },
             filterFirst(value, row) {
                 return row.first === value;
+            },
+            deleteLocation(id) {
+                console.log(id)
             }
         },
         mounted() {

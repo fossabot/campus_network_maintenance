@@ -18,7 +18,8 @@
                         <el-form :model="data2" :rules="rules" ref="data2" label-width="120px">
                             <el-form-item label="主要地区名称" prop="first">
                                 <el-select v-model="data2.first" filterable>
-                                    <el-option v-for="item in first" :key="item.id" :label="item.first" :value="item.first"></el-option>
+                                    <el-option v-for="item in first" :key="item.id" :label="item.first"
+                                               :value="item.first"></el-option>
                                 </el-select>
                             </el-form-item>
                             <el-form-item label="次要地区名称" prop="second">
@@ -63,10 +64,19 @@
         },
         methods: {
             getFirst() {
-                this.$http.get('/api/admin/location/first').then((response) => {
+                this.$http.get(
+                    '/api/admin/location/first'
+                ).then((response) => {
                     if (response.status === 200) {
                         this.first = response.data
                     }
+                })
+            },
+            getData() {
+                this.$http.get(
+                    '/api/admin/location/detail/' + this.$route.params.id
+                ).then((response) => {
+                    console.log(response)
                 })
             },
             submitForm(data) {
@@ -94,6 +104,7 @@
         },
         mounted() {
             this.getFirst()
+            this.getData()
         }
     }
 </script>

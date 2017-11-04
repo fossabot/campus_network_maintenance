@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Location;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\TypeLocationRelation;
 use Illuminate\Http\Request;
 
 class DeleteController extends Controller
@@ -16,6 +17,8 @@ class DeleteController extends Controller
     public function delete(Request $request)
     {
         if (Location::findOrFail($request->input('id'))->delete()) {
+            TypeLocationRelation::whereLocationId($request->input('id'))->delete();
+
             return response()->json('', 200);
         }
 

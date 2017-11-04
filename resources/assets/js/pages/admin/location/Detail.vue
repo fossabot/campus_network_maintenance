@@ -18,8 +18,7 @@
                         <el-form :model="data2" :rules="rules" ref="data2" label-width="120px">
                             <el-form-item label="主要地区名称" prop="first">
                                 <el-select v-model="data2.first" filterable>
-                                    <el-option v-for="item in first" :key="item.id" :label="item.first"
-                                               :value="item.first"></el-option>
+                                    <el-option v-for="item in first" :key="item.id" :label="item.first" :value="item.first"></el-option>
                                 </el-select>
                             </el-form-item>
                             <el-form-item label="次要地区名称" prop="second">
@@ -87,7 +86,7 @@
                             '/api/admin/location/create', this[data]
                         ).then((response) => {
                             this.lock = false
-                            if (response.status === 200 && parseInt(response.data)) {
+                            if (response.status === 200) {
                                 this.$notify.success({
                                     message: '新增成功',
                                     duration: 2000

@@ -23,7 +23,9 @@ class LocationController extends Controller
     {
         Type::findOrFail($request->input('id'));
 
-        if ($this->clearAllot($request) && $this->attemptAllot($request)) {
+        $this->clearAllot($request);
+
+        if ($this->attemptAllot($request)) {
             return response()->json('', 200);
         }
 

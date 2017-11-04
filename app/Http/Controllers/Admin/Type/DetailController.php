@@ -9,8 +9,6 @@ class DetailController extends Controller
 {
     public function data($id)
     {
-        dump($id);
-        die;
         return response()->json(Type::findOrFail($id), 200);
     }
 }

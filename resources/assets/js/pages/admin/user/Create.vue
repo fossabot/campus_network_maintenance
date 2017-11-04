@@ -5,8 +5,7 @@
                 <el-form :model="data" :rules="rules" ref="data" label-width="120px">
                     <el-form-item label="维修分类" prop="type_id">
                         <el-select v-model="data.type_id" filterable>
-                            <el-option v-for="item in type" :key="item.id" :label="item.name"
-                                       :value="item.id"></el-option>
+                            <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="管理员帐号" prop="username">

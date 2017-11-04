@@ -134,6 +134,7 @@
                                     message: '退出成功',
                                     duration: 2000
                                 })
+                                this.$loading({body: true, lock: true})
                                 window.location.href = '/admin'
                             })
                         })

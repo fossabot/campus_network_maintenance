@@ -40,6 +40,9 @@
                             <span slot="title">维修人员</span>
                             <el-menu-item index="/user/list">维修人员列表</el-menu-item>
                             <el-menu-item index="/user/create">新增维修人员</el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 13) === '/user/detail/'" :index="$route.path">
+                                修改维修人员
+                            </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="type">

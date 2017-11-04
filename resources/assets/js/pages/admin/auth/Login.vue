@@ -61,6 +61,7 @@
                         ).then((response) => {
                             this.lock = false
                             if (response.status === 200 && response.data === 'success') {
+                                this.lock = true
                                 this.$notify.success({
                                     message: '登录成功',
                                     duration: 2000

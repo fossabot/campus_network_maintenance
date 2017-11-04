@@ -3,8 +3,19 @@
         <el-header>
             <div class="title">校园网络运维系统</div>
             <el-row type="flex" justify="end" style="margin-left: 190px;">
-                <el-col :span="4" style="width: 150px;">
-                    <div class="grid-content">用户名</div>
+                <el-col :span="4" style="width: 150px;text-align: right;">
+                    <el-dropdown :show-timeout="0" @command="clickItem">
+                        <span style="cursor: pointer;color: #fefefe;">
+                            {{ admin.name }}
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item v-if="admin.role_id != 9" disabled>{{ admin.type }}</el-dropdown-item>
+                            <el-dropdown-item disabled>{{ admin.role }}</el-dropdown-item>
+                            <el-dropdown-item command="profile" divided>修改资料</el-dropdown-item>
+                            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
                 </el-col>
             </el-row>
         </el-header>
@@ -96,6 +107,40 @@
         </el-container>
     </el-container>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                admin: window.admin
+            }
+        },
+        methods: {
+            clickItem(command) {
+                switch (command) {
+                    case 'profile':
+                        break;
+                    case 'logout':
+                        this.$confirm('确认退出吗？', '提示', {
+                            type: 'warning',
+                            center: true
+                        }).then(() => {
+                            this.$http.post('/api/admin/auth/logout').then((response) => {
+                                this.$notify.success({
+                                    message: '退出成功',
+                                    duration: 2000
+                                })
+                                window.location.href = '/admin'
+                            })
+                        })
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+</script>
 
 <style>
     .el-header {

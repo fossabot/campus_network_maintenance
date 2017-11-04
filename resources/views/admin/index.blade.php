@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     <link href="{{ mix('/statics/admin/css/app.css') }}" rel="stylesheet">
-    @if($admin)<script>window.admin = {id: '{{ $admin->id }}', name: '{{ $admin->name }}', role_id: '{{ $admin->role_id }}', role: '{{ $admin->role }}', type_id: '{{ $admin->type_id }}', type: '{{ $admin->type }}'}</script>@endif
+    @if($admin)<script>window.admin = {id: '{{ $admin->id }}', name: '{{ $admin->name }}', role_id: '{{ $admin->role_id }}', role: '{{ $admin->role }}', type_id: '{{ $admin->type_id }}', type: '{{ @$admin->type->name }}'}</script>@endif
 
 </head>
 <body>

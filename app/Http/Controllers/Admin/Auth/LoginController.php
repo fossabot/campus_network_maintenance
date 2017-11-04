@@ -32,6 +32,8 @@ class LoginController extends Controller
 
         // 尝试登录
         if ($admin = $this->attemptLogin($request)) {
+            session()->regenerate(true);
+
             session()->put('admin.id', $admin->id);
 
             return response()->json('success', 200);

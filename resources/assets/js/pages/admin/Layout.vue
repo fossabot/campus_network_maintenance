@@ -119,6 +119,7 @@
             clickItem(command) {
                 switch (command) {
                     case 'profile':
+                        this.$router.push('/profile')
                         break;
                     case 'logout':
                         this.$confirm('确认退出吗？', '提示', {

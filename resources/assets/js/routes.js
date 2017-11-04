@@ -194,6 +194,27 @@ const routes = [
         ]
     },
     {
+        path: '/profile',
+        redirect: '/profile/edit'
+    },
+    {
+        path: '/profile',
+        name: '个人资料',
+        component: Layout,
+        children: [
+            {
+                path: 'edit',
+                name: '修改资料',
+                component: require('./pages/admin/profile/Detail.vue'),
+                beforeEnter: mustLogin
+            },
+            {
+                path: '*',
+                redirect: '/profile/edit'
+            }
+        ]
+    },
+    {
         path: '*',
         redirect: '/'
     }

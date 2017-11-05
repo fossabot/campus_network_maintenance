@@ -19,7 +19,11 @@ class UpdateController extends Controller
     {
         $admin = Admin::findOrFail($request->input('id'));
 
-        if ($this->role() <= $request->input('role_id')) {
+        if ($this->id() != $admin->id && $this->role() <= $request->input('role_id')) {
+            return response()->json('没有此操作的权限。', 403);
+        }
+
+        if ($this->role() != 9 && $request->input('type_id') != $this->type()) {
             return response()->json('没有此操作的权限。', 403);
         }
 
@@ -38,7 +42,11 @@ class UpdateController extends Controller
      */
     protected function attemptUpdate(Model $admin, UpdateRequest $request)
     {
-        $data = $request->only(['name', 'mobile', 'company']);
+        $data = array_merge($request->only([
+            'type_id', 'name', 'mobile', 'company',
+        ]), [
+            'role_id' => $request->input('role_id') ?: 1,
+        ]);
 
         if ($request->input('password')) {
             $data = array_merge($data, ['password' => Hash::make($request->input('password'))]);
@@ -46,14 +54,6 @@ class UpdateController extends Controller
             if (session('admin.id') == $admin->id) {
                 session()->flush();
             }
-        }
-
-        if ($request->input('role_id') && $this->role() == 9) {
-            $data = array_merge($data, ['role_id' => $request->input('role_id')]);
-        }
-
-        if ($request->input('type_id')) {
-            $data = array_merge($data, ['type_id' => $request->input('type_id')]);
         }
 
         return $admin->update($data);

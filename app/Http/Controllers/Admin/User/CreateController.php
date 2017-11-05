@@ -9,9 +9,20 @@ use Illuminate\Support\Facades\Hash;
 
 class CreateController extends Controller
 {
+    /**
+     * 修改维修人员
+     *
+     * @param CreateRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(CreateRequest $request)
     {
         if ($this->role() <= $request->input('role_id')) {
+            return response()->json('没有此操作的权限。', 403);
+        }
+
+        if ($this->role() != 9 && $request->input('type_id') != $this->type()) {
             return response()->json('没有此操作的权限。', 403);
         }
 
@@ -44,8 +55,9 @@ class CreateController extends Controller
     protected function attemptCreate(CreateRequest $request)
     {
         return Admin::insertGetId(array_merge($request->only([
-            'role_id', 'type_id', 'username', 'name', 'mobile', 'company',
+            'type_id', 'username', 'name', 'mobile', 'company',
         ]), [
+            'role_id'  => $request->input('role_id') ?: 1,
             'password' => Hash::make($request->input('password')),
         ]));
     }

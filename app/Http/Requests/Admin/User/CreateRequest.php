@@ -24,7 +24,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id'  => 'required|numeric|in:1,5,9',
+            'role_id'  => 'nullable|numeric|in:1,5,9',
             'type_id'  => 'required|numeric',
             'username' => 'required|min:6|max:24',
             'password' => 'required|min:6|max:24',

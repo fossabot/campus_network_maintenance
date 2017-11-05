@@ -74,13 +74,18 @@
                         ).then((response) => {
                             this.lock = false
                             if (response.status === 200) {
-                                this.$notify.success({
-                                    message: '修改成功',
-                                    duration: 2000
-                                })
-                                if (this.password) {
+                                if (this.data.password) {
+                                    this.$notify.success({
+                                        message: '修改成功，请重新登录',
+                                        duration: 2000
+                                    })
+                                    this.$loading({body: true, lock: true})
                                     window.location.href = '/admin'
                                 } else {
+                                    this.$notify.success({
+                                        message: '修改成功',
+                                        duration: 2000
+                                    })
                                     this.getData()
                                 }
                             }

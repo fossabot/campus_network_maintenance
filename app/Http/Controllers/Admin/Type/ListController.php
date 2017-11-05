@@ -15,7 +15,14 @@ class ListController extends Controller
      */
     public function data()
     {
-        return response()->json(Type::all()->map([$this, 'transformer'])->toArray(), 200);
+        if ($this->role() != 9) {
+            $type = Type::where('id', $this->type())->get();
+        } else {
+            $type = Type::all();
+        }
+
+
+        return response()->json($type->map([$this, 'transformer'])->toArray(), 200);
     }
 
     /**

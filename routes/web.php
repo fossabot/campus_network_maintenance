@@ -26,6 +26,10 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
+        Route::group(['prefix' => 'admin'], function () {
+
+        });
+
         // 维修人员
         Route::group(['prefix' => 'user'], function () {
             Route::get('list', 'Admin\User\ListController@data');

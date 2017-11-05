@@ -13,9 +13,13 @@ class ListController extends Controller
      */
     public function data()
     {
-        $users = Admin::where('role_id', '!=', 9)->orderByDesc('role_id')->orderBy('type_id')->get();
+        $users = Admin::where('role_id', '!=', 9)->where('id', '!=', $this->id())->orderByDesc('role_id')->orderBy('type_id');
 
-        return response()->json($users->map([$this, 'transformer'])->toArray(), 200);
+        if ($this->role() != 9) {
+            $users->where('type_id', $this->type());
+        }
+
+        return response()->json($users->get()->map([$this, 'transformer'])->toArray(), 200);
     }
 
     /**

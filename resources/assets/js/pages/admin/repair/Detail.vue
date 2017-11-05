@@ -1,7 +1,18 @@
 <template>
-    <div class="repair-create">
+    <div class="repair-detail">
+        <div v-if="data.status_id == 0" class="title">当前状态：【{{ data.status }}】</div>
         <el-row>
             <el-col :md="12">
+                <el-steps v-if="data.status_id > 0" :active="data.status_id" align-center>
+                    <el-step title="等待维修"></el-step>
+                    <el-step title="正在维修"></el-step>
+                    <el-step title="维修完成"></el-step>
+                    <el-step title="评价完成"></el-step>
+                </el-steps>
+            </el-col>
+        </el-row>
+        <el-row style="margin-top: 30px;">
+            <el-col :md="12" v-if="data.status_id == 1">
                 <el-form :model="data" :rules="rules" ref="data" label-width="120px">
                     <el-form-item label="报障人学号" prop="user_id">
                         <el-input v-model="data.user_id"></el-input>
@@ -30,14 +41,41 @@
                     <el-form-item label="报障描述" prop="user_description">
                         <el-input type="textarea" v-model="data.user_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
-                    <el-form-item label="维修记录" v-if="data.repair" required>
+                    <el-form-item label="维修记录" v-if="data.status_id >= 2" required>
                         <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
-                        <el-button @click="resetForm('data')">重置</el-button>
+                        <el-button @click="resetForm('data')">重置刷新</el-button>
                     </el-form-item>
                 </el-form>
+            </el-col>
+            <el-col :md="12" v-if="data.status_id != 1">
+                <el-card>
+                    <el-form class="detail" label-position="right">
+                        <el-form-item label="报障人学号">
+                            <span>{{ data.user_id }}</span>
+                        </el-form-item>
+                        <el-form-item label="报障人姓名">
+                            <span>{{ data.user_name }}</span>
+                        </el-form-item>
+                        <el-form-item label="报障人手机号码">
+                            <span>{{ data.user_mobile }}</span>
+                        </el-form-item>
+                        <el-form-item label="报障分类">
+                            <span>{{ data.type }}</span>
+                        </el-form-item>
+                        <el-form-item label="报障地区">
+                            <span>{{ data.location.first }} {{ data.location.second }}</span>
+                        </el-form-item>
+                        <el-form-item label="故障房间号">
+                            <span>{{ data.user_room }}</span>
+                        </el-form-item>
+                        <el-form-item label="报障描述">
+                            <span>{{ data.user_description }}</span>
+                        </el-form-item>
+                    </el-form>
+                </el-card>
             </el-col>
         </el-row>
     </div>
@@ -56,7 +94,12 @@
                     user_name: '',
                     user_mobile: '',
                     type_id: '',
+                    type: '',
                     location_id: '',
+                    location: {
+                        first: '',
+                        second: ''
+                    },
                     user_room: '',
                     user_description: '',
                     repair_description: ''
@@ -151,7 +194,9 @@
                 })
             },
             resetForm(data) {
+                this.flag = false
                 this.$refs[data].resetFields()
+                this.getData()
             }
         },
         mounted() {
@@ -159,3 +204,25 @@
         }
     }
 </script>
+
+<style>
+    .repair-detail .title {
+        padding: 10px 0 20px;
+        font-size: 24px;
+    }
+
+    .repair-detail .detail {
+        font-size: 0;
+    }
+
+    .repair-detail .detail label {
+        width: 150px;
+        color: #99a9bf;
+    }
+
+    .repair-detail .detail .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 100%;
+    }
+</style>

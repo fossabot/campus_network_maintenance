@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ListController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function data(Request $request)
     {
         $per = $request->input('per');
@@ -41,6 +46,11 @@ class ListController extends Controller
         ], 200);
     }
 
+    /**
+     * @param Repair $repair
+     *
+     * @return array
+     */
     public function transformer(Repair $repair)
     {
         return [

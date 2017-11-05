@@ -30,14 +30,11 @@
                     <el-form-item label="报障描述" prop="user_description">
                         <el-input type="textarea" v-model="data.user_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
-                    <el-form-item label="维修完成">
-                        <el-switch v-model="data.repair"></el-switch>
-                    </el-form-item>
                     <el-form-item label="维修记录" v-if="data.repair" required>
                         <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" :loading="lock" @click="submitForm('data')">新增</el-button>
+                        <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
                         <el-button @click="resetForm('data')">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -50,6 +47,7 @@
     export default {
         data() {
             return {
+                flag: false,
                 lock: false,
                 type: [],
                 location: [],
@@ -61,7 +59,6 @@
                     location_id: '',
                     user_room: '',
                     user_description: '',
-                    repair: false,
                     repair_description: ''
                 },
                 rules: {
@@ -98,10 +95,25 @@
                         this.type = response.data
                     }
                 })
+                this.$http.get(
+                    '/api/admin/repair/detail/' + this.$route.params.id
+                ).then((response) => {
+                    if (response.status === 200) {
+                        this.data = response.data
+                        this.changeType(this.data.type_id)
+                        this.$message.success({
+                            message: '获取成功'
+                        })
+                    }
+                })
             },
             changeType(type_id) {
                 this.location = []
-                this.data.location_id = ''
+                if (this.flag) {
+                    this.data.location_id = ''
+                } else {
+                    this.flag = true
+                }
                 this.$http.get(
                     '/api/admin/type/location/' + type_id + '/full'
                 ).then((response) => {
@@ -132,7 +144,7 @@
                                     message: '新增成功',
                                     duration: 2000
                                 })
-                                this.$router.replace('/repair/detail/' + response.data)
+                                this.getData()
                             }
                         })
                     }

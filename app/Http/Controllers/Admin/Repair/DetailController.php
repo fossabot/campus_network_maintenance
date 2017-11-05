@@ -15,6 +15,6 @@ class DetailController extends Controller
             return response()->json('没有此操作的权限。', 403);
         }
 
-        return response()->json();
+        return response()->json($repair, 200);
     }
 }

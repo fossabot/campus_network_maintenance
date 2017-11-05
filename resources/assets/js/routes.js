@@ -56,6 +56,12 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
+                path: 'detail/:id',
+                name: '修改报障单',
+                component: require('./pages/admin/repair/Detail.vue'),
+                beforeEnter: mustLogin
+            },
+            {
                 path: '*',
                 redirect: '/repair/list'
             }

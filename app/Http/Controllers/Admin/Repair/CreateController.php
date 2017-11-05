@@ -10,6 +10,11 @@ use Illuminate\Support\Carbon;
 
 class CreateController extends Controller
 {
+    /**
+     * @param CreateRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(CreateRequest $request)
     {
         if ($this->role() != 9 && $request->input('type_id') != $this->type()) {
@@ -27,22 +32,36 @@ class CreateController extends Controller
         return response()->json('服务器错误。', 500);
     }
 
+    /**
+     * @param $type_id
+     * @param $location_id
+     *
+     * @return bool
+     */
     protected function checkLocationExist($type_id, $location_id)
     {
         return (bool)TypeLocationRelation::whereTypeId($type_id)->whereLocationId($location_id)->first();
     }
 
+    /**
+     * @param CreateRequest $request
+     *
+     * @return int
+     */
     protected function attemptCreate(CreateRequest $request)
     {
+        $now = Carbon::now();
+
         $data = array_merge($request->only([
             'user_id', 'user_name', 'user_mobile', 'type_id', 'location_id', 'user_room', 'user_description',
         ]), [
-            'status_id' => 1,
-            'admin_id'  => $this->id(),
+            'status_id'  => 1,
+            'admin_id'   => $this->id(),
+            'created_at' => $now,
+            'updated_at' => $now,
         ]);
 
         if ($request->input('repair') == true) {
-            $now = Carbon::now();
             $data = array_merge($data, [
                 'status_id'   => 3,
                 'accepted_at' => $now,

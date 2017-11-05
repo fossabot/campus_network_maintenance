@@ -30,6 +30,9 @@
                             <span slot="title">报障单</span>
                             <el-menu-item index="/repair/list">报障单列表</el-menu-item>
                             <el-menu-item index="/repair/create">新增报障单</el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 15) === '/repair/detail/'" :index="$route.path">
+                                修改报障单
+                            </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="user" v-if="admin.role_id >= 5">

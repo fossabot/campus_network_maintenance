@@ -15,4 +15,14 @@ class TypeLocationRelation extends Model
     protected $fillable = [
         'type_id', 'location_id',
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id', 'id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id', 'id');
+    }
 }

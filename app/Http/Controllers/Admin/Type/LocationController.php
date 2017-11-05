@@ -22,6 +22,30 @@ class LocationController extends Controller
     }
 
     /**
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function fullData($id)
+    {
+        $data = [];
+
+        foreach (TypeLocationRelation::whereTypeId($id)->get() as $item) {
+            $location = $item->location;
+            if (!isset($data[$location->first])) {
+                $data = array_merge($data, [$location->first => []]);
+            }
+
+            $data[$location->first] = array_merge($data[$location->first], [[
+                'id'    => $location->id,
+                'value' => $location->second,
+            ]]);
+        }
+
+        return response()->json($data, 200);
+    }
+
+    /**
      * 分配地区
      *
      * @param Request $request

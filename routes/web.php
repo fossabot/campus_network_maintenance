@@ -26,8 +26,12 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
-        Route::group(['prefix' => 'admin'], function () {
-
+        // 维修单
+        Route::group(['prefix' => 'repair'], function () {
+            Route::get('list', 'Admin\Repair\ListController@data');
+            Route::post('create', 'Admin\Repair\CreateController@create');
+            Route::get('detail/{id}', 'Admin\Repair\DetailController@data');
+            Route::post('update', 'Admin\Repair\UpdateController@update');
         });
 
         // 维修人员
@@ -45,6 +49,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::get('detail/{id}', 'Admin\Type\DetailController@data');
             Route::post('update', 'Admin\Type\UpdateController@update');
             Route::get('location/{id}', 'Admin\Type\LocationController@data');
+            Route::get('location/{id}/full', 'Admin\Type\LocationController@fullData');
             Route::post('location', 'Admin\Type\LocationController@allot');
         });
 

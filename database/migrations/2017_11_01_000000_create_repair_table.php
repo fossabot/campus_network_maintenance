@@ -22,6 +22,7 @@ class CreateRepairTable extends Migration
             $table->string('user_id', 20);
             $table->string('user_name', 10);
             $table->string('user_mobile', 20);
+            $table->string('user_room', 128);
             $table->text('user_description');
             $table->unsignedInteger('user_star')->default(5);
             $table->text('user_evaluation')->nullable();

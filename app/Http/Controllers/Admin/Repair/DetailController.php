@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin\Repair;
 
 use App\Http\Controllers\Controller;
 
-class ListController extends Controller
+class DetailController extends Controller
 {
     public function data()
     {
-        if ($this->role() != 9) {
 
-        }
     }
 }

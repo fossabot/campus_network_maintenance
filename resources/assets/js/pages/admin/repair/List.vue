@@ -1,5 +1,42 @@
 <template>
     <div class="repair-list">
+        <div class="search">
+            <el-form ref="search" :model="search" label-width="100px">
+                <el-row>
+                    <el-col :md="9">
+                        <el-form-item label="状态">
+                            <el-select v-model="search.status_id">
+                                <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="9">
+                        <el-form-item label="分类">
+                            <el-select v-model="search.type_id">
+                                <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :md="9">
+                        <el-form-item label="报障人学号">
+                            <el-input v-model="search.user_id"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="9">
+                        <el-form-item label="报障人手机">
+                            <el-input v-model="search.user_mobile"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="6">
+                        <el-form-item>
+                            <el-button type="primary" @click="getData">查询</el-button>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
         <el-table :data="data" border>
             <el-table-column type="expand">
                 <template slot-scope="scope">
@@ -41,8 +78,8 @@
             layout="sizes, prev, pager, next, jumper, ->, total"
             :total="total"
             :page-sizes="[20, 50, 100, 200]"
-            :page-size="per"
-            :current-page="page"
+            :page-size="search.per"
+            :current-page="search.page"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             style="margin-top: 20px;"
@@ -55,38 +92,60 @@
     export default {
         data() {
             return {
-                total: 4000,
-                per: 20,
-                page: 1,
-                data: []
+                total: 20,
+                data: [],
+                status: [
+                    {label: '已删除', value: 0},
+                    {label: '等待维修', value: 1},
+                    {label: '正在维修', value: 2},
+                    {label: '维修完成', value: 3},
+                    {label: '评价完成', value: 4}
+                ],
+                type: [],
+                search: {
+                    per: 20,
+                    page: 1,
+                    status_id: '',
+                    type_id: '',
+                    user_id: '',
+                    user_mobile: ''
+                }
             }
         },
         methods: {
             getData() {
                 this.$http.post(
-                    '/api/admin/repair/list', {
-                        per: this.per,
-                        page: this.page
-                    }
+                    '/api/admin/repair/list', this.search
                 ).then((response) => {
                     if (response.status === 200) {
-                        this.data = response.data
+                        this.total = response.data.total
+                        this.data = response.data.data
                         this.$message.success({
                             message: '获取成功'
                         })
                     }
                 })
             },
+            getType() {
+                this.$http.get(
+                    '/api/admin/type/list'
+                ).then((response) => {
+                    if (response.status === 200) {
+                        this.type = response.data
+                    }
+                })
+            },
             handleSizeChange(val) {
-                this.per = val
+                this.search.per = val
                 this.getData()
             },
             handleCurrentChange(val) {
-                this.page = val
+                this.search.page = val
                 this.getData()
             }
         },
         mounted() {
+            this.getType()
             this.getData()
         }
     }

@@ -13,13 +13,32 @@ class ListController extends Controller
         $per = $request->input('per');
         $page = $request->input('page');
 
-        if ($this->role() != 9) {
-            $data = Repair::whereTypeId($this->type())->offset(($page - 1) * $per)->limit($per)->get();
-        } else {
-            $data = Repair::offset(($page - 1) * $per)->limit($per)->get();
+        $query = new Repair();
+
+        if ($request->input('status_id')) {
+            $query = $query->where('status_id', $request->input('status_id'));
         }
 
-        return response()->json($data->map([$this, 'transformer']), 200);
+        if ($request->input('user_id')) {
+            $query = $query->where('user_id', 'like', '%' . $request->input('user_id') . '%');
+        }
+
+        if ($request->input('user_mobile')) {
+            $query = $query->where('user_mobile', 'like', '%' . $request->input('user_mobile') . '%');
+        }
+
+        if ($this->role() != 9) {
+            $query = $query->whereTypeId($this->type());
+        } else {
+            if ($request->input('type_id')) {
+                $query = $query->whereTypeId($request->input('type_id'));
+            }
+        }
+
+        return response()->json([
+            'total' => $query->count(),
+            'data'  => $query->offset(($page - 1) * $per)->limit($per)->get()->map([$this, 'transformer']),
+        ], 200);
     }
 
     public function transformer(Repair $repair)

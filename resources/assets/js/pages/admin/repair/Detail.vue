@@ -11,7 +11,7 @@
                 </el-steps>
             </el-col>
         </el-row>
-        <el-row style="margin-top: 30px;">
+        <el-row :gutter="20" style="margin-top: 30px;">
             <el-col :md="12" v-if="data.status_id == 1">
                 <el-form :model="data" :rules="rules" ref="data" label-width="120px">
                     <el-form-item label="报障人学号" prop="user_id">
@@ -46,6 +46,8 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
+                        <el-button type="success" :loading="lock" @click="startRepair">开始维修</el-button>
+                        <el-button type="danger" :loading="lock" @click="deleteRepair">删除</el-button>
                         <el-button @click="resetForm('data')">重置刷新</el-button>
                     </el-form-item>
                 </el-form>
@@ -75,6 +77,15 @@
                             <span>{{ data.user_description }}</span>
                         </el-form-item>
                     </el-form>
+                </el-card>
+            </el-col>
+            <el-col :md="12">
+                <el-card>
+                    <el-collapse accordion>
+                        <el-collapse-item title="一致性 Consistency">
+                            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                        </el-collapse-item>
+                    </el-collapse>
                 </el-card>
             </el-col>
         </el-row>
@@ -197,6 +208,12 @@
                 this.flag = false
                 this.$refs[data].resetFields()
                 this.getData()
+            },
+            startRepair() {
+
+            },
+            deleteRepair() {
+
             }
         },
         mounted() {

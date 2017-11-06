@@ -32,6 +32,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('create', 'Admin\Repair\CreateController@create');
             Route::get('detail/{id}', 'Admin\Repair\DetailController@data');
             Route::post('update', 'Admin\Repair\UpdateController@update');
+            Route::post('change', 'Admin\Repair\ChangeController@change');
         });
 
         // 维修人员

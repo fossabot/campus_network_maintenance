@@ -37,7 +37,7 @@ class ListController extends Controller
         }
 
         if ($this->role() != 9) {
-            $query = $query->whereTypeId($this->type());
+            $query = $query->whereTypeId($this->type())->orderByDesc('status_id');
         } else {
             if ($request->input('type_id')) {
                 $query = $query->whereTypeId($request->input('type_id'));

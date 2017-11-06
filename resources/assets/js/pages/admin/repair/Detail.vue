@@ -46,7 +46,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
-                        <el-button type="success" :loading="lock" @click="startRepair">开始维修</el-button>
+                        <el-button type="success" :loading="lock" @click="acceptRepair">开始维修</el-button>
                         <el-button type="danger" :loading="lock" @click="deleteRepair">删除</el-button>
                         <el-button @click="resetForm('data')">重置刷新</el-button>
                     </el-form-item>
@@ -82,7 +82,7 @@
             <el-col :md="12">
                 <div class="title">维修人员备注</div>
                 <el-card>
-                    <el-collapse v-if="data.admin_description" accordion>
+                    <el-collapse v-if="data.admin_description.length" accordion>
                         <el-collapse-item v-for="item in data.admin_description" :key="item.id" :title="item.admin + ' ' + item.created_at">
                             <div>{{ item.description }}</div>
                         </el-collapse-item>
@@ -116,13 +116,7 @@
                     user_room: '',
                     user_description: '',
                     repair_description: '',
-                    admin_description: [
-                        {
-                            admin: '',
-                            description: '',
-                            created_at: ''
-                        }
-                    ]
+                    admin_description: []
                 },
                 rules: {
                     user_id: [
@@ -151,6 +145,7 @@
         },
         methods: {
             getData() {
+                this.flag = false
                 this.$http.get(
                     '/api/admin/type/list'
                 ).then((response) => {
@@ -164,7 +159,6 @@
                     if (response.status === 200) {
                         this.data = response.data
                         this.changeType(this.data.type_id)
-                        console.log(this.data.admin_description)
                         this.$message.success({
                             message: '获取成功'
                         })
@@ -195,17 +189,16 @@
                 })
             },
             submitForm(data) {
-                console.log(this.data)
                 this.$refs[data].validate((valid) => {
                     if (valid) {
                         this.lock = true
                         this.$http.post(
-                            '/api/admin/repair/create', this.data
+                            '/api/admin/repair/update', this.data
                         ).then((response) => {
                             this.lock = false
                             if (response.status === 200) {
                                 this.$notify.success({
-                                    message: '新增成功',
+                                    message: '修改成功',
                                     duration: 2000
                                 })
                                 this.getData()
@@ -215,15 +208,64 @@
                 })
             },
             resetForm(data) {
-                this.flag = false
                 this.$refs[data].resetFields()
                 this.getData()
             },
-            startRepair() {
-
+            acceptRepair() {
+                this.lock = true
+                this.$http.post(
+                    '/api/admin/repair/change', {
+                        id: this.data.id,
+                        type: 'accept'
+                    }).then((response) => {
+                    this.lock = false
+                    if (response.status === 200) {
+                        this.$notify.success({
+                            message: '开始维修',
+                            duration: 2000
+                        })
+                        this.getData()
+                    }
+                })
+            },
+            finishRepair() {
+                this.lock = true
+                this.$http.post(
+                    '/api/admin/repair/change', {
+                        id: this.data.id,
+                        type: 'finish'
+                    }).then((response) => {
+                    this.lock = false
+                    if (response.status === 200) {
+                        this.$notify.success({
+                            message: '完成维修',
+                            duration: 2000
+                        })
+                        this.getData()
+                    }
+                })
             },
             deleteRepair() {
-
+                this.$confirm('删除操作不可恢复，确认删除吗？', '提示', {
+                    type: 'warning',
+                    center: true
+                }).then(() => {
+                    this.lock = true
+                    this.$http.post(
+                        '/api/admin/repair/change', {
+                            id: this.data.id,
+                            type: 'delete'
+                        }).then((response) => {
+                        this.lock = false
+                        if (response.status === 200) {
+                            this.$notify.success({
+                                message: '删除成功',
+                                duration: 2000
+                            })
+                            this.getData()
+                        }
+                    })
+                })
             }
         },
         mounted() {

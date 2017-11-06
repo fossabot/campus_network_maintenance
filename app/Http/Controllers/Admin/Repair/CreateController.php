@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Repair;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Repair\CreateRequest;
+use App\Http\Requests\Admin\RepairRequest;
 use App\Models\Repair;
 use App\Models\RepairDescription;
 use App\Models\TypeLocationRelation;
@@ -12,11 +12,11 @@ use Illuminate\Support\Carbon;
 class CreateController extends Controller
 {
     /**
-     * @param CreateRequest $request
+     * @param RepairRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(CreateRequest $request)
+    public function create(RepairRequest $request)
     {
         if ($this->role() != 9 && $request->input('type_id') != $this->type()) {
             return response()->json('没有此操作的权限。', 403);
@@ -46,11 +46,11 @@ class CreateController extends Controller
     }
 
     /**
-     * @param CreateRequest $request
+     * @param RepairRequest $request
      *
      * @return int
      */
-    protected function attemptCreate(CreateRequest $request)
+    protected function attemptCreate(RepairRequest $request)
     {
         $now = Carbon::now();
 
@@ -75,10 +75,10 @@ class CreateController extends Controller
     }
 
     /**
-     * @param CreateRequest $request
+     * @param RepairRequest $request
      * @param               $id
      */
-    protected function createDescription(CreateRequest $request, $id)
+    protected function createDescription(RepairRequest $request, $id)
     {
         if ($request->input('repair') == true) {
             $now = Carbon::now();

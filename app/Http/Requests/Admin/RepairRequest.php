@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Repair;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequest extends FormRequest
+class RepairRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

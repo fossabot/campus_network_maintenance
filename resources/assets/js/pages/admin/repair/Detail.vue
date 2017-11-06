@@ -41,7 +41,7 @@
                     <el-form-item label="报障描述" prop="user_description">
                         <el-input type="textarea" v-model="data.user_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
-                    <el-form-item label="维修记录" v-if="data.status_id >= 2" required>
+                    <el-form-item label="维修备注" v-if="data.status_id >= 2" required>
                         <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
                     <el-form-item>
@@ -52,7 +52,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-col :md="12" v-if="data.status_id != 1">
+            <el-col :md="12" v-if="data.status_id > 1 || data.status_id == 0">
                 <el-card>
                     <el-form class="detail" label-position="right">
                         <el-form-item label="报障人学号">
@@ -77,9 +77,18 @@
                             <span>{{ data.user_description }}</span>
                         </el-form-item>
                     </el-form>
+                    <el-form label-width="150px">
+                        <el-form-item label="维修备注" required>
+                            <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="success" :loading="lock" v-if="data.status_id == 2" @click="finishRepair">维修完成</el-button>
+                            <el-button type="primary" :loading="lock" v-if="data.status_id > 2" @click="addDescription">添加备注</el-button>
+                        </el-form-item>
+                    </el-form>
                 </el-card>
             </el-col>
-            <el-col :md="12">
+            <el-col :md="12" v-if="data.status_id > 2">
                 <div class="title">维修人员备注</div>
                 <el-card>
                     <el-collapse v-if="data.admin_description.length" accordion>
@@ -233,12 +242,31 @@
                 this.$http.post(
                     '/api/admin/repair/change', {
                         id: this.data.id,
-                        type: 'finish'
+                        type: 'finish',
+                        repair_description: this.data.repair_description
                     }).then((response) => {
                     this.lock = false
                     if (response.status === 200) {
                         this.$notify.success({
                             message: '完成维修',
+                            duration: 2000
+                        })
+                        this.getData()
+                    }
+                })
+            },
+            addDescription() {
+                this.lock = true
+                this.$http.post(
+                    '/api/admin/repair/change', {
+                        id: this.data.id,
+                        type: 'addDescription',
+                        repair_description: this.data.repair_description
+                    }).then((response) => {
+                    this.lock = false
+                    if (response.status === 200) {
+                        this.$notify.success({
+                            message: '添加成功',
                             duration: 2000
                         })
                         this.getData()

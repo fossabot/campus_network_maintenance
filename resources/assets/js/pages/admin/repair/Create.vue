@@ -33,7 +33,7 @@
                     <el-form-item label="维修完成">
                         <el-switch v-model="data.repair"></el-switch>
                     </el-form-item>
-                    <el-form-item label="维修记录" v-if="data.repair" required>
+                    <el-form-item label="维修备注" v-if="data.repair" required>
                         <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
                     <el-form-item>

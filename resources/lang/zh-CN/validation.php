@@ -129,6 +129,14 @@ return [
         'allow_user_create'   => '允许用户创建',
         'first'               => '主要地区',
         'second'              => '次要地区',
+        'user_id'             => '报障人学号',
+        'user_name'           => '报障人姓名',
+        'user_mobile'         => '报障人手机号码',
+        'type_id'             => '报障分类',
+        'location_id'         => '报障地区',
+        'user_room'           => '故障房间号',
+        'user_description'    => '报障描述',
+        'repair_description'  => '维修备注',
     ],
 
 ];

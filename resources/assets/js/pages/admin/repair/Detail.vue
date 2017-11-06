@@ -89,8 +89,8 @@
                 </el-card>
             </el-col>
             <el-col :md="12" v-if="data.status_id > 2 || data.status_id == 0">
-                <div class="title">维修人员备注</div>
                 <el-card>
+                    <div class="title">维修人员备注</div>
                     <el-collapse v-if="data.admin_description.length" accordion>
                         <el-collapse-item v-for="item in data.admin_description" :key="item.id" :title="item.admin + ' ' + item.created_at">
                             <div>{{ item.description }}</div>

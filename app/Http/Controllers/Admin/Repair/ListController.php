@@ -18,29 +18,34 @@ class ListController extends Controller
         $per = $request->input('per');
         $page = $request->input('page');
 
+        $status_id = $request->input('status_id');
+        $type_id = $request->input('type_id');
+        $user_id = $request->input('user_id');
+        $user_mobile = $request->input('user_mobile');
+
         $query = new Repair();
 
-        if ($request->input('status_id')) {
-            $query = $query->where('status_id', $request->input('status_id'));
+        if (!is_null($status_id)) {
+            $query = $query->where('status_id', $status_id);
         } else {
-            if (!$request->input('user_id') && !$request->input('user_mobile')) {
+            if (!$status_id && !$type_id && !$user_id && !$user_mobile) {
                 $query = $query->whereIn('status_id', [1, 2]);
             }
         }
 
-        if ($request->input('user_id')) {
-            $query = $query->where('user_id', 'like', '%' . $request->input('user_id') . '%');
+        if ($user_id) {
+            $query = $query->where('user_id', 'like', '%' . $user_id . '%');
         }
 
-        if ($request->input('user_mobile')) {
-            $query = $query->where('user_mobile', 'like', '%' . $request->input('user_mobile') . '%');
+        if ($user_mobile) {
+            $query = $query->where('user_mobile', 'like', '%' . $user_mobile . '%');
         }
 
         if ($this->role() != 9) {
             $query = $query->whereTypeId($this->type())->orderByDesc('status_id');
         } else {
-            if ($request->input('type_id')) {
-                $query = $query->whereTypeId($request->input('type_id'));
+            if ($type_id) {
+                $query = $query->whereTypeId($type_id);
             }
         }
 

@@ -77,7 +77,7 @@
                             <span>{{ data.user_description }}</span>
                         </el-form-item>
                     </el-form>
-                    <el-form label-width="150px">
+                    <el-form v-if="data.status_id >= 2" label-width="150px">
                         <el-form-item label="维修备注" required>
                             <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
                         </el-form-item>
@@ -88,7 +88,7 @@
                     </el-form>
                 </el-card>
             </el-col>
-            <el-col :md="12" v-if="data.status_id > 2">
+            <el-col :md="12" v-if="data.status_id > 2 || data.status_id == 0">
                 <div class="title">维修人员备注</div>
                 <el-card>
                     <el-collapse v-if="data.admin_description.length" accordion>

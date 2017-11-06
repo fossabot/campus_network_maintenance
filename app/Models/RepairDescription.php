@@ -15,4 +15,9 @@ class RepairDescription extends Model
     protected $fillable = [
         'repair_id', 'admin_id', 'description',
     ];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id', 'id');
+    }
 }

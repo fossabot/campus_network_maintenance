@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Repair;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Repair\CreateRequest;
 use App\Models\Repair;
+use App\Models\RepairDescription;
 use App\Models\TypeLocationRelation;
 use Illuminate\Support\Carbon;
 
@@ -26,6 +27,7 @@ class CreateController extends Controller
         }
 
         if ($id = $this->attemptCreate($request)) {
+            $this->createDescription($request, $id);
             return response()->json($id, 200);
         }
 
@@ -70,5 +72,23 @@ class CreateController extends Controller
         }
 
         return Repair::insertGetId($data);
+    }
+
+    /**
+     * @param CreateRequest $request
+     * @param               $id
+     */
+    protected function createDescription(CreateRequest $request, $id)
+    {
+        if ($request->input('repair') == true) {
+            $now = Carbon::now();
+            RepairDescription::insert([
+                'repair_id'   => '',
+                'admin_id'    => $this->id(),
+                'description' => $request->input('repair_description'),
+                'created_at'  => $now,
+                'updated_at'  => $now,
+            ]);
+        }
     }
 }

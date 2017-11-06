@@ -13,12 +13,10 @@ class Type extends Model
     protected $dates = [];
 
     protected $fillable = [
-        'name', 'introduction', 'auto_complete_hours', 'auto_complete_stars',
-        'real_user_auth', 'allow_user_create',
+        'name', 'introduction', 'auto_complete_hours', 'auto_complete_stars', 'allow_user_create',
     ];
 
     protected $casts = [
-        'real_user_auth'    => 'bool',
         'allow_user_create' => 'bool',
     ];
 }

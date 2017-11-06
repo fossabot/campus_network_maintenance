@@ -28,7 +28,6 @@ class TypeRequest extends FormRequest
             'introduction'        => 'nullable|max:128',
             'auto_complete_hours' => 'required|numeric|min:0|max:720',
             'auto_complete_stars' => 'required|numeric|min:1|max:5',
-            'real_user_auth'      => 'required|boolean',
             'allow_user_create'   => 'required|boolean',
         ];
     }

@@ -125,7 +125,6 @@ return [
         'introduction'        => '描述',
         'auto_complete_hours' => '自动完成时间',
         'auto_complete_stars' => '用户默认评价',
-        'real_user_auth'      => '需要用户验证',
         'allow_user_create'   => '允许用户创建',
         'first'               => '主要地区',
         'second'              => '次要地区',

@@ -48,7 +48,7 @@ class CreateController extends Controller
     protected function attemptCreate(TypeRequest $request)
     {
         return Type::insertGetId($request->only([
-            'name', 'introduction', 'auto_complete_hours', 'auto_complete_stars', 'real_user_auth', 'allow_user_create',
+            'name', 'introduction', 'auto_complete_hours', 'auto_complete_stars', 'allow_user_create',
         ]));
     }
 }

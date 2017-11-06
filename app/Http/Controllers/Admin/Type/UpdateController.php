@@ -54,7 +54,7 @@ class UpdateController extends Controller
     protected function attemptUpdate(Model $type, TypeRequest $request)
     {
         return $type->update($request->only([
-            'name', 'introduction', 'auto_complete_hours', 'auto_complete_stars', 'real_user_auth', 'allow_user_create',
+            'name', 'introduction', 'auto_complete_hours', 'auto_complete_stars', 'allow_user_create',
         ]));
     }
 }

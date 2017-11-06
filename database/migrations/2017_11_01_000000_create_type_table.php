@@ -19,7 +19,6 @@ class CreateTypeTable extends Migration
             $table->string('introduction', 128)->nullable();
             $table->unsignedInteger('auto_complete_hours')->default(0);
             $table->unsignedInteger('auto_complete_stars')->default(5);
-            $table->boolean('real_user_auth')->default(true);
             $table->boolean('allow_user_create')->default(true);
             $table->timestamps();
         });

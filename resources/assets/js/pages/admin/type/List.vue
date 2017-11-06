@@ -10,9 +10,6 @@
                         <el-form-item label="用户默认评价">
                             <span>{{ scope.row.auto_complete_stars }}</span>
                         </el-form-item>
-                        <el-form-item label="需要用户验证">
-                            <span>{{ scope.row.real_user_auth }}</span>
-                        </el-form-item>
                         <el-form-item label="允许用户创建">
                             <span>{{ scope.row.allow_user_create }}</span>
                         </el-form-item>

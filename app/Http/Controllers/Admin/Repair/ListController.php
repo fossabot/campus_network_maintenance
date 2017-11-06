@@ -22,6 +22,10 @@ class ListController extends Controller
 
         if ($request->input('status_id')) {
             $query = $query->where('status_id', $request->input('status_id'));
+        } else {
+            if (!$request->input('user_id') && !$request->input('user_mobile')) {
+                $query = $query->whereIn('status_id', [1, 2]);
+            }
         }
 
         if ($request->input('user_id')) {

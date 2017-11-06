@@ -80,12 +80,14 @@
                 </el-card>
             </el-col>
             <el-col :md="12">
+                <div class="title">维修人员备注</div>
                 <el-card>
-                    <el-collapse accordion>
-                        <el-collapse-item title="一致性 Consistency">
-                            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                    <el-collapse v-if="data.admin_description" accordion>
+                        <el-collapse-item v-for="item in data.admin_description" :key="item.id" :title="item.admin + ' ' + item.created_at">
+                            <div>{{ item.description }}</div>
                         </el-collapse-item>
                     </el-collapse>
+                    <div v-else>暂无备注</div>
                 </el-card>
             </el-col>
         </el-row>
@@ -113,7 +115,14 @@
                     },
                     user_room: '',
                     user_description: '',
-                    repair_description: ''
+                    repair_description: '',
+                    admin_description: [
+                        {
+                            admin: '',
+                            description: '',
+                            created_at: ''
+                        }
+                    ]
                 },
                 rules: {
                     user_id: [
@@ -155,6 +164,7 @@
                     if (response.status === 200) {
                         this.data = response.data
                         this.changeType(this.data.type_id)
+                        console.log(this.data.admin_description)
                         this.$message.success({
                             message: '获取成功'
                         })

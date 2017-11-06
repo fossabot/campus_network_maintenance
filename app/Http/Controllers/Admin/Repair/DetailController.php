@@ -62,6 +62,11 @@ class DetailController extends Controller
         ];
     }
 
+    /**
+     * @param RepairDescription $description
+     *
+     * @return array
+     */
     public function transformerDescription(RepairDescription $description)
     {
         return [

@@ -17,7 +17,7 @@ class UpdateController extends Controller
      */
     public function update(RepairRequest $request)
     {
-        $repair = Repair::find($request->input('id'));
+        $repair = Repair::findOrFail($request->input('id'));
 
         if ($repair->status_id != 1) {
             return response()->json('当前状态为' . $repair->status . '，无法修改。', 422);

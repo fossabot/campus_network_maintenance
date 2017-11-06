@@ -83,7 +83,7 @@ class CreateController extends Controller
         if ($request->input('repair') == true) {
             $now = Carbon::now();
             RepairDescription::insert([
-                'repair_id'   => '',
+                'repair_id'   => $id,
                 'admin_id'    => $this->id(),
                 'description' => $request->input('repair_description'),
                 'created_at'  => $now,

@@ -15,7 +15,15 @@ class Controller extends BaseController
      */
     public function id()
     {
-        return (int)session('admin.id');
+        return (int)session('admin.id') ?: (int)session('user.id');
+    }
+
+    /**
+     * @return string
+     */
+    public function name()
+    {
+        return (string)session('user.name');
     }
 
     /**

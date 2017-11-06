@@ -11,18 +11,31 @@
 |
 */
 
+Route::get('/', 'IndexController@index');
+
+Route::group(['prefix' => 'user'], function () {
+
+    Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
+        Route::get('login', 'User\Auth\LoginController@show');
+        Route::post('login', 'User\Auth\LoginController@login');
+    });
+
+    Route::group(['prefix' => 'repair', 'middleware' => 'user'], function () {
+        Route::get('list', 'User\Repair\ListController@show');
+        Route::get('create', 'User\Repair\CreateController@show');
+        Route::get('update', 'User\Repair\UpdateController@show');
+    });
+
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('{path?}', 'Admin\IndexController@show')->where('path', '[\/\w\.-]*');
 });
 
 Route::group(['prefix' => 'api'], function () {
 
-    Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
-
-    });
-
     Route::post('admin/auth/login', 'Admin\Auth\LoginController@login')->middleware('guest');
-    Route::post('admin/auth/logout', 'Admin\Auth\LogoutController@logout');
+    Route::post('admin/auth/logout', 'Admin\Auth\LogoutController@logout')->middleware('admin');
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 

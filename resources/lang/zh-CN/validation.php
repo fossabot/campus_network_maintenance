@@ -117,6 +117,7 @@ return [
     */
 
     'attributes' => [
+        'user_pass'           => '密码',
         'username'            => '管理员账户',
         'password'            => '管理员密码',
         'mobile'              => '手机号码',
@@ -128,9 +129,9 @@ return [
         'allow_user_create'   => '允许用户创建',
         'first'               => '主要地区',
         'second'              => '次要地区',
-        'user_id'             => '报障人学号',
-        'user_name'           => '报障人姓名',
-        'user_mobile'         => '报障人手机号码',
+        'user_id'             => '学号',
+        'user_name'           => '姓名',
+        'user_mobile'         => '手机号码',
         'type_id'             => '报障分类',
         'location_id'         => '报障地区',
         'user_room'           => '故障房间号',

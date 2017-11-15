@@ -15,6 +15,8 @@ Route::get('/', 'IndexController@index');
 
 Route::group(['prefix' => 'user'], function () {
 
+    Route::redirect('/', '/user/repair/list');
+
     Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
         Route::get('login', 'User\Auth\LoginController@show');
         Route::post('login', 'User\Auth\LoginController@login');

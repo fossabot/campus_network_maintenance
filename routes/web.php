@@ -17,6 +17,8 @@ Route::group(['prefix' => 'user'], function () {
 
     Route::redirect('/', '/user/repair/list');
 
+    Route::get('auth/logout', 'User\Auth\LogoutController@logout');
+
     Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function () {
         Route::get('login', 'User\Auth\LoginController@show');
         Route::post('login', 'User\Auth\LoginController@login');
@@ -25,7 +27,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'repair', 'middleware' => 'user'], function () {
         Route::get('list', 'User\Repair\ListController@show');
         Route::get('create', 'User\Repair\CreateController@show');
-        Route::get('update', 'User\Repair\UpdateController@show');
+        Route::post('create', 'User\Repair\CreateController@show');
+        Route::get('detail/{id}', 'User\Repair\DetailController@show');
+        Route::post('update', 'User\Repair\UpdateController@show');
     });
 
 });

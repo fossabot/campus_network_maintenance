@@ -68,7 +68,7 @@
         <div class="container">
 
             @if($errors->isNotEmpty())
-                <div class="row" style="margin-top: 100px;">
+                <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <div class="alert alert-danger">{{ $errors->first() }}</div>
                     </div>
@@ -89,12 +89,12 @@
     $(function () {
         $('#navbar').find('li').each(function () {
             if ($(this).find('a')[0].getAttribute('href') === window.location.origin + window.location.pathname) {
-                $(this).addClass('active')
+                $(this).addClass('active');
             } else {
-                $(this).removeClass('active')
+                $(this).removeClass('active');
             }
-        })
-    })
+        });
+    });
 </script>
 
 @yield('js')

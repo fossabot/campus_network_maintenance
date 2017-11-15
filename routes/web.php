@@ -27,9 +27,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'repair', 'middleware' => 'user'], function () {
         Route::get('list', 'User\Repair\ListController@show');
         Route::get('create', 'User\Repair\CreateController@show');
-        Route::post('create', 'User\Repair\CreateController@show');
+        Route::post('create', 'User\Repair\CreateController@create');
         Route::get('detail/{id}', 'User\Repair\DetailController@show');
-        Route::post('update', 'User\Repair\UpdateController@show');
+        Route::post('update', 'User\Repair\UpdateController@update');
     });
 
 });

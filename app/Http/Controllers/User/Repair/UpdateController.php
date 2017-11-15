@@ -9,5 +9,6 @@ class UpdateController extends Controller
 {
     public function show()
     {
+        return view('user.repair.detail');
     }
 }

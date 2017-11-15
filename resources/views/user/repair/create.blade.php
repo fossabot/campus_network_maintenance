@@ -1,5 +1,5 @@
 @extends('user.layout.default')
 
 @section('content')
-    list
+    create
 @endsection

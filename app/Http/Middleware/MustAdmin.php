@@ -17,7 +17,7 @@ class MustAdmin
     public function handle($request, Closure $next)
     {
         if ((int)session('admin.id') <= 0) {
-            return redirect('/admin');
+            return redirect('/admin/#/auth/login');
         }
 
         if ($request->getMethod() != 'GET') {

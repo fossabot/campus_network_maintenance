@@ -8,5 +8,6 @@ class CreateController extends Controller
 {
     public function show()
     {
+        return view('user.repair.create');
     }
 }

@@ -17,7 +17,7 @@ class MustUser
     public function handle($request, Closure $next)
     {
         if ((int)session('user.id') <= 0) {
-            return redirect('/user');
+            return redirect('/user/auth/login');
         }
 
         return $next($request);

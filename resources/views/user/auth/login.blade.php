@@ -24,36 +24,38 @@
             height: 100%;
         }
 
-        .container {
-            height: 100%;
-        }
-
-        main .login-form {
-            padding: 100px 10px;
+        header {
+            margin-bottom: 100px;
         }
 
         footer {
             text-align: center;
             font-size: 12px;
+            margin-top: 100px;
         }
     </style>
+
+    @yield('css')
+
 </head>
 <body>
 <div id="app">
-    <div class="container">
-        <header>
-            <div style="text-align: center;padding-top: 50px;">
-                <img src="/statics/img/logo.png" style="width: 95%;max-width: 420px;">
-            </div>
-        </header>
-        <main>
+    <header>
+        <div style="text-align: center;padding-top: 50px;">
+            <img src="/statics/img/logo.png" style="width: 95%;max-width: 420px;">
+        </div>
+    </header>
+    <main>
+        <div class="container">
+
             @if($errors->isNotEmpty())
-                <div class="row" style="margin-top: 100px;">
+                <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <div class="alert alert-danger">{{ $errors->first() }}</div>
                     </div>
                 </div>
             @endif
+
             <div class="login-form">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
@@ -80,14 +82,17 @@
                     </div>
                 </div>
             </div>
-        </main>
-        <footer>
-            <p>版权所有，保留一切权利！</p>
-            <p>Copyright © {{ date('Y') }} <b>江苏科技大学 张家港校区/苏州理工学院</b></p>
-        </footer>
-    </div>
+        </div>
+    </main>
+    <footer>
+        <p>版权所有，保留一切权利！</p>
+        <p>Copyright © {{ date('Y') }} <b>江苏科技大学 张家港校区/苏州理工学院</b></p>
+    </footer>
 </div>
 <script src="/statics/user/js/jquery.min.js"></script>
 <script src="/statics/user/js/bootstrap.min.js"></script>
+
+@yield('js')
+
 </body>
 </html>

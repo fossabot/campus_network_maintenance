@@ -17,6 +17,12 @@ class LoginController extends Controller
         return view('user.auth.login');
     }
 
+    /**
+     * @param LoginRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws ValidationException
+     */
     public function login(LoginRequest $request)
     {
         // 是否登录失败次数过多
@@ -31,7 +37,8 @@ class LoginController extends Controller
         }
 
         // 尝试登录
-        if ($this->attemptLogin($request)) {
+        if (true) {
+            //if ($this->attemptLogin($request)) {
             $name = '王晟';
             //$name = $this->getUserInfo($request);
 

@@ -34,6 +34,7 @@
 
         footer {
             text-align: center;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -46,6 +47,13 @@
             </div>
         </header>
         <main>
+            @if($errors->isNotEmpty())
+                <div class="row" style="margin-top: 100px;">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <div class="alert alert-danger">{{ $errors->first() }}</div>
+                    </div>
+                </div>
+            @endif
             <div class="login-form">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
@@ -54,14 +62,12 @@
                                 <label for="user_id" class="col-sm-2 control-label">学号</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="user_id" id="user_id" autocomplete="off" required>
-                                    @if ($errors->has('user_id'))<span class="help-block"><strong>{{ $errors->first('user_id') }}</strong></span>@endif
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('user_pass') ? ' has-error' : '' }}">
                                 <label for="user_pass" class="col-sm-2 control-label">密码</label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" name="user_pass" id="user_pass" autocomplete="off" required>
-                                    @if ($errors->has('user_pass'))<span class="help-block"><strong>{{ $errors->first('user_pass') }}</strong></span>@endif
                                 </div>
                             </div>
                             <div class="form-group">

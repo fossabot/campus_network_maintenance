@@ -8,6 +8,6 @@ class ListController extends Controller
 {
     public function show()
     {
-        return view('');
+        return view('user.repair.list');
     }
 }

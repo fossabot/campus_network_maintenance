@@ -41,6 +41,11 @@ class ChangeController extends Controller
                 if ($repair->status_id != 2) {
                     return response()->json('当前状态为' . $repair->status . '。', 422);
                 }
+
+                $repair_description = $request->input('repair_description');
+                if (!$repair_description) {
+                    return response()->json('维修备注 不能为空。', 422);
+                }
                 $this->createDescription($request->input('repair_description'), $repair->id, $now);
                 break;
             case 'delete':

@@ -30,7 +30,7 @@ class Request
 
         $result = Curl::get($url);
 
-        return $result;
+        return array_merge(['url' => $url], $result);
     }
 
     /**

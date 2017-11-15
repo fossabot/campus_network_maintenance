@@ -37,10 +37,8 @@ class LoginController extends Controller
         }
 
         // 尝试登录
-        if (true) {
-            //if ($this->attemptLogin($request)) {
-            $name = '王晟';
-            //$name = $this->getUserInfo($request);
+        if ($this->attemptLogin($request)) {
+            $name = $this->getUserInfo($request);
 
             session()->regenerate(true);
 

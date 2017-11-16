@@ -88,6 +88,7 @@
         },
         mounted() {
             this.admin = window.admin
+            this.type_id = this.admin.role_id != 9 ? this.admin.type_id : 0
             this.getType()
             this.getData()
         }

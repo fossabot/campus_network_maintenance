@@ -4,10 +4,10 @@
         <el-row>
             <el-col :md="12">
                 <el-steps v-if="data.status_id > 0" :active="data.status_id" align-center>
-                    <el-step title="等待维修"></el-step>
-                    <el-step title="正在维修"></el-step>
-                    <el-step title="维修完成"></el-step>
-                    <el-step title="评价完成"></el-step>
+                    <el-step title="等待维修" :description="data.created_at"></el-step>
+                    <el-step title="正在维修" :description="data.accepted_at"></el-step>
+                    <el-step title="维修完成" :description="data.repaired_at"></el-step>
+                    <el-step title="评价完成" :description="data.completed_at"></el-step>
                 </el-steps>
             </el-col>
         </el-row>

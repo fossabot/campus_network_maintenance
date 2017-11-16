@@ -63,7 +63,7 @@
                             <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
                                 <label for="user_id" class="col-sm-2 control-label">学号</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="user_id" id="user_id" autocomplete="off" required>
+                                    <input type="text" class="form-control" name="user_id" id="user_id" value="{{ old('user_id') }}" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('user_pass') ? ' has-error' : '' }}">

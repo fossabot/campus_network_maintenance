@@ -36,12 +36,12 @@ class LoginController extends Controller
             ])->status(423);
         }
 
-        session()->regenerate(true);
-
-        session()->put('user.id', '152219605221');
-        session()->put('user.name', '王晟');
-
-        return redirect()->intended('/user/repair/list');
+        //session()->regenerate(true);
+        //
+        //session()->put('user.id', '152219605221');
+        //session()->put('user.name', '王晟');
+        //
+        //return redirect()->intended('/user/repair/list');
 
         // 尝试登录
         if ($this->attemptLogin($request)) {

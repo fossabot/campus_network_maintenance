@@ -9,6 +9,11 @@ use App\Models\TypeLocationRelation;
 
 class DetailController extends Controller
 {
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $detail = Repair::findOrFail($id);

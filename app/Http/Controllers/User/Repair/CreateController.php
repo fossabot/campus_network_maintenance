@@ -12,6 +12,9 @@ use Illuminate\Validation\ValidationException;
 
 class CreateController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show()
     {
         $types = [];

@@ -24,6 +24,10 @@ class UpdateController extends Controller
     {
         $repair = Repair::findOrFail($request->input('id'));
 
+        if ($repair->user_id != $this->id()) {
+            throw ValidationException::withMessages(['fail' => '没有此操作的权限。']);
+        }
+
         if ($repair->status_id != 1) {
             throw ValidationException::withMessages(['fail' => '当前状态无法修改。']);
         }
@@ -52,6 +56,10 @@ class UpdateController extends Controller
     public function description(Request $request)
     {
         $repair = Repair::findOrFail($request->input('id'));
+
+        if ($repair->user_id != $this->id()) {
+            throw ValidationException::withMessages(['fail' => '没有此操作的权限。']);
+        }
 
         if ($repair->status_id != 3) {
             throw ValidationException::withMessages(['fail' => '当前状态无法评价。']);

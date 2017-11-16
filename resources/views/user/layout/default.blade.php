@@ -59,6 +59,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">{{ session('user.name') }} {{ session('user.id') }}</a></li>
+                        <li><a href="#" id="logout">退出登录</a></li>
                     </ul>
                 </div>
             </div>
@@ -68,12 +69,15 @@
         <div class="container">
 
             @if($errors->isNotEmpty())
+
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <div class="alert alert-danger">{{ $errors->first() }}</div>
                     </div>
                 </div>
+
             @endif
+
             @yield('content')
 
         </div>
@@ -92,6 +96,12 @@
                 $(this).addClass('active');
             } else {
                 $(this).removeClass('active');
+            }
+        });
+
+        $('#logout').click(function () {
+            if (confirm('确定退出登录吗？')) {
+                window.location.href = '/user/auth/logout'
             }
         });
     });

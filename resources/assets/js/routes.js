@@ -44,6 +44,12 @@ const routes = [
         component: Layout,
         children: [
             {
+                path: 'view',
+                name: '报障单总览',
+                component: require('./pages/admin/repair/View.vue'),
+                beforeEnter: mustLogin
+            },
+            {
                 path: 'list',
                 name: '报障单列表',
                 component: require('./pages/admin/repair/List.vue'),

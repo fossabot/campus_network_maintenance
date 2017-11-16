@@ -48,6 +48,7 @@ Route::group(['prefix' => 'api'], function () {
 
         // 维修单
         Route::group(['prefix' => 'repair'], function () {
+            Route::get('view/{type}', 'Admin\Repair\ViewController@data');
             Route::post('list', 'Admin\Repair\ListController@data');
             Route::post('create', 'Admin\Repair\CreateController@create');
             Route::get('detail/{id}', 'Admin\Repair\DetailController@data');

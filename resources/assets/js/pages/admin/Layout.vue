@@ -28,6 +28,7 @@
                         </template>
                         <el-menu-item-group>
                             <span slot="title">报障单</span>
+                            <el-menu-item index="/repair/view">报障单总览</el-menu-item>
                             <el-menu-item index="/repair/list">报障单列表</el-menu-item>
                             <el-menu-item index="/repair/create">新增报障单</el-menu-item>
                             <el-menu-item v-if="$route.path.substr(0, 15) === '/repair/detail/'" :index="$route.path">

@@ -5,6 +5,9 @@ import BabelPolyFill from 'babel-polyfill'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 
+import VeHistogram from 'v-charts/lib/histogram'
+import VePie from 'v-charts/lib/pie'
+
 import VueRouter from 'vue-router'
 import routes from './routes'
 
@@ -14,6 +17,9 @@ import App from './App.vue'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
+
+Vue.component(VeHistogram.name, VeHistogram)
+Vue.component(VePie.name, VePie)
 
 // 路由
 const router = new VueRouter({

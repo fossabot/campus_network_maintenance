@@ -8,6 +8,7 @@ use App\School\Api\WebAuthenticate;
 use App\School\Api\WebGetUserInfo;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -118,6 +119,8 @@ class LoginController extends Controller
         ]);
 
         $result = $authenticate->execute();
+
+        Cache::put('r', $result);
 
         if ($result['code'] == 200 && $result['content']['result'] == 1) {
             return true;

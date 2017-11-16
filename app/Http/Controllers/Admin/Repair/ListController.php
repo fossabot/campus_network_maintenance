@@ -74,7 +74,7 @@ class ListController extends Controller
                 'second' => $repair->location->second,
             ],
             'user_room'        => $repair->user_room,
-            'admin'            => $repair->admin->name,
+            'admin'            => @$repair->admin->name,
             'user_id'          => $repair->user_id,
             'user_name'        => $repair->user_name,
             'user_mobile'      => $repair->user_mobile,

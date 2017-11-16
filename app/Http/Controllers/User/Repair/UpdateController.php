@@ -9,6 +9,7 @@ use App\Models\Type;
 use App\Models\TypeLocationRelation;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class UpdateController extends Controller
@@ -16,6 +17,10 @@ class UpdateController extends Controller
     public function update(RepairRequest $request)
     {
         $repair = Repair::findOrFail($request->input('id'));
+
+        if ($repair->status_id != 1) {
+            throw ValidationException::withMessages(['fail' => '当前状态无法修改。']);
+        }
 
         if (!$this->checkType($request->input('type_id'))) {
             throw ValidationException::withMessages(['fail' => '报障分类 不符合要求。']);
@@ -30,6 +35,16 @@ class UpdateController extends Controller
         }
 
         throw ValidationException::withMessages(['fail' => '服务器错误。']);
+    }
+
+    public function description(Request $request)
+    {
+        $repair = Repair::findOrFail($request->input('id'));
+
+        if ($repair->status_id != 1) {
+            throw ValidationException::withMessages(['fail' => '当前状态无法评价。']);
+        }
+
     }
 
     /**
@@ -57,7 +72,7 @@ class UpdateController extends Controller
      * @param Model         $repair
      * @param RepairRequest $request
      *
-     * @return int
+     * @return bool
      */
     protected function attemptUpdate(Model $repair, RepairRequest $request)
     {
@@ -65,6 +80,24 @@ class UpdateController extends Controller
             'user_id', 'user_name', 'user_mobile', 'type_id', 'location_id', 'user_room', 'user_description',
         ]), [
             'updated_at' => Carbon::now(),
+        ]));
+    }
+
+    /**
+     * @param Model   $repair
+     * @param Request $request
+     *
+     * @return bool
+     */
+    protected function attemptDescription(Model $repair, Request $request)
+    {
+        $now = Carbon::now();
+
+        return $repair->update(array_merge($request->only([
+            'user_star', 'user_evaluation',
+        ]), [
+            'completed_at' => $now,
+            'updated_at'   => $now,
         ]));
     }
 }

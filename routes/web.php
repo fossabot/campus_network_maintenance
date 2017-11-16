@@ -30,6 +30,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('create', 'User\Repair\CreateController@create');
         Route::get('detail/{id}', 'User\Repair\DetailController@show');
         Route::post('update', 'User\Repair\UpdateController@update');
+        Route::post('description', 'User\Repair\UpdateController@description');
     });
 
 });

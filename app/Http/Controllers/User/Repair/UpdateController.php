@@ -14,6 +14,12 @@ use Illuminate\Validation\ValidationException;
 
 class UpdateController extends Controller
 {
+    /**
+     * @param RepairRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws ValidationException
+     */
     public function update(RepairRequest $request)
     {
         $repair = Repair::findOrFail($request->input('id'));
@@ -37,14 +43,25 @@ class UpdateController extends Controller
         throw ValidationException::withMessages(['fail' => '服务器错误。']);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws ValidationException
+     */
     public function description(Request $request)
     {
         $repair = Repair::findOrFail($request->input('id'));
 
-        if ($repair->status_id != 1) {
+        if ($repair->status_id != 3) {
             throw ValidationException::withMessages(['fail' => '当前状态无法评价。']);
         }
 
+        if ($this->attemptDescription($repair, $request)) {
+            return redirect()->intended('/user/repair/detail/' . $request->input('id'));
+        }
+
+        throw ValidationException::withMessages(['fail' => '服务器错误。']);
     }
 
     /**
@@ -76,11 +93,11 @@ class UpdateController extends Controller
      */
     protected function attemptUpdate(Model $repair, RepairRequest $request)
     {
-        return $repair->update(array_merge($request->only([
+        return $repair->forceFill(array_merge($request->only([
             'user_id', 'user_name', 'user_mobile', 'type_id', 'location_id', 'user_room', 'user_description',
         ]), [
             'updated_at' => Carbon::now(),
-        ]));
+        ]))->save();
     }
 
     /**
@@ -93,11 +110,12 @@ class UpdateController extends Controller
     {
         $now = Carbon::now();
 
-        return $repair->update(array_merge($request->only([
+        return $repair->forceFill(array_merge($request->only([
             'user_star', 'user_evaluation',
         ]), [
+            'status_id'    => 4,
             'completed_at' => $now,
             'updated_at'   => $now,
-        ]));
+        ]))->save();
     }
 }

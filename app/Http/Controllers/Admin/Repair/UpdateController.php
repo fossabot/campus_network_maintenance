@@ -38,10 +38,10 @@ class UpdateController extends Controller
      */
     protected function attemptUpdate(Model $repair, RepairRequest $request)
     {
-        return $repair->update(array_merge($request->only([
+        return $repair->forceFill(array_merge($request->only([
             'user_id', 'user_name', 'user_mobile', 'type_id', 'location_id', 'user_room', 'user_description',
         ]), [
             'updated_at' => Carbon::now(),
-        ]));
+        ]))->save();
     }
 }

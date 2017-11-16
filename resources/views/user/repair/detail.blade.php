@@ -76,22 +76,26 @@
 
         @if($detail->status_id >= 2)
 
-            <div class="col-md-4 col-md-offset-4">
-                <dl class="dl-horizontal">
-                    <dt>报障人学号</dt><dd>{{ $detail->user_id }}</dd>
-                    <dt>报障人姓名</dt><dd>{{ $detail->user_name }}</dd>
-                    <dt>报障人手机号码</dt><dd>{{ $detail->user_mobile }}</dd>
-                    <dt>报障分类</dt><dd>{{ $detail->type->name }}</dd>
-                    <dt>报障地区</dt><dd>{{ $detail->location->first }} {{ $detail->location->second }}</dd>
-                    <dt>报障房间号</dt><dd>{{ $detail->user_room }}</dd>
-                    <dt>报障描述</dt><dd>{{ $detail->user_description }}</dd>
-                    @if($detail->user_star)<dt>用户评星</dt><dd>{{ $detail->user_star }}</dd>@endif
-                    @if($detail->user_evaluation)<dt>用户评价</dt><dd>{{ $detail->user_evaluation }}</dd>@endif
-                    @if($detail->created_at)<dt>创建时间</dt><dd>{{ $detail->created_at }}</dd>@endif
-                    @if($detail->accepted_at)<dt>开始维修时间</dt><dd>{{ $detail->accepted_at }}</dd>@endif
-                    @if($detail->repaired_at)<dt>维修完成时间</dt><dd>{{ $detail->repaired_at }}</dd>@endif
-                    @if($detail->completed_at)<dt>评价时间</dt><dd>{{ $detail->completed_at }}</dd>@endif
-                </dl>
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>报障人学号</dt><dd>{{ $detail->user_id }}</dd>
+                            <dt>报障人姓名</dt><dd>{{ $detail->user_name }}</dd>
+                            <dt>报障人手机号码</dt><dd>{{ $detail->user_mobile }}</dd>
+                            <dt>报障分类</dt><dd>{{ $detail->type->name }}</dd>
+                            <dt>报障地区</dt><dd>{{ $detail->location->first }} {{ $detail->location->second }}</dd>
+                            <dt>报障房间号</dt><dd>{{ $detail->user_room }}</dd>
+                            <dt>报障描述</dt><dd>{{ $detail->user_description }}</dd>
+                            @if($detail->user_star)<dt>用户评星</dt><dd>{{ $detail->user_star }}</dd>@endif
+                            @if($detail->user_evaluation)<dt>用户评价</dt><dd>{{ $detail->user_evaluation }}</dd>@endif
+                            @if($detail->created_at)<dt>创建时间</dt><dd>{{ $detail->created_at }}</dd>@endif
+                            @if($detail->accepted_at)<dt>开始维修时间</dt><dd>{{ $detail->accepted_at }}</dd>@endif
+                            @if($detail->repaired_at)<dt>维修完成时间</dt><dd>{{ $detail->repaired_at }}</dd>@endif
+                            @if($detail->completed_at)<dt>评价时间</dt><dd>{{ $detail->completed_at }}</dd>@endif
+                        </dl>
+                    </div>
+                </div>
             </div>
 
         @endif
@@ -104,11 +108,11 @@
                         <label for="user_star" class="col-sm-4 control-label">用户评星</label>
                         <div class="col-sm-8">
                             <select class="form-control" name="user_star" id="user_star">
-                                <option value="1">一星</option>
-                                <option value="2">二星</option>
-                                <option value="3">三星</option>
-                                <option value="4">四星</option>
                                 <option value="5">五星</option>
+                                <option value="4">四星</option>
+                                <option value="3">三星</option>
+                                <option value="2">二星</option>
+                                <option value="1">一星</option>
                             </select>
                         </div>
                     </div>

@@ -86,7 +86,7 @@ class ChangeController extends Controller
      */
     protected function attemptUpdate(Repair $repair, $data)
     {
-        return $repair->update($data);
+        return $repair->forceFill($data)->save();
     }
 
     /**

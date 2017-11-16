@@ -56,6 +56,6 @@ class UpdateController extends Controller
             }
         }
 
-        return $admin->update($data);
+        return $admin->forceFill($data)->save();
     }
 }

@@ -120,8 +120,6 @@ class LoginController extends Controller
 
         $result = $authenticate->execute();
 
-        Cache::put('r', $result);
-
         if ($result['code'] == 200 && $result['content']['result'] == 1) {
             return true;
         }

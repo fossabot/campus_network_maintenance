@@ -18,7 +18,7 @@ class LocationController extends Controller
      */
     public function data($id)
     {
-        return response()->json(TypeLocationRelation::whereTypeId($id)->pluck('location_id'), 200);
+        return response()->json(TypeLocationRelation::whereTypeId($id)->pluck('location_id'));
     }
 
     /**
@@ -42,7 +42,7 @@ class LocationController extends Controller
             ]]);
         }
 
-        return response()->json($data, 200);
+        return response()->json($data);
     }
 
     /**
@@ -62,7 +62,7 @@ class LocationController extends Controller
 
         // 尝试分配
         if ($this->attemptAllot($request)) {
-            return response()->json('', 200);
+            return response()->json();
         }
 
         return response()->json('服务器错误。', 500);

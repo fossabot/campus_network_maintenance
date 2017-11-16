@@ -28,7 +28,7 @@ class UpdateController extends Controller
 
         // 尝试修改
         if ($this->attemptUpdate($type, $request)) {
-            return response()->json('', 200);
+            return response()->json();
         }
 
         return response()->json('服务器错误。', 500);

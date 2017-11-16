@@ -22,7 +22,7 @@ class ListController extends Controller
         }
 
 
-        return response()->json($type->map([$this, 'transformer'])->toArray(), 200);
+        return response()->json($type->map([$this, 'transformer'])->toArray());
     }
 
     /**

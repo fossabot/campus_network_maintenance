@@ -77,7 +77,7 @@
                             '/api/admin/location/create', this[data]
                         ).then((response) => {
                             this.lock = false
-                            if (response.status === 200 && parseInt(response.data)) {
+                            if (response.status === 200) {
                                 this.$notify.success({
                                     message: '新增成功',
                                     duration: 2000

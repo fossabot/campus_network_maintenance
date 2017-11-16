@@ -194,6 +194,12 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
+                path: 'detail/:id',
+                name: '修改维修备件',
+                component: require('./pages/admin/part/Detail.vue'),
+                beforeEnter: mustLogin
+            },
+            {
                 path: 'use',
                 name: '维修备件使用情况',
                 component: require('./pages/admin/part/Use.vue'),

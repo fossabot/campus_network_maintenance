@@ -10,7 +10,7 @@ class DetailController extends Controller
 {
     public function data($id)
     {
-        return response()->json($this->transformer(Admin::findOrFail($id)), 200);
+        return response()->json($this->transformer(Admin::findOrFail($id)));
     }
 
     /**

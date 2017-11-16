@@ -84,6 +84,12 @@ Route::group(['prefix' => 'api'], function () {
         });
 
         // 维修备件
+        Route::group(['prefix' => 'part'], function () {
+            Route::get('list', 'Admin\Part\ListController@data');
+            Route::post('create', 'Admin\Part\CreateController@create');
+            Route::get('detail/{id}', 'Admin\Part\DetailController@data');
+            Route::post('update', 'Admin\Part\UpdateController@update');
+        });
 
     });
 

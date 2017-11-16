@@ -36,7 +36,7 @@ class LoginController extends Controller
 
             session()->put('admin.id', $admin->id);
 
-            return response()->json('success', 200);
+            return response()->json('success');
         }
 
         // 登录失败次数加一

@@ -28,7 +28,7 @@ class CreateController extends Controller
 
         if ($id = $this->attemptCreate($request)) {
             $this->createDescription($request, $id);
-            return response()->json($id, 200);
+            return response()->json($id);
         }
 
         return response()->json('服务器错误。', 500);

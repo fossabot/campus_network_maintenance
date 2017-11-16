@@ -29,7 +29,7 @@ class DeleteController extends Controller
         if ($location->delete()) {
             TypeLocationRelation::whereLocationId($request->input('id'))->delete();
 
-            return response()->json('', 200);
+            return response()->json();
         }
 
         return response()->json('服务器错误。', 500);

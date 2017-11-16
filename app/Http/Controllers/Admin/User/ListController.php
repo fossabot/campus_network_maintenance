@@ -19,7 +19,7 @@ class ListController extends Controller
             $users->where('type_id', $this->type());
         }
 
-        return response()->json($users->get()->map([$this, 'transformer'])->toArray(), 200);
+        return response()->json($users->get()->map([$this, 'transformer'])->toArray());
     }
 
     /**

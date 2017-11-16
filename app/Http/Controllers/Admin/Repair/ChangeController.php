@@ -72,7 +72,7 @@ class ChangeController extends Controller
         }
 
         if ($this->attemptUpdate($repair, $data)) {
-            return response()->json('', 200);
+            return response()->json();
         }
 
         return response()->json('服务器错误。', 500);

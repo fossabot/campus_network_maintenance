@@ -16,6 +16,6 @@ class DetailController extends Controller
      */
     public function data($id)
     {
-        return response()->json(Type::findOrFail($id), 200);
+        return response()->json(Type::findOrFail($id));
     }
 }

@@ -27,7 +27,7 @@ class CreateController extends Controller
             }
 
             if ($id = $this->attemptCreateFirst($request)) {
-                return response()->json($id, 200);
+                return response()->json($id);
             }
         } else {
             // 创建次要地区
@@ -40,7 +40,7 @@ class CreateController extends Controller
             }
 
             if ($id = $this->attemptCreateSecond($request)) {
-                return response()->json($id, 200);
+                return response()->json($id);
             }
         }
 

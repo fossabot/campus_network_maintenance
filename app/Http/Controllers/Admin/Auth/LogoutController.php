@@ -15,6 +15,6 @@ class LogoutController extends Controller
     {
         session()->flush();
 
-        return response()->json('', 200);
+        return response()->json();
     }
 }

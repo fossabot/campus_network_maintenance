@@ -83,6 +83,9 @@
                             <span slot="title">维修备件</span>
                             <el-menu-item index="/part/list">维修备件列表</el-menu-item>
                             <el-menu-item index="/part/create">新增维修备件</el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 13) === '/part/detail/'" :index="$route.path">
+                                修改维修备件
+                            </el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group>
                             <span slot="title">维修备件日志</span>

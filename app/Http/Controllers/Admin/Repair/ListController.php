@@ -52,7 +52,7 @@ class ListController extends Controller
         return response()->json([
             'total' => $query->count(),
             'data'  => $query->offset(($page - 1) * $per)->limit($per)->get()->map([$this, 'transformer']),
-        ], 200);
+        ]);
     }
 
     /**

@@ -69,6 +69,9 @@
                         this.data1.rows = response.data.data1
                         this.data2.rows = response.data.data2
                         this.data3.rows = response.data.data3
+                        this.$message.success({
+                            message: '获取成功'
+                        })
                     }
                 })
             },

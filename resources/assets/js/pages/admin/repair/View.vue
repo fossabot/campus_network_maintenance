@@ -20,16 +20,16 @@
         </div>
         <el-row>
             <h4>报障单完成数</h4>
-            <ve-histogram :data="data1" :settings="settings1"></ve-histogram>
+            <ve-histogram :data="data1" :settings="settings1" :loading="loading" :data-empty="data1.rows.length === 0"></ve-histogram>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
                 <h4>今日报障单完成数</h4>
-                <ve-pie :data="data2"></ve-pie>
+                <ve-pie :data="data2" :loading="loading" :data-empty="data2.rows.length === 0"></ve-pie>
             </el-col>
             <el-col :span="12">
                 <h4>本月报障单完成数</h4>
-                <ve-pie :data="data3"></ve-pie>
+                <ve-pie :data="data3" :loading="loading" :data-empty="data3.rows.length === 0"></ve-pie>
             </el-col>
         </el-row>
 
@@ -37,12 +37,15 @@
 </template>
 
 <script>
+    import 'v-charts/lib/style.css'
+
     export default {
         data() {
             return {
                 admin: [],
                 type: [],
                 type_id: 0,
+                loading: true,
                 data1: {
                     columns: ['维修人员', '今日', '昨日', '本月', '上个月'],
                     rows: []
@@ -62,6 +65,7 @@
         },
         methods: {
             getData() {
+                this.loading = true
                 this.$http.get(
                     '/api/admin/repair/view/' + this.type_id
                 ).then((response) => {
@@ -69,6 +73,7 @@
                         this.data1.rows = response.data.data1
                         this.data2.rows = response.data.data2
                         this.data3.rows = response.data.data3
+                        this.loading = false
                         this.$message.success({
                             message: '获取成功'
                         })
@@ -88,7 +93,7 @@
         },
         mounted() {
             this.admin = window.admin
-            this.type_id = this.admin.role_id != 9 ? this.admin.type_id : 0
+            this.type_id = parseInt(this.admin.role_id) !== 9 ? this.admin.type_id : 0
             this.getType()
             this.getData()
         }

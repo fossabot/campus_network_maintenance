@@ -1,5 +1,3 @@
 <template>
-    <div class="repair-create">
-        create
-    </div>
+    <div class="part-use"></div>
 </template>

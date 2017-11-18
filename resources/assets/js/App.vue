@@ -8,6 +8,12 @@
     export default {
         mounted() {
             console.info('Author ：https://www.52xckl.cn')
+            if (window.location.href.indexOf(window.location.origin + '/admin#') !== -1) {
+                const href = window.location.href.split('#', 2)
+                if (href.length === 2) {
+                    window.location.href = href[0] + '/#' + href[1]
+                }
+            }
         }
     }
 </script>

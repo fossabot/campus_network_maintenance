@@ -80,7 +80,7 @@
                                         duration: 2000
                                     })
                                     this.$loading({body: true, lock: true})
-                                    window.location.href = '/admin'
+                                    window.location.href = '/admin/'
                                 } else {
                                     this.$notify.success({
                                         message: '修改成功',

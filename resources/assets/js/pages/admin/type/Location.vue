@@ -87,8 +87,12 @@
     }
 
     .type-location .el-transfer-panel {
-        min-height: 400px;
-        min-width: 300px;
+        height: 500px;
+        width: 300px;
+    }
+
+    .type-location .el-transfer-panel__list {
+        height: 390px;
     }
 
     .type-location .el-transfer-panel__filter .el-input__inner {

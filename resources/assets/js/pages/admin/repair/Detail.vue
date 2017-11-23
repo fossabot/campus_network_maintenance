@@ -319,7 +319,11 @@
                 })
             },
             clearPart(part) {
-                console.log(part.name)
+                this.part_use.forEach((value, index) => {
+                    if (value.name === part.name) {
+                        this.part_use.splice(index, 1)
+                    }
+                })
             },
             addUse() {
                 if (isNaN(parseInt(this.part_number)) || parseInt(this.part_number) <= 0) {
@@ -331,7 +335,7 @@
                     return
                 }
                 let flag = false
-                this.part_use.every((value) => {
+                this.part_use.forEach((value) => {
                     if (value.name === this.part_name) {
                         flag = true
                     }

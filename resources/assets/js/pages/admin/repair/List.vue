@@ -10,7 +10,7 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="9">
+                    <el-col :md="9" v-if="admin.role_id == 9">
                         <el-form-item label="分类">
                             <el-select v-model="search.type_id">
                                 <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
@@ -92,20 +92,20 @@
     export default {
         data() {
             return {
+                admin: {},
                 total: 20,
                 data: [],
                 status: [
                     {label: '已删除', value: 0},
-                    {label: '等待维修', value: 1},
-                    {label: '正在维修', value: 2},
-                    {label: '维修完成', value: 3},
-                    {label: '评价完成', value: 4}
+                    {label: '未完成', value: 12},
+                    {label: '已完成', value: 34},
+                    {label: '全部', value: 12340}
                 ],
                 type: [],
                 search: {
                     per: 20,
                     page: 1,
-                    status_id: '',
+                    status_id: 12,
                     type_id: '',
                     user_id: '',
                     user_mobile: ''
@@ -145,6 +145,7 @@
             }
         },
         mounted() {
+            this.admin = window.admin
             this.getType()
             this.getData()
         }

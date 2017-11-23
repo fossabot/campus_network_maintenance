@@ -81,6 +81,15 @@
                         <el-form-item label="维修备注" required>
                             <el-input type="textarea" v-model="data.repair_description" :autosize="{minRows: 3}"></el-input>
                         </el-form-item>
+                        <el-form-item label="维修备件" v-if="data.status_id == 2">
+                            <el-tag v-for="part in part_use" :key="part.name" closable @close="clearPart(part)">{{part.name}} （{{part.number}}）</el-tag>
+                            <el-input v-model="part_number" placeholder="使用数量">
+                                <el-select v-model="part_name" slot="prepend" placeholder="请选择" class="part-select">
+                                    <el-option v-for="item in part" :key="item.id" :label="item.name" :value="item.name"></el-option>
+                                </el-select>
+                                <el-button slot="append" icon="el-icon-plus" @click="addUse"></el-button>
+                            </el-input>
+                        </el-form-item>
                         <el-form-item>
                             <el-button type="success" :loading="lock" v-if="data.status_id == 2" @click="finishRepair">维修完成</el-button>
                             <el-button type="primary" :loading="lock" v-if="data.status_id > 2" @click="addDescription">添加备注</el-button>
@@ -127,6 +136,10 @@
                     repair_description: '',
                     admin_description: []
                 },
+                part: [],
+                part_name: '',
+                part_number: '',
+                part_use: [],
                 rules: {
                     user_id: [
                         {required: true, message: '请输入报障人学号', trigger: 'blur'}
@@ -171,6 +184,15 @@
                         this.$message.success({
                             message: '获取成功'
                         })
+                    }
+                })
+            },
+            getPart() {
+                this.$http.get(
+                    '/api/admin/part/list'
+                ).then((response) => {
+                    if (response.status === 200) {
+                        this.part = response.data
                     }
                 })
             },
@@ -243,6 +265,7 @@
                     '/api/admin/repair/change', {
                         id: this.data.id,
                         type: 'finish',
+                        use: this.part_use,
                         repair_description: this.data.repair_description
                     }).then((response) => {
                     this.lock = false
@@ -294,10 +317,42 @@
                         }
                     })
                 })
+            },
+            clearPart(part) {
+                console.log(part.name)
+            },
+            addUse() {
+                if (isNaN(parseInt(this.part_number)) || parseInt(this.part_number) <= 0) {
+                    this.$notify.error({
+                        title: '错误',
+                        message: '请输入备件使用数量',
+                        duration: 2000
+                    })
+                    return
+                }
+                let flag = false
+                this.part_use.every((value) => {
+                    if (value.name === this.part_name) {
+                        flag = true
+                    }
+                })
+                if (flag) {
+                    this.$notify.error({
+                        title: '错误',
+                        message: '当前备件已使用',
+                        duration: 2000
+                    })
+                    return
+                }
+                this.part_use.push({
+                    name: this.part_name,
+                    number: this.part_number
+                })
             }
         },
         mounted() {
             this.getData()
+            this.getPart()
         }
     }
 </script>
@@ -321,5 +376,9 @@
         margin-right: 0;
         margin-bottom: 0;
         width: 100%;
+    }
+
+    .repair-detail .part-select {
+        width: 150px;
     }
 </style>

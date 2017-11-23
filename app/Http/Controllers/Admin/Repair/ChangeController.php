@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Repair;
 
 use App\Http\Controllers\Controller;
+use App\Models\LogPartUse;
+use App\Models\Part;
 use App\Models\Repair;
 use App\Models\RepairDescription;
 use Carbon\Carbon;
@@ -46,6 +48,21 @@ class ChangeController extends Controller
                 if (!$repair_description) {
                     return response()->json('维修备注 不能为空。', 422);
                 }
+
+                foreach ($request->input('use') as $item) {
+                    $part = Part::whereName($item['name'])->first();
+                    if ($part) {
+                        LogPartUse::insert([
+                            'repair_id'  => $repair->id,
+                            'part_id'    => $part->id,
+                            'admin_id'   => $this->id(),
+                            'number'     => $item['number'],
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                        ]);
+                    }
+                }
+
                 $this->createDescription($request->input('repair_description'), $repair->id, $now);
                 break;
             case 'delete':

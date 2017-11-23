@@ -26,7 +26,11 @@ class ListController extends Controller
         $query = new Repair();
 
         if (!is_null($status_id)) {
-            $query = $query->where('status_id', $status_id);
+            // 已经选择状态
+            if (!$user_id && !$user_mobile) {
+                // 并且没有输入学号和手机
+                $query = $query->where('status_id', $status_id);
+            }
         } else {
             if (!$status_id && !$type_id && !$user_id && !$user_mobile) {
                 if ($this->role() != 9) {

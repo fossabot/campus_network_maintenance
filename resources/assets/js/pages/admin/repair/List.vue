@@ -105,7 +105,7 @@
                 search: {
                     per: 20,
                     page: 1,
-                    status_id: 12,
+                    status_id: parseInt(admin.role_id) === 9 ? 12340 : 12,
                     type_id: '',
                     user_id: '',
                     user_mobile: ''

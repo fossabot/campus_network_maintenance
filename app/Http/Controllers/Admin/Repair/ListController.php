@@ -29,7 +29,7 @@ class ListController extends Controller
             $query = $query->where('status_id', $status_id);
         } else {
             if (!$status_id && !$type_id && !$user_id && !$user_mobile) {
-                $query = $query->whereIn('status_id', [1, 2]);
+                $query = $query->whereIn('status_id', [1, 2, 3, 4]);
             }
         }
 
@@ -42,7 +42,7 @@ class ListController extends Controller
         }
 
         if ($this->role() != 9) {
-            $query = $query->whereTypeId($this->type())->orderByDesc('status_id');
+            $query = $query->whereTypeId($this->type())->orderBy('status_id');
         } else {
             if ($type_id) {
                 $query = $query->whereTypeId($type_id);

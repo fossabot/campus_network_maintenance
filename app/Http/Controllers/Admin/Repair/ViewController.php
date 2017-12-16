@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class ViewController extends Controller
 {
-    public function data($type)
+    public function data($type, $start, $end)
     {
         $admins = Admin::whereIn('role_id', [1, 5]);
 
@@ -23,6 +23,8 @@ class ViewController extends Controller
             'startOfYesterday' => Carbon::yesterday(),
             'startOfThisMonth' => (new Carbon())->startOfMonth(),
             'startOfLastMonth' => (new Carbon())->startOfMonth()->subSecond()->startOfMonth(),
+            'customStart'      => $start ? Carbon::parse($start) : Carbon::now(),
+            'customEnd'        => $end ? Carbon::parse($end)->endOfDay() : Carbon::now(),
         ];
 
         $data1 = $data2 = $data3 = [];
@@ -32,10 +34,9 @@ class ViewController extends Controller
             $yesterday = $this->countRepair($admin->id, [$time['startOfYesterday'], $time['startOfToday']]);
             $month = $this->countRepair($admin->id, [$time['startOfThisMonth'], $time['now']]);
             $lastMonth = $this->countRepair($admin->id, [$time['startOfLastMonth'], $time['startOfThisMonth']]);
+            $custom = $this->countRepair($admin->id, [$time['customStart'], $time['customEnd']]);
 
-            $data1 = array_merge($data1, [[
-                '维修人员' => $admin->name, '今日' => $today, '昨日' => $yesterday, '本月' => $month, '上个月' => $lastMonth,
-            ]]);
+            $data1 = array_merge($data1, [['维修人员' => $admin->name, '今日'   => $today, '昨日'   => $yesterday, '本月'   => $month, '上个月'  => $lastMonth, '自定义'  => $custom]]);
             $data2 = array_merge($data2, [['维修人员' => $admin->name, '数量' => $today]]);
             $data3 = array_merge($data3, [['维修人员' => $admin->name, '数量' => $month]]);
         }

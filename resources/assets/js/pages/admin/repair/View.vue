@@ -10,6 +10,11 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
+                    <el-col :md="7">
+                        <el-form-item label="自定义时间">
+                            <el-date-picker v-model="time" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd" unlink-panels></el-date-picker>
+                        </el-form-item>
+                    </el-col>
                     <el-col :md="5">
                         <el-form-item>
                             <el-button type="primary" @click="getData">筛选</el-button>
@@ -32,7 +37,6 @@
                 <ve-pie :data="data3" :loading="loading" :data-empty="data3.rows.length === 0"></ve-pie>
             </el-col>
         </el-row>
-
     </div>
 </template>
 
@@ -45,9 +49,10 @@
                 admin: [],
                 type: [],
                 type_id: 0,
+                time: [],
                 loading: true,
                 data1: {
-                    columns: ['维修人员', '今日', '昨日', '本月', '上个月'],
+                    columns: ['维修人员', '今日', '昨日', '本月', '上个月', '自定义'],
                     rows: []
                 },
                 settings1: {
@@ -66,8 +71,10 @@
         methods: {
             getData() {
                 this.loading = true
+                let start = this.time[0] ? this.time[0] : '0'
+                let end = this.time[1] ? this.time[1] : '0'
                 this.$http.get(
-                    '/api/admin/repair/view/' + this.type_id
+                    '/api/admin/repair/view/' + this.type_id + '/' + start + '/' + end
                 ).then((response) => {
                     if (response.status === 200) {
                         this.data1.rows = response.data.data1

@@ -58,7 +58,8 @@ class repairComplete extends Command
                 $repair->forceFill([
                     'status_id'    => 4,
                     'user_star'    => $type->auto_complete_stars,
-                    'completed_at' => $repair->repaired_at->addHour($type->auto_complete_hours)
+                    'completed_at' => $repair->repaired_at->addHour($type->auto_complete_hours),
+                    'updated_at'   => $repair->repaired_at->addHour($type->auto_complete_hours),
                 ])->save();
             }
             Cache::increment($this->key);

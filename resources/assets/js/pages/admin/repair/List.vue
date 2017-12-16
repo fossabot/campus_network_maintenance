@@ -3,33 +3,38 @@
         <div class="search">
             <el-form ref="search" :model="search" label-width="100px">
                 <el-row>
-                    <el-col :md="9">
+                    <el-col :md="6">
                         <el-form-item label="状态">
                             <el-select v-model="search.status_id">
                                 <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="9" v-if="admin.role_id == 9">
+                    <el-col :md="6" v-if="admin.role_id == 9">
                         <el-form-item label="分类">
                             <el-select v-model="search.type_id">
                                 <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :md="9">
+                    <el-col :md="6">
                         <el-form-item label="报障人学号">
                             <el-input v-model="search.user_id"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="9">
+                    <el-col :md="6">
                         <el-form-item label="报障人手机">
                             <el-input v-model="search.user_mobile"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="6">
+                </el-row>
+                <el-row type="flex" justify="center">
+                    <el-col :md="7">
+                        <el-form-item label="自定义时间">
+                            <el-date-picker v-model="search.time" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd" unlink-panels></el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="5">
                         <el-form-item>
                             <el-button type="primary" @click="getData">查询</el-button>
                         </el-form-item>
@@ -105,6 +110,7 @@
                 search: {
                     per: 20,
                     page: 1,
+                    time: [],
                     status_id: parseInt(admin.role_id) === 9 ? 12340 : 12,
                     type_id: '',
                     user_id: '',

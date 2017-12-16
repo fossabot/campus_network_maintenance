@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Repair;
 
 use App\Http\Controllers\Controller;
 use App\Models\Repair;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ListController extends Controller
@@ -18,12 +19,17 @@ class ListController extends Controller
         $per = $request->input('per');
         $page = $request->input('page');
 
+        $time = $request->input('time');
         $status_id = $request->input('status_id');
         $type_id = $request->input('type_id');
         $user_id = $request->input('user_id');
         $user_mobile = $request->input('user_mobile');
 
         $query = new Repair();
+
+        if (isset($time[0], $time[1])) {
+            $query = $query->whereBetween('created_at', [Carbon::parse($time[0]), Carbon::parse($time[1])]);
+        }
 
         if (!is_null($status_id)) {
             $values = [];

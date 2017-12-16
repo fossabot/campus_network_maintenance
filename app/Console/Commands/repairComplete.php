@@ -54,11 +54,11 @@ class repairComplete extends Command
         $repair = Repair::where('id', '>=', Cache::get($this->key))->whereStatusId(3)->whereCompletedAt(null)->first();
         if ($repair) {
             $type = Type::find($repair->type_id);
-            if ($repair->created_at->addHour($type->auto_complete_hours) <= Carbon::now()) {
+            if ($repair->repaired_at->addHour($type->auto_complete_hours) <= Carbon::now()) {
                 $repair->forceFill([
                     'status_id'    => 4,
                     'user_star'    => $type->auto_complete_stars,
-                    'completed_at' => $repair->created_at->addHour($type->auto_complete_hours)
+                    'completed_at' => $repair->repaired_at->addHour($type->auto_complete_hours)
                 ])->save();
             }
             Cache::increment($this->key);

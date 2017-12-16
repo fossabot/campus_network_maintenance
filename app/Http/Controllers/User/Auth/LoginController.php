@@ -8,7 +8,6 @@ use App\School\Api\WebAuthenticate;
 use App\School\Api\WebGetUserInfo;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller

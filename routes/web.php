@@ -86,6 +86,7 @@ Route::group(['prefix' => 'api'], function () {
 
         // 维修备件
         Route::group(['prefix' => 'part'], function () {
+            Route::get('use/{start}/{end}', 'Admin\Part\UseController@data');
             Route::get('list', 'Admin\Part\ListController@data');
             Route::post('create', 'Admin\Part\CreateController@create');
             Route::get('detail/{id}', 'Admin\Part\DetailController@data');

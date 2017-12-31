@@ -37,7 +37,7 @@
                     </el-form>
                 </template>
             </el-table-column>
-            <el-table-column prop="id" label="id" width="50"></el-table-column>
+            <el-table-column prop="id" label="id"></el-table-column>
             <el-table-column prop="status" label="状态" width="80"></el-table-column>
             <el-table-column prop="type.name" label="分类"></el-table-column>
             <el-table-column label="地区"><template slot-scope="scope">{{ scope.row.location.first }} {{ scope.row.location.second }}</template></el-table-column>
@@ -45,6 +45,7 @@
             <el-table-column prop="user_id" label="报障人学号" width="150"></el-table-column>
             <el-table-column prop="user_name" label="报障人姓名" width="110"></el-table-column>
             <el-table-column prop="user_mobile" label="报障人手机号码" width="150"></el-table-column>
+            <el-table-column prop="created_at" label="报障时间" width="190"></el-table-column>
             <el-table-column label="操作" width="110"><template slot-scope="scope"><el-button size="mini" @click="$router.push('/repair/detail/' + scope.row.id)">查看 / 修改</el-button></template></el-table-column>
         </el-table>
         <el-pagination layout="sizes, prev, pager, next, jumper, ->, total" :total="total" :page-sizes="[20, 50, 100, 200]" :page-size="search.per" :current-page="search.page" @size-change="handleSizeChange" @current-change="handleCurrentChange" style="margin-top: 20px;"></el-pagination>

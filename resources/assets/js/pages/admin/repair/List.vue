@@ -6,7 +6,7 @@
                     <el-col :md="6">
                         <el-form-item label="状态"><el-select v-model="search.status_id"><el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option></el-select></el-form-item>
                     </el-col>
-                    <el-col :md="6" v-if="admin.role_id == 9">
+                    <el-col :md="6" v-if="parseInt(admin.role_id) === 9">
                         <el-form-item label="分类"><el-select v-model="search.type_id"><el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option></el-select></el-form-item>
                     </el-col>
                     <el-col :md="6">

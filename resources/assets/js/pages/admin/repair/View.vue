@@ -1,6 +1,6 @@
 <template>
     <div class="repair-view">
-        <div class="search" v-if="admin.role_id == 9">
+        <div class="search" v-if="parseInt(admin.role_id) === 9">
             <el-form ref="search" label-width="100px">
                 <el-row type="flex" justify="center">
                     <el-col :md="5">

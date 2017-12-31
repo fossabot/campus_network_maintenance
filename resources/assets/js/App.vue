@@ -1,13 +1,13 @@
 <template>
     <div id="app">
-        <router-view></router-view>
+        <router-view/>
     </div>
 </template>
 
 <script>
     export default {
         mounted() {
-            console.info('Author ：https://www.52xckl.cn')
+            console.info('Github ：https://github.com/StarUDream/campus_network_maintenance')
             if (window.location.href.indexOf(window.location.origin + '/admin#') !== -1) {
                 const href = window.location.href.split('#', 2)
                 if (href.length === 2) {

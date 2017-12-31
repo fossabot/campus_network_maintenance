@@ -10,7 +10,7 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item v-if="admin.role_id != 9" disabled>{{ admin.type }}</el-dropdown-item>
+                            <el-dropdown-item v-if="parseInt(admin.role_id) !== 9" disabled>{{ admin.type }}</el-dropdown-item>
                             <el-dropdown-item disabled>{{ admin.role }}</el-dropdown-item>
                             <el-dropdown-item command="profile" divided>修改资料</el-dropdown-item>
                             <el-dropdown-item command="logout">退出登录</el-dropdown-item>
@@ -27,7 +27,6 @@
                             <span slot="title">报障单</span>
                         </template>
                         <el-menu-item-group>
-                            <span slot="title">报障单</span>
                             <el-menu-item index="/repair/view">报障单总览</el-menu-item>
                             <el-menu-item index="/repair/list">报障单列表</el-menu-item>
                             <el-menu-item index="/repair/create">新增报障单</el-menu-item>
@@ -36,12 +35,11 @@
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="user" v-if="admin.role_id >= 5">
+                    <el-submenu index="user" v-if="parseInt(admin.role_id) >= 5">
                         <template slot="title">
                             <span slot="title">维修人员</span>
                         </template>
                         <el-menu-item-group>
-                            <span slot="title">维修人员</span>
                             <el-menu-item index="/user/list">维修人员列表</el-menu-item>
                             <el-menu-item index="/user/create">新增维修人员</el-menu-item>
                             <el-menu-item v-if="$route.path.substr(0, 13) === '/user/detail/'" :index="$route.path">
@@ -49,12 +47,11 @@
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="type" v-if="admin.role_id == 9">
+                    <el-submenu index="type" v-if="parseInt(admin.role_id) === 9">
                         <template slot="title">
                             <span slot="title">维修分类</span>
                         </template>
                         <el-menu-item-group>
-                            <span slot="title">维修分类</span>
                             <el-menu-item index="/type/list">维修分类列表</el-menu-item>
                             <el-menu-item index="/type/create">新增维修分类</el-menu-item>
                             <el-menu-item v-if="$route.path.substr(0, 13) === '/type/detail/'" :index="$route.path">
@@ -65,18 +62,17 @@
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="location" v-if="admin.role_id == 9">
+                    <el-submenu index="location" v-if="parseInt(admin.role_id) === 9">
                         <template slot="title">
                             <span slot="title">维修地区</span>
                         </template>
                         <el-menu-item-group>
-                            <span slot="title">维修地区</span>
                             <el-menu-item index="/location/list/first">主要地区列表</el-menu-item>
                             <el-menu-item index="/location/list/second">次要地区列表</el-menu-item>
                             <el-menu-item index="/location/create">新增维修地区</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="part" v-if="admin.role_id == 9">
+                    <el-submenu index="part" v-if="parseInt(admin.role_id) === 9">
                         <template slot="title">
                             <span slot="title">维修备件</span>
                         </template>
@@ -110,7 +106,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="24">
-                        <router-view></router-view>
+                        <router-view/>
                     </el-col>
                 </el-row>
             </el-main>
@@ -178,5 +174,6 @@
     .el-main {
         background-color: #fefefe;
         height: 100%;
+        overflow-y: scroll;
     }
 </style>

@@ -3,7 +3,7 @@
         <el-table :data="data" border>
             <el-table-column label="分类">
                 <template slot-scope="scope">
-                    <span v-if="scope.row.role_id != 9">{{ scope.row.type }}</span>
+                    <span v-if="parseInt(scope.row.role_id) !== 9">{{ scope.row.type }}</span>
                     <span v-else>{{ scope.row.role }}</span>
                 </template>
             </el-table-column>

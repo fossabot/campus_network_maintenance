@@ -8,22 +8,22 @@
                             <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="管理员帐号" prop="username">
+                    <el-form-item label="帐号" prop="username">
                         <el-input v-model="data.username"></el-input>
                     </el-form-item>
-                    <el-form-item label="管理员密码" prop="password">
+                    <el-form-item label="密码" prop="password">
                         <el-input v-model="data.password"></el-input>
                     </el-form-item>
-                    <el-form-item label="管理员姓名" prop="name">
+                    <el-form-item label="姓名" prop="name">
                         <el-input v-model="data.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="手机号码" prop="mobile">
+                    <el-form-item label="手机" prop="mobile">
                         <el-input v-model="data.mobile"></el-input>
                     </el-form-item>
-                    <el-form-item label="公司名称" prop="company">
+                    <el-form-item label="部门" prop="company">
                         <el-input v-model="data.company"></el-input>
                     </el-form-item>
-                    <el-form-item label="设为管理员" prop="role_id" v-if="admin.role_id == 9" required>
+                    <el-form-item label="设为管理员" prop="role_id" v-if="parseInt(admin.role_id) === 9" required>
                         <el-switch v-model="data.role_id" :inactive-value="1" :active-value="5"></el-switch>
                     </el-form-item>
                     <el-form-item>

@@ -38,19 +38,19 @@
         <el-row :gutter="20">
             <el-col :span="12">
                 <h4>今日报障单完成数</h4>
-                <ve-pie :data="data4" :loading="loading" :data-empty="data2.rows.length === 0"/>
+                <ve-pie :data="data4" :loading="loading" :data-empty="data4.rows.length === 0"/>
             </el-col>
             <el-col :span="12">
                 <h4>昨日报障单完成数</h4>
-                <ve-pie :data="data5" :loading="loading" :data-empty="data2.rows.length === 0"/>
+                <ve-pie :data="data5" :loading="loading" :data-empty="data5.rows.length === 0"/>
             </el-col>
             <el-col :span="12">
                 <h4>本月报障单完成数</h4>
-                <ve-pie :data="data6" :loading="loading" :data-empty="data3.rows.length === 0"/>
+                <ve-pie :data="data6" :loading="loading" :data-empty="data6.rows.length === 0"/>
             </el-col>
             <el-col :span="12">
                 <h4>自定义报障单完成数</h4>
-                <ve-pie :data="data7" :loading="loading" :data-empty="data3.rows.length === 0"/>
+                <ve-pie :data="data7" :loading="loading" :data-empty="data7.rows.length === 0"/>
             </el-col>
         </el-row>
     </div>

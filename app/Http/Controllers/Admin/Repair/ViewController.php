@@ -40,6 +40,7 @@ class ViewController extends Controller
                     '今日'   => $today,
                     '昨日'   => $yesterday,
                     '本月'   => $month,
+                    '总共'   => $this->countRepair($admin->id, [0, $time['now']]),
                     '自定义'  => $custom
                 ]
             ]);

@@ -71,7 +71,7 @@
                     label: {normal: {show: true, position: 'top'}}
                 },
                 data1: {
-                    columns: ['维修人员', '今日', '昨日', '本月', '自定义'],
+                    columns: ['维修人员', '今日', '昨日', '本月', '总共', '自定义'],
                     rows: []
                 },
                 data2: {

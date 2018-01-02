@@ -8,7 +8,7 @@ use App\Models\Location;
 class DetailController extends Controller
 {
     /**
-     * 获取维修地区详情
+     * 获取维修区域详情
      *
      * @param $id
      *

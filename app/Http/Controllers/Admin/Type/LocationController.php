@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
     /**
-     * 获取当前分类已分配的地区
+     * 获取当前分类已分配的区域
      *
      * @param $id
      *
@@ -46,7 +46,7 @@ class LocationController extends Controller
     }
 
     /**
-     * 分配地区
+     * 分配区域
      *
      * @param Request $request
      *
@@ -57,7 +57,7 @@ class LocationController extends Controller
         // 分类是否存在
         Type::findOrFail($request->input('id'));
 
-        // 清空原来分配的地区
+        // 清空原来分配的区域
         $this->clearAllot($request);
 
         // 尝试分配

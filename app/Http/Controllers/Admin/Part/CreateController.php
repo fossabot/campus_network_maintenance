@@ -15,9 +15,7 @@ class CreateController extends Controller
      */
     public function create(Request $request)
     {
-        $name = $request->input('name');
-
-        if (mb_strlen($name) > 64) {
+        if (mb_strlen($request->input('name')) > 64) {
             return response()->json('维修备件的长度不得超过64个字符。', 422);
         }
 

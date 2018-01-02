@@ -9,7 +9,7 @@ use App\Models\Location;
 class CreateController extends Controller
 {
     /**
-     * 创建维修地区
+     * 创建维修区域
      *
      * @param LocationRequest $request
      *
@@ -17,26 +17,26 @@ class CreateController extends Controller
      */
     public function create(LocationRequest $request)
     {
-        // 分辨创建主要地区还是次要地区
+        // 分辨创建一级区域还是二级区域
         $flag = (bool)$request->input('second');
 
         if (!$flag) {
-            // 创建主要地区
+            // 创建一级区域
             if ($this->checkFirstUnique($request->input('first'))) {
-                return response()->json('主要地区 已经存在。', 422);
+                return response()->json('一级区域 已经存在。', 422);
             }
 
             if ($id = $this->attemptCreateFirst($request)) {
                 return response()->json($id);
             }
         } else {
-            // 创建次要地区
+            // 创建二级区域
             if (!$this->checkFirstUnique($request->input('first'))) {
-                return response()->json('主要地区 不存在。', 422);
+                return response()->json('一级区域 不存在。', 422);
             }
 
             if ($this->checkSecondUnique($request->input('first'), $request->input('second'))) {
-                return response()->json('次要地区 已经存在。', 422);
+                return response()->json('二级区域 已经存在。', 422);
             }
 
             if ($id = $this->attemptCreateSecond($request)) {

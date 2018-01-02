@@ -31,7 +31,6 @@
                             <el-menu-item index="/repair/list">报障单列表</el-menu-item>
                             <el-menu-item index="/repair/create">新增报障单</el-menu-item>
                             <el-menu-item v-if="$route.path.substr(0, 15) === '/repair/detail/'" :index="$route.path">修改报障单</el-menu-item>
-                            <el-menu-item index="/repair/description">故障描述选项</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="user" v-if="parseInt(admin.role_id) >= 5">
@@ -78,6 +77,16 @@
                         <el-menu-item-group>
                             <span slot="title">维修备件日志</span>
                             <el-menu-item index="/part/use">维修备件使用情况</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="description" v-if="parseInt(admin.role_id) >= 5">
+                        <template slot="title">
+                            <span slot="title">故障类别</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="/description/list">故障类别列表</el-menu-item>
+                            <el-menu-item index="/description/create">新增故障类别</el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 20) === '/description/detail/'" :index="$route.path">修改故障类别</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>

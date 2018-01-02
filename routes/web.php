@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('location', 'Admin\Type\LocationController@allot');
         });
 
-        // 维修地区
+        // 维修区域
         Route::group(['prefix' => 'location'], function () {
             Route::get('first', 'Admin\Location\ListController@first');
             Route::get('second', 'Admin\Location\ListController@second');
@@ -91,6 +91,13 @@ Route::group(['prefix' => 'api'], function () {
             Route::post('create', 'Admin\Part\CreateController@create');
             Route::get('detail/{id}', 'Admin\Part\DetailController@data');
             Route::post('update', 'Admin\Part\UpdateController@update');
+        });
+
+        Route::group(['prefix' => 'description'], function () {
+            Route::get('list', 'Admin\Description\ListController@data');
+            Route::post('create', 'Admin\Description\CreateController@create');
+            Route::get('detail/{id}', 'Admin\Description\DetailController@data');
+            Route::post('update', 'Admin\Description\UpdateController@update');
         });
 
     });

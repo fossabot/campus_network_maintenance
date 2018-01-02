@@ -37,7 +37,7 @@
                     </el-form>
                 </template>
             </el-table-column>
-            <el-table-column prop="id" label="id"></el-table-column>
+            <el-table-column prop="id" label="流水号"></el-table-column>
             <el-table-column prop="status" label="状态" width="80"></el-table-column>
             <el-table-column prop="type.name" label="分类"></el-table-column>
             <el-table-column label="区域"><template slot-scope="scope">{{ scope.row.location.first }} {{ scope.row.location.second }}</template></el-table-column>

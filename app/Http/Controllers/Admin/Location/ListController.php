@@ -8,7 +8,7 @@ use App\Models\Location;
 class ListController extends Controller
 {
     /**
-     * 获取主要地区列表
+     * 获取一级区域列表
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -18,7 +18,7 @@ class ListController extends Controller
     }
 
     /**
-     * 获取次要地区列表
+     * 获取二级区域列表
      *
      * @return \Illuminate\Http\JsonResponse
      */

@@ -49,7 +49,7 @@ class CreateController extends Controller
         }
 
         if (!$this->checkLocation($request->input('type_id'), $request->input('location_id'))) {
-            throw ValidationException::withMessages(['fail' => '报障地区 不符合要求。']);
+            throw ValidationException::withMessages(['fail' => '报障区域 不符合要求。']);
         }
 
         if ($id = $this->attemptCreate($request)) {

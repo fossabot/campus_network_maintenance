@@ -68,12 +68,6 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
-                path: 'description',
-                name: '故障描述',
-                component: require('./pages/admin/repair/Description.vue'),
-                beforeEnter: mustLogin
-            },
-            {
                 path: '*',
                 redirect: '/repair/list'
             }
@@ -220,6 +214,35 @@ const routes = [
             {
                 path: '*',
                 redirect: '/part/list'
+            }
+        ]
+    },
+    {
+        path: '/description',
+        name: '故障类别',
+        component: Layout,
+        children: [
+            {
+                path: 'list',
+                name: '故障类别列表',
+                component: require('./pages/admin/description/List.vue'),
+                beforeEnter: mustLogin
+            },
+            {
+                path: 'create',
+                name: '新增故障类别',
+                component: require('./pages/admin/description/Create.vue'),
+                beforeEnter: mustLogin
+            },
+            {
+                path: 'detail/:id',
+                name: '修改故障类别',
+                component: require('./pages/admin/description/Detail.vue'),
+                beforeEnter: mustLogin
+            },
+            {
+                path: '*',
+                redirect: '/description/list'
             }
         ]
     },

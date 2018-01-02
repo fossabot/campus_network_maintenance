@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListController extends Controller
 {
-    public function data()
+    public function data($type)
     {
-        return response()->json(RepairUserDescription::all()->map([$this, 'transformer'])->toArray());
+        if ($type) {
+            $description = RepairUserDescription::whereTypeId($type)->get();
+        } else {
+            $description = RepairUserDescription::all();
+        }
+
+        return response()->json($description->map([$this, 'transformer'])->toArray());
     }
 
     public function transformer(Model $description)

@@ -94,7 +94,7 @@ Route::group(['prefix' => 'api'], function () {
         });
 
         Route::group(['prefix' => 'description'], function () {
-            Route::get('list', 'Admin\Description\ListController@data');
+            Route::get('list/{type}', 'Admin\Description\ListController@data');
             Route::post('create', 'Admin\Description\CreateController@create');
             Route::get('detail/{id}', 'Admin\Description\DetailController@data');
             Route::post('update', 'Admin\Description\UpdateController@update');

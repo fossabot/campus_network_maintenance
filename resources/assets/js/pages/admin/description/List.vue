@@ -18,7 +18,7 @@
         methods: {
             getData() {
                 this.$http.get(
-                    '/api/admin/description/list'
+                    '/api/admin/description/list/0'
                 ).then((response) => {
                     if (response.status === 200) {
                         this.data = response.data

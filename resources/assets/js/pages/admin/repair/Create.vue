@@ -28,7 +28,10 @@
                         <el-input v-model="data.user_room"></el-input>
                     </el-form-item>
                     <el-form-item label="报障描述" prop="user_description">
-                        <el-input type="textarea" v-model="data.user_description" :autosize="{minRows: 3}"></el-input>
+                        <el-select v-model="data.user_description" style="width: 100%;">
+                            <el-option v-for="item in description" :key="item.id" :label="item.description" :value="item.description"></el-option>
+                        </el-select>
+                        <el-input type="textarea" v-if="data.user_description === '其他'" v-model="data.user_description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
                     <el-form-item label="维修完成">
                         <el-switch v-model="data.repair"></el-switch>
@@ -53,6 +56,7 @@
                 lock: false,
                 type: [],
                 location: [],
+                description: [],
                 data: {
                     user_id: '',
                     user_name: '',
@@ -99,7 +103,21 @@
                     }
                 })
             },
+            getDescription(type) {
+                this.$http.get(
+                    '/api/admin/description/list/' + type
+                ).then((response) => {
+                    if (response.status === 200) {
+                        this.description = response.data
+                        this.description.push({id: 0, description: '其他'})
+                        this.$message.success({
+                            message: '获取成功'
+                        })
+                    }
+                })
+            },
             changeType(type_id) {
+                this.getDescription(type_id)
                 this.location = []
                 this.data.location_id = ''
                 this.$http.get(

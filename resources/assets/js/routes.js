@@ -68,6 +68,12 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
+                path: 'description',
+                name: '故障描述',
+                component: require('./pages/admin/repair/Description.vue'),
+                beforeEnter: mustLogin
+            },
+            {
                 path: '*',
                 redirect: '/repair/list'
             }
@@ -135,7 +141,7 @@ const routes = [
             },
             {
                 path: 'location/:id',
-                name: '分配维修地区',
+                name: '分配维修区域',
                 component: require('./pages/admin/type/Location.vue'),
                 beforeEnter: mustLogin
             },
@@ -151,24 +157,24 @@ const routes = [
     },
     {
         path: '/location',
-        name: '维修地区',
+        name: '维修区域',
         component: Layout,
         children: [
             {
                 path: 'list/first',
-                name: '主要地区列表',
+                name: '一级区域列表',
                 component: require('./pages/admin/location/List/First.vue'),
                 beforeEnter: mustLogin
             },
             {
                 path: 'list/second',
-                name: '维修地区列表',
+                name: '维修区域列表',
                 component: require('./pages/admin/location/List/Second.vue'),
                 beforeEnter: mustLogin
             },
             {
                 path: 'create',
-                name: '新增维修地区',
+                name: '新增维修区域',
                 component: require('./pages/admin/location/Create.vue'),
                 beforeEnter: mustLogin
             },

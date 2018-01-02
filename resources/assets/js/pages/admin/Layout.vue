@@ -30,9 +30,8 @@
                             <el-menu-item index="/repair/view">报障单总览</el-menu-item>
                             <el-menu-item index="/repair/list">报障单列表</el-menu-item>
                             <el-menu-item index="/repair/create">新增报障单</el-menu-item>
-                            <el-menu-item v-if="$route.path.substr(0, 15) === '/repair/detail/'" :index="$route.path">
-                                修改报障单
-                            </el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 15) === '/repair/detail/'" :index="$route.path">修改报障单</el-menu-item>
+                            <el-menu-item index="/repair/description">故障描述选项</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="user" v-if="parseInt(admin.role_id) >= 5">
@@ -42,9 +41,7 @@
                         <el-menu-item-group>
                             <el-menu-item index="/user/list">维修人员列表</el-menu-item>
                             <el-menu-item index="/user/create">新增维修人员</el-menu-item>
-                            <el-menu-item v-if="$route.path.substr(0, 13) === '/user/detail/'" :index="$route.path">
-                                修改维修人员
-                            </el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 13) === '/user/detail/'" :index="$route.path">修改维修人员</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="type" v-if="parseInt(admin.role_id) === 9">
@@ -54,22 +51,18 @@
                         <el-menu-item-group>
                             <el-menu-item index="/type/list">维修分类列表</el-menu-item>
                             <el-menu-item index="/type/create">新增维修分类</el-menu-item>
-                            <el-menu-item v-if="$route.path.substr(0, 13) === '/type/detail/'" :index="$route.path">
-                                修改维修分类
-                            </el-menu-item>
-                            <el-menu-item v-if="$route.path.substr(0, 15) === '/type/location/'" :index="$route.path">
-                                分配维修地区
-                            </el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 13) === '/type/detail/'" :index="$route.path">修改维修分类</el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 15) === '/type/location/'" :index="$route.path">分配维修区域</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="location" v-if="parseInt(admin.role_id) === 9">
                         <template slot="title">
-                            <span slot="title">维修地区</span>
+                            <span slot="title">维修区域</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="/location/list/first">主要地区列表</el-menu-item>
-                            <el-menu-item index="/location/list/second">次要地区列表</el-menu-item>
-                            <el-menu-item index="/location/create">新增维修地区</el-menu-item>
+                            <el-menu-item index="/location/list/first">一级区域列表</el-menu-item>
+                            <el-menu-item index="/location/list/second">二级区域列表</el-menu-item>
+                            <el-menu-item index="/location/create">新增维修区域</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="part" v-if="parseInt(admin.role_id) === 9">
@@ -80,9 +73,7 @@
                             <span slot="title">维修备件</span>
                             <el-menu-item index="/part/list">维修备件列表</el-menu-item>
                             <el-menu-item index="/part/create">新增维修备件</el-menu-item>
-                            <el-menu-item v-if="$route.path.substr(0, 13) === '/part/detail/'" :index="$route.path">
-                                修改维修备件
-                            </el-menu-item>
+                            <el-menu-item v-if="$route.path.substr(0, 13) === '/part/detail/'" :index="$route.path">修改维修备件</el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group>
                             <span slot="title">维修备件日志</span>
@@ -93,16 +84,8 @@
             </el-aside>
             <el-main>
                 <el-row>
-                    <el-col :span="12">
-                        <h2 style="margin-bottom: 20px;">{{ $route.name }}</h2>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-breadcrumb style="float: right;">
-                            <el-breadcrumb-item v-for="item in $route.matched" :key="item.path" :to="{path: item.path}">
-                                {{ item.name }}
-                            </el-breadcrumb-item>
-                        </el-breadcrumb>
-                    </el-col>
+                    <el-col :span="12"><h2 style="margin-bottom: 20px;">{{ $route.name }}</h2></el-col>
+                    <el-col :span="12"><el-breadcrumb style="float: right;"><el-breadcrumb-item v-for="item in $route.matched" :key="item.path" :to="{path: item.path}">{{ item.name }}</el-breadcrumb-item></el-breadcrumb></el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="24">

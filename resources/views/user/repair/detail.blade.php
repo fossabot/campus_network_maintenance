@@ -43,10 +43,10 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
-                        <label for="location_id" class="col-sm-4 control-label">报障地区</label>
+                        <label for="location_id" class="col-sm-4 control-label">报障区域</label>
                         <div class="col-sm-8">
                             <select class="form-control" name="location_id" id="location_id">
-                                <option value="0">请选择报障地区</option>
+                                <option value="0">请选择报障区域</option>
                             </select>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                             <dt>报障人姓名</dt><dd>{{ $detail->user_name }}</dd>
                             <dt>报障人手机号码</dt><dd>{{ $detail->user_mobile }}</dd>
                             <dt>报障分类</dt><dd>{{ $detail->type->name }}</dd>
-                            <dt>报障地区</dt><dd>{{ $detail->location->first }} {{ $detail->location->second }}</dd>
+                            <dt>报障区域</dt><dd>{{ $detail->location->first }} {{ $detail->location->second }}</dd>
                             <dt>报障房间号</dt><dd>{{ $detail->user_room }}</dd>
                             <dt>报障描述</dt><dd>{{ $detail->user_description }}</dd>
                             @if($detail->user_star)<dt>用户评星</dt><dd>{{ $detail->user_star }}</dd>@endif
@@ -161,7 +161,7 @@
 
             function changeLocation(type_id) {
                 $('#location_id').empty();
-                $('#location_id').append('<option value="0">请选择报障地区</option>');
+                $('#location_id').append('<option value="0">请选择报障区域</option>');
                 types.forEach(function (item) {
                     if (parseInt(type_id) === item.id) {
                         item.locations.forEach(function (location) {

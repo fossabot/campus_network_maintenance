@@ -40,7 +40,7 @@
             <el-table-column prop="id" label="id"></el-table-column>
             <el-table-column prop="status" label="状态" width="80"></el-table-column>
             <el-table-column prop="type.name" label="分类"></el-table-column>
-            <el-table-column label="地区"><template slot-scope="scope">{{ scope.row.location.first }} {{ scope.row.location.second }}</template></el-table-column>
+            <el-table-column label="区域"><template slot-scope="scope">{{ scope.row.location.first }} {{ scope.row.location.second }}</template></el-table-column>
             <el-table-column prop="user_room" label="故障房间号" width="100"></el-table-column>
             <el-table-column prop="user_id" label="报障人学号" width="150"></el-table-column>
             <el-table-column prop="user_name" label="报障人姓名" width="110"></el-table-column>

@@ -29,10 +29,10 @@
                     </div>
                 </div>
                 <div class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
-                    <label for="location_id" class="col-sm-4 control-label">报障地区</label>
+                    <label for="location_id" class="col-sm-4 control-label">报障区域</label>
                     <div class="col-sm-8">
                         <select class="form-control" name="location_id" id="location_id">
-                            <option value="0">请选择报障地区</option>
+                            <option value="0">请选择报障区域</option>
                         </select>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
 
         function changeLocation(type_id) {
             $('#location_id').empty();
-            $('#location_id').append('<option value="0">请选择报障地区</option>');
+            $('#location_id').append('<option value="0">请选择报障区域</option>');
             types.forEach(function (item) {
                 if (parseInt(type_id) === item.id) {
                     item.locations.forEach(function (location) {

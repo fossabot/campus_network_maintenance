@@ -1,7 +1,7 @@
 <template>
     <div class="location-list">
         <el-table :data="data" border>
-            <el-table-column prop="first" label="主要地区"></el-table-column>
+            <el-table-column prop="first" label="一级区域"></el-table-column>
             <el-table-column label="操作" width="80">
                 <template slot-scope="scope">
                     <el-button size="mini" type="danger" @click="deleteFirst(scope.row.id)">删除</el-button>
@@ -32,7 +32,7 @@
                 })
             },
             deleteFirst(id) {
-                this.$confirm('删除主要地区需要手动删除其次要地区，确认删除吗？', '提示', {
+                this.$confirm('删除一级区域需要手动删除其二级区域，确认删除吗？', '提示', {
                     type: 'warning',
                     center: true
                 }).then(() => {

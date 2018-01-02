@@ -17,7 +17,7 @@
                             <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="报障地区" prop="location_id">
+                    <el-form-item label="报障区域" prop="location_id">
                         <el-select v-model="data.location_id">
                             <el-option-group v-for="first in location" :key="first.label" :label="first.label">
                                 <el-option v-for="second in first.options" :key="second.id" :label="second.value" :value="second.id"></el-option>
@@ -78,7 +78,7 @@
                         {type: 'number', required: true, message: '请选择报障分类', trigger: 'blur'}
                     ],
                     location_id: [
-                        {type: 'number', required: true, message: '请选择报障地区', trigger: 'blur'}
+                        {type: 'number', required: true, message: '请选择报障区域', trigger: 'blur'}
                     ],
                     user_room: [
                         {required: true, message: '请输入故障房间号', trigger: 'blur'}

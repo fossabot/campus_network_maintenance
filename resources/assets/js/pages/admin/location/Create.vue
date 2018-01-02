@@ -3,9 +3,9 @@
         <el-row>
             <el-col :md="12">
                 <el-tabs type="card" value="first">
-                    <el-tab-pane label="新增主要地区" name="first">
+                    <el-tab-pane label="新增一级区域" name="first">
                         <el-form :model="data1" :rules="rules" ref="data1" label-width="120px">
-                            <el-form-item label="主要地区名称" prop="first">
+                            <el-form-item label="一级区域名称" prop="first">
                                 <el-input v-model="data1.first"></el-input>
                             </el-form-item>
                             <el-form-item>
@@ -14,14 +14,14 @@
                             </el-form-item>
                         </el-form>
                     </el-tab-pane>
-                    <el-tab-pane label="新增次要地区" name="second">
+                    <el-tab-pane label="新增二级区域" name="second">
                         <el-form :model="data2" :rules="rules" ref="data2" label-width="120px">
-                            <el-form-item label="主要地区名称" prop="first">
+                            <el-form-item label="一级区域名称" prop="first">
                                 <el-select v-model="data2.first" filterable>
                                     <el-option v-for="item in first" :key="item.id" :label="item.first" :value="item.first"></el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="次要地区名称" prop="second">
+                            <el-form-item label="二级区域名称" prop="second">
                                 <el-input v-model="data2.second"></el-input>
                             </el-form-item>
                             <el-form-item>
@@ -51,11 +51,11 @@
                 },
                 rules: {
                     first: [
-                        {required: true, message: '请输入主要地区', trigger: 'blur'},
+                        {required: true, message: '请输入一级区域', trigger: 'blur'},
                         {max: 64, message: '分类名称的长度不得超过64个字符', trigger: 'blur'}
                     ],
                     second: [
-                        {required: true, message: '请输入次要地区', trigger: 'blur'},
+                        {required: true, message: '请输入二级区域', trigger: 'blur'},
                         {max: 128, message: '分类描述的长度不得超过64个字符', trigger: 'blur'}
                     ]
                 }

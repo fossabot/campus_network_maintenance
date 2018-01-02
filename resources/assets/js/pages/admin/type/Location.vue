@@ -17,7 +17,7 @@
                 type: {},
                 data: [],
                 value: [],
-                titles: ['可选择地区', '已选择地区']
+                titles: ['可选择区域', '已选择区域']
             }
         },
         methods: {

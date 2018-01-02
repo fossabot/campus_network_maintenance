@@ -22,7 +22,7 @@ class ViewController extends Controller
             'startOfToday'     => Carbon::today(),
             'startOfYesterday' => Carbon::yesterday(),
             'startOfThisMonth' => (new Carbon())->startOfMonth(),
-            'customStart'      => $start ? Carbon::parse($start) : Carbon::now(),
+            'customStart'      => $start ? Carbon::parse($start) : 0,
             'customEnd'        => $end ? Carbon::parse($end)->endOfDay() : Carbon::now(),
         ];
 
@@ -32,6 +32,7 @@ class ViewController extends Controller
             $today = $this->countRepair($admin->id, [$time['startOfToday'], $time['now']]);
             $yesterday = $this->countRepair($admin->id, [$time['startOfYesterday'], $time['startOfToday']]);
             $month = $this->countRepair($admin->id, [$time['startOfThisMonth'], $time['now']]);
+            $total = $this->countRepair($admin->id, [0, $time['now']]);
             $custom = $this->countRepair($admin->id, [$time['customStart'], $time['customEnd']]);
 
             $data1 = array_merge($data1, [
@@ -40,7 +41,7 @@ class ViewController extends Controller
                     '今日'   => $today,
                     '昨日'   => $yesterday,
                     '本月'   => $month,
-                    '总共'   => $this->countRepair($admin->id, [0, $time['now']]),
+                    '总共'   => $total,
                     '自定义'  => $custom
                 ]
             ]);

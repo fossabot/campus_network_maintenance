@@ -3,7 +3,7 @@
         <div class="search" v-if="parseInt(admin.role_id) >= 5">
             <el-form ref="search" label-width="100px">
                 <el-row type="flex" justify="center">
-                    <el-col :md="5">
+                    <el-col :md="5" v-if="parseInt(admin.role_id) === 9">
                         <el-form-item label="分类">
                             <el-select v-model="type_id">
                                 <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>

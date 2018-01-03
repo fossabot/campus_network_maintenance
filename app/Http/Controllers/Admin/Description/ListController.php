@@ -10,10 +10,14 @@ class ListController extends Controller
 {
     public function data($type)
     {
-        if ($type) {
-            $description = RepairUserDescription::whereTypeId($type)->get();
+        if ($this->role() != 9) {
+            $description = RepairUserDescription::whereTypeId($this->type())->get();
         } else {
-            $description = RepairUserDescription::all();
+            if ($type) {
+                $description = RepairUserDescription::whereTypeId($type)->get();
+            } else {
+                $description = RepairUserDescription::all();
+            }
         }
 
         return response()->json($description->map([$this, 'transformer'])->toArray());

@@ -11,6 +11,10 @@ class CreateController extends Controller
 {
     public function create(Request $request)
     {
+        if ($this->role() != 9 || $request->input('type_id') != $this->type()) {
+            return response()->json('没有此操作的权限。', 500);
+        }
+
         Type::findOrFail($request->input('type_id'));
 
         if (mb_strlen($request->input('description')) <= 0) {

@@ -124,7 +124,7 @@
                             type: 'warning',
                             center: true
                         }).then(() => {
-                            this.$http.post('/api/admin/auth/logout').then((response) => {
+                            this.$http.post('/api/admin/auth/logout').then(() => {
                                 this.$notify.success({
                                     message: '退出成功',
                                     duration: 2000
@@ -167,5 +167,9 @@
         background-color: #fefefe;
         height: 100%;
         overflow-y: scroll;
+    }
+
+    .el-select {
+        width: 100%;
     }
 </style>

@@ -28,10 +28,10 @@
                         <el-input v-model="data.user_room"></el-input>
                     </el-form-item>
                     <el-form-item label="报障描述" prop="user_description">
-                        <el-select v-model="data.user_description" style="width: 100%;">
+                        <el-select v-model="data.user_description" @change="changeDescription">
                             <el-option v-for="item in description" :key="item.id" :label="item.description" :value="item.description"></el-option>
                         </el-select>
-                        <el-input type="textarea" v-if="data.user_description === '其他'" v-model="data.user_description" :autosize="{minRows: 3}"></el-input>
+                        <el-input type="textarea" v-if="showDescription" v-model="data.user_description" :autosize="{minRows: 3}" style="margin-top: 22px;"></el-input>
                     </el-form-item>
                     <el-form-item label="维修完成">
                         <el-switch v-model="data.repair"></el-switch>
@@ -57,6 +57,7 @@
                 type: [],
                 location: [],
                 description: [],
+                showDescription: false,
                 data: {
                     user_id: '',
                     user_name: '',
@@ -136,8 +137,10 @@
                     }
                 })
             },
+            changeDescription(description) {
+                this.showDescription = description === '其他';
+            },
             submitForm(data) {
-                console.log(this.data)
                 this.$refs[data].validate((valid) => {
                     if (valid) {
                         this.lock = true
@@ -158,6 +161,8 @@
             },
             resetForm(data) {
                 this.$refs[data].resetFields()
+                this.showDescription = false
+                this.getData()
             }
         },
         mounted() {

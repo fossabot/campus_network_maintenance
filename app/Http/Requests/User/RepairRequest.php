@@ -30,7 +30,7 @@ class RepairRequest extends FormRequest
             'type_id'          => 'required|numeric|min:1',
             'location_id'      => 'required|numeric|min:1',
             'user_room'        => 'required|max:50',
-            'user_description' => 'required|min:5|max:1000',
+            'user_description' => 'required|max:1000',
         ];
     }
 }

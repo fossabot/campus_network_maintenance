@@ -1,6 +1,6 @@
 <template>
     <div class="repair-view">
-        <div class="search" v-if="parseInt(admin.role_id) === 9">
+        <div class="search" v-if="parseInt(admin.role_id) >= 5">
             <el-form ref="search" label-width="100px">
                 <el-row type="flex" justify="center">
                     <el-col :md="5">
@@ -129,7 +129,9 @@
                 ).then((response) => {
                     if (response.status === 200) {
                         this.type = response.data
-                        this.type.push({id: 0, name: '显示全部'})
+                        if (parseInt(this.admin.role_id) === 9) {
+                            this.type.push({id: 0, name: '显示全部'})
+                        }
                     }
                 })
             }

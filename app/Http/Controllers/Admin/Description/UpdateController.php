@@ -11,7 +11,7 @@ class UpdateController extends Controller
 {
     public function update(Request $request)
     {
-        if ($this->role() != 9 || $request->input('type_id') != $this->type()) {
+        if ($this->role() != 9 && $request->input('type_id') != $this->type()) {
             return response()->json('没有此操作的权限。', 500);
         }
 

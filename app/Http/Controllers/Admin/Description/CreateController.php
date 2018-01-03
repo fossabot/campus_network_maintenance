@@ -11,7 +11,7 @@ class CreateController extends Controller
 {
     public function create(Request $request)
     {
-        if ($this->role() != 9 || $request->input('type_id') != $this->type()) {
+        if ($this->role() != 9 && $request->input('type_id') != $this->type()) {
             return response()->json('没有此操作的权限。', 500);
         }
 
@@ -39,9 +39,6 @@ class CreateController extends Controller
 
     protected function attemptCreate(Request $request)
     {
-        return RepairUserDescription::insert([
-            'type_id'     => $request->input('type_id'),
-            'description' => $request->input('description')
-        ]);
+        return RepairUserDescription::insert($request->only(['type_id', 'description']));
     }
 }

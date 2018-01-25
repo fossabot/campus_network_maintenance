@@ -31,7 +31,7 @@ class ListController extends Controller
             $query = $query->whereBetween('created_at', [Carbon::parse($time[0]), Carbon::parse($time[1])]);
         }
 
-        if (!is_null($status_id)) {
+        if ($status_id !== null) {
             $values = [];
             foreach (str_split($status_id) as $value) {
                 if ($value >= 0 && $value <= 4) {

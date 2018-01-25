@@ -13,6 +13,6 @@ class Part extends Model
     protected $dates = [];
 
     protected $fillable = [
-        'name',
+        'name', 'left_number',
     ];
 }

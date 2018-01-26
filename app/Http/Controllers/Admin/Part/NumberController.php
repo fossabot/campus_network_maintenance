@@ -19,7 +19,7 @@ class NumberController extends Controller
             return response()->json('增加的数量 不符合规则。', 422);
         }
 
-        $part->left_number = $number;
+        $part->left_number += $number;
 
         if ($part->save()) {
             $log = new LogPartAdd();

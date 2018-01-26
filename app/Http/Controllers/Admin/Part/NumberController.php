@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class NumberController extends Controller
 {
+    public function data()
+    {
+        return response()->json(LogPartAdd::all()->map([$this, 'transformer']));
+    }
+
     public function add(Request $request)
     {
         $part = Part::findOrFail($request->input('id'));
@@ -32,5 +37,22 @@ class NumberController extends Controller
         }
 
         return response()->json('服务器错误。', 500);
+    }
+
+    public function transformer(LogPartAdd $log)
+    {
+        return [
+            'id'         => $log->id,
+            'part'       => [
+                'id'   => $log->part->id,
+                'name' => $log->part->name,
+            ],
+            'admin'      => [
+                'id'   => $log->admin->id,
+                'name' => $log->admin->name,
+            ],
+            'number'     => $log->number,
+            'created_at' => $log->created_at->toDateTimeString(),
+        ];
     }
 }

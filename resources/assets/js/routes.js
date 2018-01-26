@@ -206,6 +206,12 @@ const routes = [
                 beforeEnter: mustLogin
             },
             {
+                path: 'add',
+                name: '维修备件添加记录',
+                component: require('./pages/admin/part/Add'),
+                beforeEnter: mustLogin
+            },
+            {
                 path: 'use',
                 name: '维修备件使用情况',
                 component: require('./pages/admin/part/Use.vue'),

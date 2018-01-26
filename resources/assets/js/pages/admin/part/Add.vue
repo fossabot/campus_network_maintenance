@@ -7,6 +7,7 @@
             <el-table-column prop="admin.name" label="操作用户"></el-table-column>
             <el-table-column prop="created_at" label="增加时间"></el-table-column>
         </el-table>
+        <el-pagination layout="sizes, prev, pager, next, jumper, ->, total" :total="total" :page-sizes="[20, 50, 100, 200]" :page-size="search.per" :current-page="search.page" @size-change="handleSizeChange" @current-change="handleCurrentChange" style="margin-top: 20px;"></el-pagination>
     </div>
 </template>
 
@@ -14,19 +15,35 @@
     export default {
         data() {
             return {
-                data: []
+                total: 20,
+                data: [],
+                search: {
+                    per: 20,
+                    page: 1
+                }
             }
         },
         methods: {
             getData() {
-                this.$http.get('/api/admin/part/add').then((response) => {
+                this.$http.get(
+                    '/api/admin/part/add', {params: this.search}
+                ).then((response) => {
                     if (response.status === 200) {
-                        this.data = response.data
+                        this.total = response.data.total
+                        this.data = response.data.data
                         this.$message.success({
                             message: '获取成功'
                         })
                     }
                 })
+            },
+            handleSizeChange(val) {
+                this.search.per = val
+                this.getData()
+            },
+            handleCurrentChange(val) {
+                this.search.page = val
+                this.getData()
             }
         },
         mounted() {

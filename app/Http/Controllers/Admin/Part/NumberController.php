@@ -9,9 +9,17 @@ use Illuminate\Http\Request;
 
 class NumberController extends Controller
 {
-    public function data()
+    public function data(Request $request)
     {
-        return response()->json(LogPartAdd::all()->map([$this, 'transformer']));
+        $per = (int)$request->input('per');
+        $page = (int)$request->input('page');
+
+        $query = new LogPartAdd();
+
+        return response()->json([
+            'total' => $query->count(),
+            'data'  => $query->offset(($page - 1) * $per)->limit($per)->get()->map([$this, 'transformer']),
+        ]);
     }
 
     public function add(Request $request)

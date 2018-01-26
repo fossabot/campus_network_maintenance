@@ -4,12 +4,21 @@ namespace App\Http\Controllers\Admin\Part;
 
 use App\Http\Controllers\Controller;
 use App\Models\LogPartUse;
+use Illuminate\Http\Request;
 
 class UseController extends Controller
 {
-    public function data()
+    public function data(Request $request)
     {
-        return response()->json(LogPartUse::all()->map([$this, 'transformer']));
+        $per = (int)$request->input('per');
+        $page = (int)$request->input('page');
+
+        $query = new LogPartUse();
+
+        return response()->json([
+            'total' => $query->count(),
+            'data'  => $query->offset(($page - 1) * $per)->limit($per)->get()->map([$this, 'transformer']),
+        ]);
     }
 
     public function transformer(LogPartUse $log)

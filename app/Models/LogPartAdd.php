@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LogPartAdd extends Model
 {
-    protected $table = 'log_part_';
+    protected $table = 'log_part_add';
 
     public $timestamps = true;
 

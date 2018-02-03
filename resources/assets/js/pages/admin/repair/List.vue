@@ -37,14 +37,12 @@
                     </el-form>
                 </template>
             </el-table-column>
-            <el-table-column prop="id" label="流水号"></el-table-column>
+            <el-table-column prop="id" label="流水号" width="100"></el-table-column>
             <el-table-column prop="status" label="状态" width="80"></el-table-column>
             <el-table-column prop="type.name" label="分类"></el-table-column>
-            <el-table-column label="区域"><template slot-scope="scope">{{ scope.row.location.first }} {{ scope.row.location.second }}</template></el-table-column>
-            <el-table-column prop="user_room" label="故障房间号" width="100"></el-table-column>
+            <el-table-column label="区域"><template slot-scope="scope">{{ scope.row.location.first }} {{ scope.row.location.second }}#{{ scope.row.user_room }}</template></el-table-column>
             <el-table-column prop="user_id" label="报障人学号" width="150"></el-table-column>
-            <el-table-column prop="user_name" label="报障人姓名" width="110"></el-table-column>
-            <el-table-column prop="user_mobile" label="报障人手机号码" width="150"></el-table-column>
+            <el-table-column prop="user_description" label="故障描述" width="300" show-overflow-tooltip></el-table-column>
             <el-table-column prop="created_at" label="报障时间" width="135"></el-table-column>
             <el-table-column label="操作" width="175">
                 <template slot-scope="scope">

@@ -34,11 +34,11 @@ class UpdateController extends Controller
 
     protected function checkDescriptionUnique(Request $request)
     {
-        return (bool)RepairUserDescription::whereKeyNot($request->input('type_id'))->whereDescription($request->input('description'))->first();
+        return (bool)RepairUserDescription::whereKeyNot($request->input('id'))->whereTypeId($request->input('type_id'))->whereDescription($request->input('description'))->first();
     }
 
     protected function attemptUpdate(Request $request)
     {
-        return RepairUserDescription::findOrFail($request->input('id'))->forceFill($request->only(['type_id', 'description']))->save();
+        return RepairUserDescription::findOrFail($request->input('id'))->forceFill($request->only(['type_id', 'description', 'admin_description']))->save();
     }
 }

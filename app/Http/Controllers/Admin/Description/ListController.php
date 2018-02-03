@@ -29,9 +29,10 @@ class ListController extends Controller
          * @var RepairUserDescription $description
          */
         return [
-            'id'          => $description->id,
-            'type'        => (new \App\Http\Controllers\Admin\Type\ListController())->transformer($description->type),
-            'description' => $description->description,
+            'id'                => $description->id,
+            'type'              => (new \App\Http\Controllers\Admin\Type\ListController())->transformer($description->type),
+            'description'       => $description->description,
+            'admin_description' => $description->admin_description,
         ];
     }
 }

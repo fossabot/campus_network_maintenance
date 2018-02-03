@@ -39,6 +39,6 @@ class CreateController extends Controller
 
     protected function attemptCreate(Request $request)
     {
-        return RepairUserDescription::insert($request->only(['type_id', 'description']));
+        return RepairUserDescription::insert($request->only(['type_id', 'description', 'admin_description']));
     }
 }

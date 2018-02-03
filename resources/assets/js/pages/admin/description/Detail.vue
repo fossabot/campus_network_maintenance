@@ -11,6 +11,9 @@
                     <el-form-item label="故障类别描述" prop="description">
                         <el-input type="textarea" v-model="data.description" :autosize="{minRows: 3}"></el-input>
                     </el-form-item>
+                    <el-form-item label="默认解决方法" prop="admin_description">
+                        <el-input type="textarea" v-model="data.admin_description" :autosize="{minRows: 3}"></el-input>
+                    </el-form-item>
                     <el-form-item>
                         <el-button type="primary" :loading="lock" @click="submitForm('data')">修改</el-button>
                         <el-button @click="resetForm('data')">重置</el-button>
@@ -28,8 +31,10 @@
                 type: [],
                 lock: false,
                 data: {
+                    id: this.$route.params.id,
                     type_id: '',
-                    description: ''
+                    description: '',
+                    admin_description: ''
                 },
                 rules: {
                     type_id: [

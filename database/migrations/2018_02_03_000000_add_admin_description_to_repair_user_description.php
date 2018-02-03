@@ -14,7 +14,7 @@ class AddAdminDescriptionToRepairUserDescription extends Migration
     public function up()
     {
         Schema::table('repair_user_description', function (Blueprint $table) {
-            $table->text('admin_description')->after('type_id');
+            $table->text('admin_description');
         });
     }
 

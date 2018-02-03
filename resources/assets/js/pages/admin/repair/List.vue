@@ -45,7 +45,7 @@
             <el-table-column prop="user_id" label="报障人学号" width="150"></el-table-column>
             <el-table-column prop="user_name" label="报障人姓名" width="110"></el-table-column>
             <el-table-column prop="user_mobile" label="报障人手机号码" width="150"></el-table-column>
-            <el-table-column prop="created_at" label="报障时间" width="190"></el-table-column>
+            <el-table-column prop="created_at" label="报障时间" width="135"></el-table-column>
             <el-table-column label="操作" width="175">
                 <template slot-scope="scope">
                     <el-button size="mini" @click="$router.push('/repair/detail/' + scope.row.id)">查看</el-button>

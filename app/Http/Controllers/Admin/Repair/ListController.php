@@ -91,11 +91,11 @@ class ListController extends Controller
             'user_description' => $repair->user_description,
             'user_star'        => $repair->user_star . '星',
             'user_evaluation'  => $repair->user_evaluation,
-            'created_at'       => $repair->created_at ? $repair->created_at->toDateTimeString() : null,
-            'accepted_at'      => $repair->accepted_at ? $repair->accepted_at->toDateTimeString() : null,
-            'repaired_at'      => $repair->repaired_at ? $repair->repaired_at->toDateTimeString() : null,
-            'completed_at'     => $repair->completed_at ? $repair->completed_at->toDateTimeString() : null,
-            'updated_at'       => $repair->updated_at ? $repair->updated_at->toDateTimeString() : null,
+            'created_at'       => $repair->created_at ? $repair->created_at->format('Y-m-d H:i') : null,
+            'accepted_at'      => $repair->accepted_at ? $repair->accepted_at->format('Y-m-d H:i') : null,
+            'repaired_at'      => $repair->repaired_at ? $repair->repaired_at->format('Y-m-d H:i') : null,
+            'completed_at'     => $repair->completed_at ? $repair->completed_at->format('Y-m-d H:i') : null,
+            'updated_at'       => $repair->updated_at ? $repair->updated_at->format('Y-m-d H:i') : null,
         ];
     }
 }

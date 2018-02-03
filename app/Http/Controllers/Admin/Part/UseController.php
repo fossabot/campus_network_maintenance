@@ -35,7 +35,7 @@ class UseController extends Controller
                 'name' => $log->admin->name,
             ],
             'number'     => $log->number,
-            'created_at' => $log->created_at->toDateTimeString(),
+            'created_at' => $log->created_at->format('Y-m-d H:i'),
         ];
     }
 }

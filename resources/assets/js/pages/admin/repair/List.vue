@@ -46,7 +46,13 @@
             <el-table-column prop="user_name" label="报障人姓名" width="110"></el-table-column>
             <el-table-column prop="user_mobile" label="报障人手机号码" width="150"></el-table-column>
             <el-table-column prop="created_at" label="报障时间" width="190"></el-table-column>
-            <el-table-column label="操作" width="110"><template slot-scope="scope"><el-button size="mini" @click="$router.push('/repair/detail/' + scope.row.id)">查看 / 修改</el-button></template></el-table-column>
+            <el-table-column label="操作" width="175">
+                <template slot-scope="scope">
+                    <el-button size="mini" @click="$router.push('/repair/detail/' + scope.row.id)">查看</el-button>
+                    <el-button v-if="scope.row.status_id === 1" size="mini" type="success" @click="acceptRepair(scope.row.id)">开始维修</el-button>
+                    <el-button v-if="scope.row.status_id === 2" size="mini" type="success" @click="finishRepair(scope.row.id)">维修完成</el-button>
+                </template>
+            </el-table-column>
         </el-table>
         <el-pagination layout="sizes, prev, pager, next, jumper, ->, total" :total="total" :page-sizes="[20, 50, 100, 200]" :page-size="search.per" :current-page="search.page" @size-change="handleSizeChange" @current-change="handleCurrentChange" style="margin-top: 20px;"></el-pagination>
     </div>
@@ -107,6 +113,40 @@
             handleCurrentChange(val) {
                 this.search.page = val
                 this.getData()
+            },
+            acceptRepair(id) {
+                this.lock = true
+                this.$http.post(
+                    '/api/admin/repair/change', {
+                        id: id,
+                        type: 'accept'
+                    }).then((response) => {
+                    this.lock = false
+                    if (response.status === 200) {
+                        this.$notify.success({
+                            message: '开始维修',
+                            duration: 2000
+                        })
+                        this.getData()
+                    }
+                })
+            },
+            finishRepair(id) {
+                this.lock = true
+                this.$http.post(
+                    '/api/admin/repair/change', {
+                        id: id,
+                        type: 'finish'
+                    }).then((response) => {
+                    this.lock = false
+                    if (response.status === 200) {
+                        this.$notify.success({
+                            message: '完成维修',
+                            duration: 2000
+                        })
+                        this.getData()
+                    }
+                })
             }
         },
         mounted() {

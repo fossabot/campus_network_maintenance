@@ -7,6 +7,7 @@ use App\Models\LogPartUse;
 use App\Models\Part;
 use App\Models\Repair;
 use App\Models\RepairDescription;
+use App\Models\RepairUserDescription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -44,26 +45,31 @@ class ChangeController extends Controller
                     return response()->json('当前状态为' . $repair->status . '。', 422);
                 }
 
+                $description = RepairUserDescription::whereTypeId($repair->type_id)->whereDescription($repair->user_description)->first();
+
                 $repair_description = $request->input('repair_description');
-                if (!$repair_description) {
+                if (!$repair_description && !$description) {
                     return response()->json('维修备注 不能为空。', 422);
                 }
 
-                foreach ($request->input('use') as $item) {
-                    $part = Part::whereName($item['name'])->first();
-                    if ($part) {
-                        LogPartUse::insert([
-                            'repair_id'  => $repair->id,
-                            'part_id'    => $part->id,
-                            'admin_id'   => $this->id(),
-                            'number'     => $item['number'],
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now(),
-                        ]);
+                $use = $request->input('use');
+                if (is_array($use)) {
+                    foreach ($request->input('use') as $item) {
+                        $part = Part::whereName($item['name'])->first();
+                        if ($part) {
+                            LogPartUse::insert([
+                                'repair_id'  => $repair->id,
+                                'part_id'    => $part->id,
+                                'admin_id'   => $this->id(),
+                                'number'     => $item['number'],
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now(),
+                            ]);
+                        }
                     }
                 }
 
-                $this->createDescription($request->input('repair_description'), $repair->id, $now);
+                $this->createDescription($request->input('repair_description') ?: $description->admin_description, $repair->id, $now);
                 break;
             case 'delete':
                 $data = [
@@ -97,7 +103,7 @@ class ChangeController extends Controller
 
     /**
      * @param Repair $repair
-     * @param array  $data
+     * @param array $data
      *
      * @return bool
      */

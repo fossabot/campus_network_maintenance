@@ -36,10 +36,12 @@ class LocationController extends Controller
                 $data = array_merge($data, [$location->first => []]);
             }
 
-            $data[$location->first] = array_merge($data[$location->first], [[
-                'id'    => $location->id,
-                'value' => $location->second,
-            ]]);
+            $data[$location->first] = array_merge($data[$location->first], [
+                [
+                    'id'    => $location->id,
+                    'value' => $location->second,
+                ]
+            ]);
         }
 
         return response()->json($data);
@@ -88,10 +90,12 @@ class LocationController extends Controller
         $data = [];
 
         foreach ($request->input('locations') as $id) {
-            $data = array_merge($data, [[
-                'type_id'     => $request->input('id'),
-                'location_id' => $id,
-            ]]);
+            $data = array_merge($data, [
+                [
+                    'type_id'     => $request->input('id'),
+                    'location_id' => $id,
+                ]
+            ]);
         }
 
         return TypeLocationRelation::insert($data);

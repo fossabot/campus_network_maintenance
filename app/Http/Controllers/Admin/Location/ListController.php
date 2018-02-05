@@ -26,4 +26,23 @@ class ListController extends Controller
     {
         return response()->json(Location::whereNotNull('second')->orderBy('first')->get());
     }
+
+    public function full()
+    {
+        $data = [];
+
+        foreach (Location::whereNotNull('second')->orderBy('first')->get() as $location) {
+            if (!isset($data[$location->first])) {
+                $data = array_merge($data, [$location->first => []]);
+            }
+            $data[$location->first] = array_merge($data[$location->first], [
+                [
+                    'id'    => $location->id,
+                    'value' => $location->second,
+                ]
+            ]);
+        }
+
+        return response()->json($data);
+    }
 }

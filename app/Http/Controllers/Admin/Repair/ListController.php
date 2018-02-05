@@ -22,7 +22,9 @@ class ListController extends Controller
         $time = $request->input('time');
         $status_id = $request->input('status_id');
         $type_id = $request->input('type_id');
+        $location_id = $request->input('location_id');
         $user_id = $request->input('user_id');
+        $user_name = $request->input('user_name');
         $user_mobile = $request->input('user_mobile');
 
         $query = new Repair();
@@ -31,32 +33,32 @@ class ListController extends Controller
             $query = $query->whereBetween('created_at', [Carbon::parse($time[0]), Carbon::parse($time[1])]);
         }
 
-        if ($status_id !== null) {
-            $values = [];
-            foreach (str_split($status_id) as $value) {
-                if ($value >= 0 && $value <= 4) {
-                    $values = array_merge($values, [$value]);
-                }
+        if (is_array($status_id) && count($status_id)) {
+            $query = $query->whereIn('status_id', $status_id);
+        }
+
+        if ($this->role() != 9) {
+            $query = $query->whereTypeId($this->type());
+        } else {
+            if ($type_id) {
+                $query = $query->whereTypeId($type_id);
             }
-            if (count($values)) {
-                $query = $query->whereIn('status_id', $values);
-            }
+        }
+
+        if ($location_id) {
+            $query = $query->whereLocationId($location_id);
         }
 
         if ($user_id) {
             $query = $query->where('user_id', 'like', '%' . $user_id . '%');
         }
 
-        if ($user_mobile) {
-            $query = $query->where('user_mobile', 'like', '%' . $user_mobile . '%');
+        if ($user_name) {
+            $query = $query->where('user_id', 'like', '%' . $user_name . '%');
         }
 
-        if ($this->role() != 9) {
-            $query = $query->whereTypeId($this->type())->orderBy('status_id');
-        } else {
-            if ($type_id) {
-                $query = $query->whereTypeId($type_id);
-            }
+        if ($user_mobile) {
+            $query = $query->where('user_mobile', 'like', '%' . $user_mobile . '%');
         }
 
         return response()->json([
@@ -84,7 +86,7 @@ class ListController extends Controller
                 'second' => $repair->location->second,
             ],
             'user_room'        => $repair->user_room,
-            'admin'            => @$repair->admin->name,
+            'admin'            => $repair->admin->name,
             'user_id'          => $repair->user_id,
             'user_name'        => $repair->user_name,
             'user_mobile'      => $repair->user_mobile,

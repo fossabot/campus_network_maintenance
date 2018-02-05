@@ -79,6 +79,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::group(['prefix' => 'location'], function () {
             Route::get('first', 'Admin\Location\ListController@first');
             Route::get('second', 'Admin\Location\ListController@second');
+            Route::get('full', 'Admin\Location\ListController@full');
             Route::post('create', 'Admin\Location\CreateController@create');
             Route::post('delete', 'Admin\Location\DeleteController@delete');
             Route::get('detail/{id}', 'Admin\Location\DetailController@data');

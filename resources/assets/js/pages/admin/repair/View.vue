@@ -6,13 +6,13 @@
                     <el-col :md="5" v-if="parseInt(admin.role_id) === 9">
                         <el-form-item label="分类">
                             <el-select v-model="type_id">
-                                <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                                <el-option v-for="item in type" :key="item.id" :label="item.name" :value="item.id"/>
                             </el-select>
                         </el-form-item>
                     </el-col>
                     <el-col :md="7">
                         <el-form-item label="自定义时间">
-                            <el-date-picker v-model="time" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd" unlink-panels></el-date-picker>
+                            <el-date-picker v-model="time" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd" unlink-panels/>
                         </el-form-item>
                     </el-col>
                     <el-col :md="5">
@@ -144,3 +144,10 @@
         }
     }
 </script>
+
+<style>
+    .repair-view {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+</style>

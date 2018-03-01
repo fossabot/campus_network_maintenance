@@ -145,6 +145,10 @@
 </script>
 
 <style>
+    .el-container {
+        height: 100%;
+    }
+
     .el-header {
         color: #fefefe;
         background-color: #409eff;
